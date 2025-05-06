@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply font-sans text-neutral-800 bg-neutral-50;
+  }
+  
+  h1, h2, h3, h4 {
+    @apply font-serif font-semibold tracking-tight;
+  }
+  
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl leading-[1.2];
+  }
+  
+  h2 {
+    @apply text-3xl md:text-4xl leading-[1.2];
+  }
+  
+  h3 {
+    @apply text-2xl md:text-3xl leading-[1.2];
+  }
+  
+  h4 {
+    @apply text-xl md:text-2xl leading-[1.2];
+  }
+  
+  p {
+    @apply leading-relaxed;
+  }
+}
+
+@layer components {
+  .container {
+    @apply px-4 md:px-6 mx-auto max-w-7xl;
+  }
+  
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 font-medium rounded-md text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+  
+  .btn-primary {
+    @apply bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary-600 text-white hover:bg-secondary-700 focus:ring-secondary-500;
+  }
+  
+  .btn-accent {
+    @apply bg-accent-600 text-white hover:bg-accent-700 focus:ring-accent-500;
+  }
+  
+  .btn-outline {
+    @apply border border-neutral-300 bg-white text-neutral-800 hover:bg-neutral-50 focus:ring-neutral-500;
+  }
+
+  .tag {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  
+  .tag-green {
+    @apply bg-primary-100 text-primary-800;
+  }
+  
+  .tag-blue {
+    @apply bg-secondary-100 text-secondary-800;
+  }
+
+  .product-card {
+    @apply relative bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300;
+  }
+  
+  .product-card:hover .product-image {
+    @apply scale-105;
+  }
+  
+  .product-image {
+    @apply w-full h-64 object-cover object-center transition-transform duration-500;
+  }
+
+  /* Swiper custom styles */
+  .swiper-button-prev,
+  .swiper-button-next {
+    @apply opacity-0 transition-opacity duration-300;
+  }
+
+  .swiper:hover .swiper-button-prev,
+  .swiper:hover .swiper-button-next {
+    @apply opacity-100;
+  }
+}

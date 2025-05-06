@@ -1,0 +1,147 @@
+import React, { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Autoplay, EffectFade } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/effect-fade';
+import 'swiper/css/navigation';
+
+const Hero: React.FC = () => {
+  const navigationPrevRef = useRef<HTMLButtonElement>(null);
+  const navigationNextRef = useRef<HTMLButtonElement>(null);
+
+  const slides = [
+    {
+      image: "https://images.pexels.com/photos/1093946/pexels-photo-1093946.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      title: "Nature's Most Nutrient-Dense Superfood",
+      subtitle: "Discover our premium, organic spirulina products - sustainably harvested and packed with essential nutrients to support your health and wellness journey."
+    },
+    {
+      image: "https://images.pexels.com/photos/4068395/pexels-photo-4068395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      title: "Sustainably Harvested Spirulina",
+      subtitle: "Our commitment to sustainable farming practices ensures the highest quality spirulina while protecting our planet's resources."
+    },
+    {
+      image: "https://images.pexels.com/photos/3735155/pexels-photo-3735155.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      title: "Premium Quality Guaranteed",
+      subtitle: "Each batch of our spirulina is rigorously tested to ensure optimal nutrient content and purity."
+    }
+  ];
+
+  return (
+    <div className="relative overflow-hidden group">
+      <Swiper
+        modules={[Navigation, Autoplay, EffectFade]}
+        effect="fade"
+        speed={1000}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+        }}
+        loop={true}
+        navigation={{
+          prevEl: navigationPrevRef.current,
+          nextEl: navigationNextRef.current,
+        }}
+        onBeforeInit={(swiper) => {
+          if (swiper.params.navigation && typeof swiper.params.navigation !== 'boolean') {
+            swiper.params.navigation.prevEl = navigationPrevRef.current;
+            swiper.params.navigation.nextEl = navigationNextRef.current;
+          }
+        }}
+        className="h-[85vh]"
+      >
+        {slides.map((slide, index) => (
+          <SwiperSlide key={index}>
+            <div className="relative h-full">
+              {/* Background Image with Overlay */}
+              <div className="absolute inset-0">
+                <img 
+                  src={slide.image} 
+                  alt="Spirulina background" 
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-primary-950/80 to-primary-900/50"></div>
+              </div>
+
+              {/* Content */}
+              <div className="relative z-10 container h-full flex flex-col justify-center text-white">
+                <div className="max-w-2xl">
+                  <motion.span 
+                    className="inline-block mb-4 text-xs uppercase tracking-widest font-semibold bg-primary-600 text-white px-3 py-1.5 rounded-sm"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    Premium Spirulina Collection
+                  </motion.span>
+                  
+                  <motion.h1 
+                    className="text-5xl sm:text-6xl md:text-7xl font-serif font-bold mb-6 leading-none"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                  >
+                    {slide.title}
+                  </motion.h1>
+                  
+                  <motion.p 
+                    className="text-lg sm:text-xl opacity-90 mb-8 max-w-xl"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                  >
+                    {slide.subtitle}
+                  </motion.p>
+                  
+                  <motion.div 
+                    className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                  >
+                    <Link to="/products" className="btn btn-primary">
+                      Shop Collection
+                    </Link>
+                    <Link to="/about" className="btn bg-white text-primary-800 hover:bg-neutral-100">
+                      Learn More
+                    </Link>
+                  </motion.div>
+                </div>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+
+        {/* Navigation Buttons */}
+        <div className="absolute inset-x-0 top-1/2 z-20 flex justify-between items-center px-4 sm:px-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <button
+            ref={navigationPrevRef}
+            className="p-2 rounded-full bg-white/20 backdrop-blur-sm hover:bg-white/30 transition-colors"
+            aria-label="Previous slide"
+          >
+            <ChevronLeft size={24} className="text-white" />
+          </button>
+          <button
+            ref={navigationNextRef}
+            className="p-2 rounded-full bg-white/20 backdrop-blur-sm hover:bg-white/30 transition-colors"
+            aria-label="Next slide"
+          >
+            <ChevronRight size={24} className="text-white" />
+          </button>
+        </div>
+      </Swiper>
+
+      {/* Wave decoration at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-16 z-10">
+        <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+          <path d="M0 60H240C480 60 720 0 960 0C1200 0 1320 60 1440 60V120H0V60Z" fill="white"/>
+        </svg>
+      </div>
+    </div>
+  );
+};
+
+export default Hero;
