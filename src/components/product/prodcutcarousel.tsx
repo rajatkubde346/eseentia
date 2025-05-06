@@ -77,7 +77,7 @@ const ProductCarousel = () => {
         <div className="flex gap-2">
           <button
             onClick={prevSlide}
-            className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+            className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors hidden md:block"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -85,7 +85,7 @@ const ProductCarousel = () => {
           </button>
           <button
             onClick={nextSlide}
-            className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+            className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors hidden md:block"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -94,13 +94,13 @@ const ProductCarousel = () => {
         </div>
       </div>
 
-      <div className="relative overflow-hidden">
-        <div 
-          className="flex transition-transform duration-300 ease-in-out"
-          style={{ transform: `translateX(-${currentIndex * (100 / 6)}%)` }}
-        >
+      <div className="relative">
+        <div className="flex overflow-x-auto md:overflow-x-hidden no-scrollbar">
           {products.map((product) => (
-            <div key={product.id} className="w-1/6 flex-shrink-0 px-2">
+            <div
+              key={product.id}
+              className="w-4/5 sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/6 flex-shrink-0 px-2"
+            >
               <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                 <div className="relative aspect-square">
                   <img

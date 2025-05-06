@@ -1,17 +1,19 @@
 import { Product } from '../types/Product';
-import product1 from '../images/product1.jpg'
+import product1 from '../images/product/powder.png'
+import product2 from '../images/product/alfalfa powder.png'
+
+
 export const products: Product[] = [
   {
     id: 1,
-    name: "Organic Spirulina Powder",
+    name: "Spirulina Powder",
     description: "Our premium organic spirulina powder is harvested from pristine waters and carefully processed to preserve its nutritional integrity. This superfood is packed with protein, vitamins, minerals, and antioxidants to support your overall health and wellbeing.",
     price: 29.99,
     compareAtPrice: 34.99,
     rating: 4.8,
     reviewCount: 124,
     images: [
-      "https://sevenhillswholefoods.com/cdn/shop/files/7hcacpow_FOP_and_Contents.jpg?v=1742392250&width=770",
-      "https://sevenhillswholefoods.com/cdn/shop/files/7hcacpow_FOP_and_Contents.jpg?v=1742392250&width=770",
+      product1,
      
     ],
     category: "powder",
@@ -84,8 +86,7 @@ export const products: Product[] = [
     rating: 4.9,
     reviewCount: 58,
     images: [
-      "https://sevenhillswholefoods.com/cdn/shop/files/7hcacpow_FOP_and_Contents.jpg?v=1742392250&width=770",
-      "https://sevenhillswholefoods.com/cdn/shop/files/7hcacpow_FOP_and_Contents.jpg?v=1742392250&width=770",
+      product1,
     ],
     category: "capsules",
     tags: ["capsules", "superfood", "vegan", "gluten-free"],
@@ -114,14 +115,13 @@ export const products: Product[] = [
   },
   {
     id: 4,
-    name: "Spirulina Smoothie Blend",
+    name: "Alfalfa Leaves Powder",
     description: "Our specially formulated smoothie blend combines pure spirulina with organic fruits and superfoods for a delicious, nutritious boost to your favorite smoothies.",
     price: 39.99,
     rating: 4.7,
     reviewCount: 42,
     images: [
-      "https://sevenhillswholefoods.com/cdn/shop/files/7hcacpow_FOP_and_Contents.jpg?v=1742392250&width=770",
-      "https://sevenhillswholefoods.com/cdn/shop/files/7hcacpow_FOP_and_Contents.jpg?v=1742392250&width=770",
+        product2,
     ],
     category: "blends",
     tags: ["blend", "smoothie", "organic", "vegan", "gluten-free"],
@@ -205,7 +205,7 @@ export const products: Product[] = [
     rating: 4.9,
     reviewCount: 108,
     images: [
-      "https://sevenhillswholefoods.com/cdn/shop/files/7hcacpow_FOP_and_Contents.jpg?v=1742392250&width=770",
+      product1,
       
     ],
     category: "powder",

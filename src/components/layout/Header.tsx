@@ -73,16 +73,22 @@ const Header: React.FC = () => {
               Home
             </Link>
             <Link 
+              to="/about" 
+              className="text-neutral-800 hover:text-primary-600 font-medium transition-all duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary-600 hover:after:w-full after:transition-all after:duration-300"
+            >
+              About
+            </Link>
+            <Link 
               to="/products" 
               className="text-neutral-800 hover:text-primary-600 font-medium transition-all duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary-600 hover:after:w-full after:transition-all after:duration-300"
             >
               Products
             </Link>
             <Link 
-              to="/about" 
+              to="/" 
               className="text-neutral-800 hover:text-primary-600 font-medium transition-all duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary-600 hover:after:w-full after:transition-all after:duration-300"
             >
-              About
+              Contact Us
             </Link>
           </nav>
 

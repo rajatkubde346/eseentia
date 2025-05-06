@@ -29,7 +29,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <img 
             src={product.images[0]} 
             alt={product.name}
-            className="product-image"
+            className=""
           />
           
           {/* Tags */}
