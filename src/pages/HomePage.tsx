@@ -21,6 +21,8 @@ const HomePage: React.FC = () => {
       <Hero />
       <FeaturedProducts />
       <ProductCarousel />
+      <ProductCarousel />
+      <ProductCarousel />
       <ProductVariants />
       <BenefitsSection />
       <TestimonialSection />

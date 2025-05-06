@@ -1,4 +1,3 @@
-import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import HomePage from './pages/HomePage';
@@ -7,7 +6,6 @@ import ProductDetailPage from './pages/ProductDetailPage';
 import AboutPage from './pages/AboutPage';
 import { CartProvider } from './context/CartContext';
 import NotFoundPage from './pages/NotFoundPage';
-
 
 function App() {
   return (
