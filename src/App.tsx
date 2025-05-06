@@ -17,7 +17,7 @@ function App() {
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/products/:id" element={<ProductDetailPage />} />
           <Route path="/about" element={<AboutPage />} />
-          <Route path="*" element={<NotFoundPage />} />
+          {/* <Route path="*" element={<NotFoundPage />} /> */}
         </Routes>
       </Layout>
     </CartProvider>
