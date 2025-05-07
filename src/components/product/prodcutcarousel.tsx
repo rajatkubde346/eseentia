@@ -1,4 +1,12 @@
 import { useState } from 'react';
+import product1 from '../../images/product/powder.png';
+import product2 from '../../images/product/tablets.png';
+import product3 from '../../images/product/alfalfa powder.png';
+import product4 from  '../../images/product/capsules.png';
+import product5 from  '../../images/product/barleys grass.png';
+import product6 from  '../../images/product/Moringa.png';
+import product7 from  '../../images/product/MoringaC.png';
+import product8 from  '../../images/product/Moringa T.png';
 
 
 interface Product {
@@ -12,44 +20,44 @@ interface Product {
 const products: Product[] = [
   {
     id: 1,
-    name: "Wireless Headphones",
+    name: "Spirulina Powder",
     price: 99.99,
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500",
+    image: product1,
     discount: 20
   },
   {
     id: 2,
-    name: "Smart Watch",
+    name: "Spirulina Capsules",
     price: 199.99,
-    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500",
+    image: product4,
     discount: 15
   },
   {
     id: 3,
-    name: "Laptop Pro",
+    name: "Spirulina Tablets",
     price: 1299.99,
-    image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500",
+    image: product2,
     discount: 10
   },
   {
     id: 4,
-    name: "Gaming Mouse",
+    name: "Moringa Powder",
     price: 49.99,
-    image: "https://images.unsplash.com/photo-1527814050087-3793815479db?w=500",
+    image: product6,
     discount: 25
   },
   {
     id: 5,
-    name: "Mechanical Keyboard",
+    name: "Moringa Capsules",
     price: 129.99,
-    image: "https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?w=500",
+    image: product7,
     discount: 5
   },
   {
     id: 6,
-    name: "4K Monitor",
+    name: "Moringa Tablets",
     price: 399.99,
-    image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500",
+    image: product8,
     discount: 12
   },
   

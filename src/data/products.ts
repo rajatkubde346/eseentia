@@ -1,6 +1,9 @@
 import { Product } from '../types/Product';
-import product1 from '../images/product/powder.png'
-import product2 from '../images/product/alfalfa powder.png'
+import product1 from '../images/product/powder.png';
+import product2 from '../images/product/alfalfa powder.png';
+import product3 from '../images/product/tablets.png';
+import product4 from  '../images/product/capsules.png';
+import product5 from  '../images/product/barleys grass.png';
 
 
 export const products: Product[] = [
@@ -50,8 +53,7 @@ export const products: Product[] = [
     rating: 4.6,
     reviewCount: 86,
     images: [
-      "https://sevenhillswholefoods.com/cdn/shop/files/7hcacpow_FOP_and_Contents.jpg?v=1742392250&width=770",
-      "https://sevenhillswholefoods.com/cdn/shop/files/7hcacpow_FOP_and_Contents.jpg?v=1742392250&width=770",
+      product3,
     ],
     category: "tablets",
     tags: ["tablets", "superfood", "vegan", "gluten-free"],
@@ -86,7 +88,7 @@ export const products: Product[] = [
     rating: 4.9,
     reviewCount: 58,
     images: [
-      product1,
+      product4,
     ],
     category: "capsules",
     tags: ["capsules", "superfood", "vegan", "gluten-free"],
@@ -163,8 +165,7 @@ export const products: Product[] = [
     rating: 4.5,
     reviewCount: 36,
     images: [
-      "https://sevenhillswholefoods.com/cdn/shop/files/7hcacpow_FOP_and_Contents.jpg?v=1742392250&width=770",
-      "https://sevenhillswholefoods.com/cdn/shop/files/7hcacpow_FOP_and_Contents.jpg?v=1742392250&width=770",
+      product3,
     ],
     category: "specialty",
     tags: ["beauty", "superfood", "vegan", "gluten-free"],
@@ -198,14 +199,14 @@ export const products: Product[] = [
   },
   {
     id: 6,
-    name: "Organic Hawaiian Spirulina",
+    name: "Barleys Grass Powder",
     description: "Our premium Hawaiian spirulina is sourced from the pristine waters of Kona, Hawaii, known for producing some of the world's purest and most nutrient-dense spirulina.",
     price: 49.99,
     compareAtPrice: 59.99,
     rating: 4.9,
     reviewCount: 108,
     images: [
-      product1,
+      product5,
       
     ],
     category: "powder",
