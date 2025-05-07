@@ -6,6 +6,7 @@ import TestimonialSection from '../components/home/TestimonialSection';
 import NewsletterSection from '../components/home/NewsletterSection';
 import ProductCarousel from '../components/product/prodcutcarousel';
 import ProductVariants from '../components/home/ProductVariants';
+import Video from '../components/testimonials/VideoTestimonials'
 
 const HomePage: React.FC = () => {
   useEffect(() => {
@@ -25,6 +26,7 @@ const HomePage: React.FC = () => {
       <ProductCarousel />
       <ProductVariants />
       <BenefitsSection />
+      <Video/>
       <TestimonialSection />
       <NewsletterSection />
     </div>

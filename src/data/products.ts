@@ -4,6 +4,9 @@ import product2 from '../images/product/alfalfa powder.png';
 import product3 from '../images/product/tablets.png';
 import product4 from  '../images/product/capsules.png';
 import product5 from  '../images/product/barleys grass.png';
+import product6 from  '../images/product/Moringa.png';
+import product7 from  '../images/product/MoringaC.png';
+import product8 from  '../images/product/MoringaT.png';
 
 
 export const products: Product[] = [
@@ -159,7 +162,7 @@ export const products: Product[] = [
   },
   {
     id: 5,
-    name: "Spirulina Beauty Boost",
+    name: "Spirulina Tablets",
     description: "This specialized spirulina formula is designed to support skin, hair, and nail health from the inside out, combining spirulina with beauty-enhancing nutrients.",
     price: 42.99,
     rating: 4.5,
@@ -234,8 +237,112 @@ export const products: Product[] = [
     sku: "SPI-HWN-100",
     isOrganic: true,
     isBestSeller: true
+  },
+  {
+    id: 7,
+    name: "Moringa Powder",
+    description: "Pure organic moringa powder, packed with essential nutrients and antioxidants. Perfect for smoothies, juices, and cooking.",
+    price: 34.99,
+    compareAtPrice: 39.99,
+    rating: 4.7,
+    reviewCount: 89,
+    images: [
+      product6,
+    ],
+    category: "powder",
+    tags: ["organic", "vegan", "gluten-free", "premium"],
+    sizes: [
+      { size: "100g", price: 34.99 },
+      { size: "250g", price: 69.99 },
+      { size: "500g", price: 129.99 }
+    ],
+    features: [
+      "Rich in vitamins A, C, and E",
+      "High in calcium and iron",
+      "Contains all essential amino acids",
+      "Supports immune system",
+      "Natural energy booster"
+    ],
+    ingredients: ["100% Organic Moringa Oleifera Leaf Powder"],
+    nutritionalInfo: {
+      "Protein": { amount: "27g", dailyValue: "54%" },
+      "Iron": { amount: "28mg", dailyValue: "156%" },
+      "Calcium": { amount: "2000mg", dailyValue: "200%" },
+      "Vitamin A": { amount: "18.9mg", dailyValue: "2100%" }
+    },
+    stock: 45,
+    sku: "MOR-PWD-100",
+    isOrganic: true
+  },
+  {
+    id: 8,
+    name: "Moringa Capsules",
+    description: "Convenient moringa capsules for easy daily supplementation. Each capsule contains pure moringa leaf powder for maximum nutrient absorption.",
+    price: 29.99,
+    rating: 4.6,
+    reviewCount: 67,
+    images: [
+      product7,
+    ],
+    category: "capsules",
+    tags: ["organic", "vegan", "gluten-free"],
+    sizes: [
+      { size: "60 capsules", price: 29.99 },
+      { size: "120 capsules", price: 54.99 },
+      { size: "240 capsules", price: 99.99 }
+    ],
+    features: [
+      "500mg moringa per capsule",
+      "Easy to swallow",
+      "No fillers or binders",
+      "Convenient daily dosage",
+      "Sustainably sourced"
+    ],
+    ingredients: ["Organic Moringa Oleifera Leaf Powder", "Vegetable Cellulose (capsule)"],
+    nutritionalInfo: {
+      "Protein": { amount: "25g", dailyValue: "50%" },
+      "Iron": { amount: "25mg", dailyValue: "139%" },
+      "Calcium": { amount: "1800mg", dailyValue: "180%" },
+      "Vitamin A": { amount: "17mg", dailyValue: "1889%" }
+    },
+    stock: 85,
+    sku: "MOR-CAP-060",
+    isNew: true
+  },
+  {
+    id: 9,
+    name: "Moringa Tablets",
+    description: "Compressed moringa tablets for those who prefer a tablet form. Each tablet contains pure moringa leaf powder for optimal nutrition.",
+    price: 27.99,
+    rating: 4.5,
+    reviewCount: 52,
+    images: [
+      product8,
+    ],
+    category: "tablets",
+    tags: ["organic", "vegan", "gluten-free"],
+    sizes: [
+      { size: "100 tablets", price: 27.99 },
+      { size: "200 tablets", price: 49.99 },
+      { size: "400 tablets", price: 89.99 }
+    ],
+    features: [
+      "400mg moringa per tablet",
+      "No artificial binders",
+      "Easy to take",
+      "Long shelf life",
+      "Pure and natural"
+    ],
+    ingredients: ["Organic Moringa Oleifera Leaf Powder"],
+    nutritionalInfo: {
+      "Protein": { amount: "24g", dailyValue: "48%" },
+      "Iron": { amount: "24mg", dailyValue: "133%" },
+      "Calcium": { amount: "1750mg", dailyValue: "175%" },
+      "Vitamin A": { amount: "16mg", dailyValue: "1778%" }
+    },
+    stock: 65,
+    sku: "MOR-TAB-100"
   }
-  
 ];
 
 export const getProductById = (id: number): Product | undefined => {

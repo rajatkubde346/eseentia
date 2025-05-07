@@ -67,10 +67,10 @@ const Hero: React.FC = () => {
               </div>
 
               {/* Content */}
-              <div className="relative z-10 container h-full flex flex-col justify-center text-white">
+              <div className="relative z-10 container  h-full flex flex-col justify-center text-white px-4 sm:px-6 lg:px-8">
                 <div className="max-w-2xl">
                   <motion.span 
-                    className="inline-block mb-4 text-xs uppercase tracking-widest font-semibold bg-primary-600 text-white px-3 py-1.5 rounded-sm"
+                    className="inline-block mb-3 sm:mb-4 text-xs uppercase tracking-widest font-semibold bg-primary-600 text-white px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-sm"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
@@ -79,7 +79,7 @@ const Hero: React.FC = () => {
                   </motion.span>
                   
                   <motion.h1 
-                    className="text-5xl sm:text-6xl md:text-7xl font-serif font-bold mb-6 leading-none"
+                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-4 sm:mb-6 leading-tight"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.1 }}
@@ -88,7 +88,7 @@ const Hero: React.FC = () => {
                   </motion.h1>
                   
                   <motion.p 
-                    className="text-lg sm:text-xl opacity-90 mb-8 max-w-xl"
+                    className="text-base sm:text-lg md:text-xl opacity-90 mb-6 sm:mb-8 max-w-xl"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.2 }}
@@ -97,15 +97,15 @@ const Hero: React.FC = () => {
                   </motion.p>
                   
                   <motion.div 
-                    className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4"
+                    className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.3 }}
                   >
-                    <Link to="/products" className="btn btn-primary">
+                    <Link to="/products" className="btn btn-primary text-sm sm:text-base px-6 py-2.5 sm:py-3">
                       Shop Collection
                     </Link>
-                    <Link to="/about" className="btn bg-white text-primary-800 hover:bg-neutral-100">
+                    <Link to="/about" className="btn bg-white text-primary-800 hover:bg-neutral-100 text-sm sm:text-base px-6 py-2.5 sm:py-3">
                       Learn More
                     </Link>
                   </motion.div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Instagram, Facebook, Twitter, Mail } from 'lucide-react';
+import { Instagram, Facebook, Twitter, Mail, Phone, MapPin } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-neutral-100 pt-16 pb-8 mt-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
           {/* Company */}
           <div className="space-y-4">
             <h4 className="text-lg font-serif font-bold text-neutral-900">Eseentia</h4>
@@ -117,32 +117,41 @@ const Footer: React.FC = () => {
               </li>
             </ul>
           </div>
-          
-          {/* Newsletter */}
-          <div className="space-y-4">
-            <h4 className="text-lg font-serif font-bold text-neutral-900">Stay Updated</h4>
-            <p className="text-neutral-600 leading-relaxed">
-              Subscribe to our newsletter for the latest products and offers.
-            </p>
-            <form className="space-y-3">
-              <div className="flex">
-                <input
-                  type="email"
-                  placeholder="Your email"
-                  className="flex-1 px-4 py-2 border border-neutral-300 rounded-l-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 focus:outline-none transition-all duration-200"
-                />
-                <button
-                  type="submit"
-                  className="bg-primary-600 text-white px-4 py-2 rounded-r-lg hover:bg-primary-700 transition-colors duration-200 transform hover:scale-105"
-                  aria-label="Subscribe"
+
+          {/* Contact Information */}
+          <div className="space-y-4 lg:col-span-2">
+            <h4 className="text-lg font-serif font-bold text-neutral-900">Contact Us</h4>
+            <div className="space-y-4">
+              <div className="flex items-start space-x-3">
+                <Phone size={20} className="text-neutral-600 mt-1 flex-shrink-0" />
+                <a 
+                  href="tel:+919975105971" 
+                  className="text-neutral-600 hover:text-primary-600 transition-colors duration-200"
                 >
-                  <Mail size={20} />
-                </button>
+                  +91 9975105971
+                </a>
               </div>
-              <p className="text-xs text-neutral-500">
-                By subscribing, you agree to our Privacy Policy.
-              </p>
-            </form>
+              <div className="space-y-3">
+                <div className="flex items-start space-x-3">
+                  <MapPin size={20} className="text-neutral-600 mt-1 flex-shrink-0" />
+                  <div className="text-neutral-600">
+                    <p className="font-medium">Business Registered Address:</p>
+                    <p>Raitown, Flat no- B3-303,</p>
+                    <p>IC Chowk Hingan Road,</p>
+                    <p>Nagpur - 440016</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <MapPin size={20} className="text-neutral-600 mt-1 flex-shrink-0" />
+                  <div className="text-neutral-600">
+                    <p className="font-medium">Office Address:</p>
+                    <p>Flat No. 03, Harihar Sahanlwas,</p>
+                    <p>Beside Dhandanla Infotech,</p>
+                    <p>Giripeth, Nagpur - 440010</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         

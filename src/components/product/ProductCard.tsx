@@ -19,62 +19,62 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   
   return (
     <motion.div 
-      className="product-card group"
+      className="product-card group bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
       <Link to={`/products/${product.id}`} className="block">
-        <div className="relative overflow-hidden">
+        <div className="relative overflow-hidden rounded-t-lg">
           <img 
             src={product.images[0]} 
             alt={product.name}
-            className=""
+            className="w-full h-48 sm:h-56 md:h-64 object-cover transition-transform duration-300 group-hover:scale-105"
           />
           
           {/* Tags */}
-          <div className="absolute top-3 left-3 flex flex-col gap-2">
+          <div className="absolute top-2 sm:top-3 left-2 sm:left-3 flex flex-col gap-1.5 sm:gap-2">
             {product.isNew && (
-              <span className="tag bg-secondary-600 text-white">New</span>
+              <span className="tag bg-secondary-600 text-white text-xs px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-sm">New</span>
             )}
             {product.isBestSeller && (
-              <span className="tag bg-accent-600 text-white">Best Seller</span>
+              <span className="tag bg-accent-600 text-white text-xs px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-sm">Best Seller</span>
             )}
             {product.isOrganic && (
-              <span className="tag bg-primary-600 text-white">Organic</span>
+              <span className="tag bg-primary-600 text-white text-xs px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-sm">Organic</span>
             )}
           </div>
           
           {/* Quick Add Button */}
-          <div className="absolute bottom-3 right-3 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+          <div className="absolute bottom-2 sm:bottom-3 right-2 sm:right-3 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
             <button
               onClick={handleAddToCart}
-              className="bg-white text-primary-800 p-2 rounded-full shadow-md hover:bg-primary-600 hover:text-white transition-colors"
+              className="bg-white text-primary-800 p-1.5 sm:p-2 rounded-full shadow-md hover:bg-primary-600 hover:text-white transition-colors"
               aria-label={`Add ${product.name} to cart`}
             >
-              <ShoppingBag size={20} />
+              <ShoppingBag size={18} className="sm:w-5 sm:h-5" />
             </button>
           </div>
         </div>
         
-        <div className="p-4">
+        <div className="p-3 sm:p-4">
           {/* Title and Price */}
-          <div className="flex justify-between items-start mb-2">
-            <h3 className="font-medium text-neutral-800">{product.name}</h3>
-            <div className="flex flex-col items-end">
+          <div className="flex justify-between items-start mb-1.5 sm:mb-2">
+            <h3 className="font-medium text-neutral-800 text-sm sm:text-base line-clamp-2">{product.name}</h3>
+            <div className="flex flex-col items-end ml-2">
               {product.compareAtPrice && (
-                <span className="text-sm text-neutral-400 line-through">
+                <span className="text-xs sm:text-sm text-neutral-400 line-through">
                   ${product.compareAtPrice.toFixed(2)}
                 </span>
               )}
-              <span className="font-medium text-neutral-900">
+              <span className="font-medium text-neutral-900 text-sm sm:text-base">
                 ${product.price.toFixed(2)}
               </span>
             </div>
           </div>
           
           {/* Category */}
-          <p className="text-sm text-neutral-500 mb-2">
+          <p className="text-xs sm:text-sm text-neutral-500 mb-1.5 sm:mb-2">
             {product.category.charAt(0).toUpperCase() + product.category.slice(1)}
           </p>
           
@@ -84,7 +84,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               {[...Array(5)].map((_, i) => (
                 <svg 
                   key={i} 
-                  className={`w-4 h-4 ${i < Math.floor(product.rating) ? 'text-accent-500' : 'text-neutral-300'}`} 
+                  className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${i < Math.floor(product.rating) ? 'text-accent-500' : 'text-neutral-300'}`} 
                   fill="currentColor" 
                   viewBox="0 0 20 20"
                 >

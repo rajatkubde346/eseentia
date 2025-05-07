@@ -220,7 +220,9 @@ const ProductsPage: React.FC = () => {
           <div className="flex-1">
             <ProductGrid products={filteredProducts} />
           </div>
+          
         </div>
+        
       </div>
     </div>
   );
