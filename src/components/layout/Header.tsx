@@ -74,9 +74,12 @@ const Header: React.FC<{ onLoginClick: () => void }> = ({ onLoginClick }) => {
       name: 'About',
       path: '/about',
       submenu: [
-        { name: 'Our Story', path: '/about/story' },
-        { name: 'Team', path: '/about/team' },
-        { name: 'Careers', path: '/about/careers' },
+        { name: 'Our Story', path: '/about' },
+        // { name: 'Mission & Vision', path: '/about#mission' },
+        // { name: 'Core Values', path: '/about#values' },
+        // { name: 'Quality Assurance', path: '/about#quality' },
+        // { name: 'Sustainability', path: '/about#sustainability' },
+        // { name: 'Data & Privacy', path: '/about#privacy' },
       ]
     },
     {

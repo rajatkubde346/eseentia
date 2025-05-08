@@ -174,23 +174,23 @@ const ProductCarousel = () => {
   };
 
   return (
-    <div className="relative w-full max-w-7xl mx-auto px-4 py-8 bg-white">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-gray-800">Featured Products</h2>
+    <div className="relative w-full max-w-7xl mx-auto px-2 sm:px-4 py-4 sm:py-8 bg-white">
+      <div className="flex items-center justify-between mb-4 sm:mb-6">
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-800">Featured Products</h2>
         <div className="flex gap-2">
           <button
             onClick={prevSlide}
-            className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+            className="p-1.5 sm:p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
           <button
             onClick={nextSlide}
-            className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+            className="p-1.5 sm:p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </button>
@@ -214,13 +214,13 @@ const ProductCarousel = () => {
           {products.map((product) => (
             <div
               key={product.id}
-              className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/6 flex-shrink-0 px-2 select-none"
+              className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/6 flex-shrink-0 px-1 sm:px-2 select-none"
               style={{ flex: `0 0 ${100 / visibleCount}%` }}
             >
               <div 
                 className={`bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 cursor-pointer
                   ${activeProduct === product.id 
-                    ? 'shadow-xl transform -translate-y-2 sm:-translate-y-3 md:-translate-y-4 lg:-translate-y-5 xl:-translate-y-6 hover:shadow-2xl' 
+                    ? 'shadow-xl transform -translate-y-1 sm:-translate-y-2 md:-translate-y-3 lg:-translate-y-4 xl:-translate-y-5 hover:shadow-2xl' 
                     : 'hover:shadow-lg hover:-translate-y-1 sm:hover:-translate-y-2 md:hover:-translate-y-3 lg:hover:-translate-y-4 xl:hover:-translate-y-5'
                   }`}
                 onClick={() => handleProductClick(product.id)}
@@ -229,7 +229,7 @@ const ProductCarousel = () => {
                   <img
                     src={product.image}
                     alt={product.name}
-                    className={`w-full h-full object-cover transition-all duration-300
+                    className={`w-full h-full object-contain p-2 sm:p-4 transition-all duration-300
                       ${activeProduct === product.id 
                         ? 'brightness-105 sm:brightness-110 md:brightness-115 lg:brightness-120 xl:brightness-125' 
                         : 'hover:brightness-105'
@@ -237,13 +237,13 @@ const ProductCarousel = () => {
                     draggable="false"
                   />
                   {product.discount && (
-                    <div className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-full text-sm">
+                    <div className="absolute top-1 right-1 sm:top-2 sm:right-2 bg-red-500 text-white px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full text-xs sm:text-sm">
                       -{product.discount}%
                     </div>
                   )}
                 </div>
-                <div className="p-4">
-                  <h3 className={`text-sm font-medium mb-1 truncate transition-colors duration-300
+                <div className="p-2 sm:p-4">
+                  <h3 className={`text-xs sm:text-sm font-medium mb-1 truncate transition-colors duration-300
                     ${activeProduct === product.id 
                       ? 'text-blue-600 sm:text-blue-700 md:text-blue-800 lg:text-blue-900 xl:text-blue-950' 
                       : 'text-gray-800 hover:text-blue-600'
@@ -251,8 +251,8 @@ const ProductCarousel = () => {
                   >
                     {product.name}
                   </h3>
-                  <div className="flex items-center gap-2">
-                    <span className={`text-lg font-bold transition-colors duration-300
+                  <div className="flex items-center gap-1 sm:gap-2">
+                    <span className={`text-sm sm:text-lg font-bold transition-colors duration-300
                       ${activeProduct === product.id 
                         ? 'text-blue-600 sm:text-blue-700 md:text-blue-800 lg:text-blue-900 xl:text-blue-950' 
                         : 'text-gray-900'
@@ -261,7 +261,7 @@ const ProductCarousel = () => {
                       ${product.price.toFixed(2)}
                     </span>
                     {product.discount && (
-                      <span className="text-sm text-gray-500 line-through">
+                      <span className="text-xs sm:text-sm text-gray-500 line-through">
                         ${(product.price * (1 + product.discount / 100)).toFixed(2)}
                       </span>
                     )}

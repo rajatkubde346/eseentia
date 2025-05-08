@@ -1,385 +1,349 @@
 import React, { useEffect } from 'react';
-import { Leaf, Droplets, Users, CheckCircle } from 'lucide-react';
+import { Leaf, Droplets, Users, CheckCircle, Shield, Heart, Globe, Award, Scale, Lock } from 'lucide-react';
 import { motion } from 'framer-motion';
 import NewsletterSection from '../components/home/NewsletterSection';
 
 const AboutPage: React.FC = () => {
   useEffect(() => {
-    // Set page title
-    document.title = 'About Us | Seven Hills Wholefoods';
-    
-    // Scroll to top on page load
+    document.title = 'About Us | Eseentia';
     window.scrollTo(0, 0);
   }, []);
-  
+
+  const fadeInUp = {
+    initial: { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.5 }
+  };
+
   return (
-    <div>
+    <div className="bg-white">
       {/* Hero Section */}
       <section className="relative bg-primary-900 py-20">
         <div className="absolute inset-0 opacity-20">
           <img 
             src="https://images.pexels.com/photos/4068395/pexels-photo-4068395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-            alt="Spirulina farm" 
+            alt="Eseentia Corporate" 
             className="w-full h-full object-cover"
           />
         </div>
         <div className="container relative z-10 text-white">
-          <div className="max-w-2xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6">Our Story</h1>
+          <div className="max-w-3xl">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6">Eseentia Corporate</h1>
             <p className="text-xl font-light opacity-90">
-              From a small sustainable farm to a global provider of premium spirulina products, our journey is rooted in our passion for natural nutrition and environmental stewardship.
+              Health, Wellness, and Sustainability Commitments
             </p>
           </div>
         </div>
       </section>
-      
-      {/* Our Mission */}
+
+      {/* Our Story Section */}
       <section className="py-16 bg-white">
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <span className="text-primary-600 font-medium">Our Mission</span>
-              <h2 className="text-3xl font-serif font-semibold mt-2 mb-6">Providing Sustainable Nutrition for a Healthier World</h2>
+            <motion.div {...fadeInUp}>
+              <span className="text-primary-600 font-medium">Our Story</span>
+              <h2 className="text-3xl font-serif font-semibold mt-2 mb-6">From Vision to Reality</h2>
               <p className="text-neutral-700 mb-6">
-                At Seven Hills Wholefoods, we're committed to providing the highest quality spirulina products while maintaining sustainable farming practices that respect our planet. Our mission is to help people achieve optimal health through nature's most nutrient-dense superfood.
+                At Eseentia, our journey began with a simple yet powerful vision: to revolutionize the wellness industry through sustainable, science-backed nutrition. What started as a commitment to quality has grown into a global movement for better health and environmental stewardship.
               </p>
               <p className="text-neutral-700">
-                We believe that health and nutrition should never come at the expense of our environment. That's why we've developed cultivation methods that minimize our ecological footprint while maximizing the nutritional profile of our spirulina.
+                Through our exclusive quality protocols and innovative production methods, we've established ourselves as leaders in the spirulina and superfood industry, always maintaining our core values of integrity, sustainability, and transparency.
               </p>
             </motion.div>
             
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
+            <motion.div {...fadeInUp}>
               <img 
                 src="https://images.pexels.com/photos/3735155/pexels-photo-3735155.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
-                alt="Spirulina farming" 
+                alt="Eseentia Story" 
                 className="rounded-lg shadow-lg object-cover h-80 w-full"
               />
             </motion.div>
           </div>
         </div>
       </section>
-      
-      {/* Our Values */}
-      <section className="py-16 bg-neutral-50">
+
+      {/* Mission & Vision */}
+      <section id="mission" className="py-16 bg-white">
+        <div className="container">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <motion.div {...fadeInUp}>
+              <span className="text-primary-600 font-medium">Our Mission</span>
+              <h2 className="text-3xl font-serif font-semibold mt-2 mb-6">Improving Lives Through Natural Wellness</h2>
+              <p className="text-neutral-700 mb-6">
+                At Eseentia, our mission is to improve lives by delivering safe, effective, and ethically produced spirulina and superfood-based wellness products.
+              </p>
+              <p className="text-neutral-700">
+                Every product is manufactured following Eseentia's exclusive quality protocols, ensuring precision, purity, and purpose in every formulation.
+              </p>
+            </motion.div>
+            
+            <motion.div {...fadeInUp}>
+              <span className="text-primary-600 font-medium">Our Vision</span>
+              <h2 className="text-3xl font-serif font-semibold mt-2 mb-6">Global Leadership in Sustainable Wellness</h2>
+              <p className="text-neutral-700 mb-6">
+                We envision Eseentia as a global leader in sustainable wellness, where each product reflects our commitment to authenticity, scientific precision, and environmental stewardship.
+              </p>
+              <ul className="space-y-3 text-neutral-700">
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-primary-600 mr-2 mt-1 flex-shrink-0" />
+                  <span>Developing products under proprietary standards</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-primary-600 mr-2 mt-1 flex-shrink-0" />
+                  <span>Fostering lasting partnerships with authorized production units</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-primary-600 mr-2 mt-1 flex-shrink-0" />
+                  <span>Driving innovation through nature and research</span>
+                </li>
+              </ul>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Core Values */}
+      <section id="values" className="py-16 bg-neutral-50">
         <div className="container">
           <div className="text-center mb-12">
-            <span className="text-primary-600 font-medium">Our Values</span>
-            <h2 className="text-3xl font-serif font-semibold mt-2 mb-4">What Drives Us Every Day</h2>
+            <span className="text-primary-600 font-medium">Core Values & Ethics</span>
+            <h2 className="text-3xl font-serif font-semibold mt-2 mb-4">What Defines Us</h2>
             <p className="max-w-2xl mx-auto text-neutral-700">
-              Our core values shape everything we do, from how we grow our spirulina to how we interact with our customers and community.
+              Our values are not aspirational — they are operational realities that define our relationships, decisions, and products.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <motion.div 
-              className="bg-white p-6 rounded-lg shadow-sm"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0 }}
-            >
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <motion.div {...fadeInUp} className="bg-white p-6 rounded-lg shadow-sm">
               <div className="w-12 h-12 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center mb-4">
+                <Scale size={24} />
+              </div>
+              <h3 className="text-xl font-serif font-semibold mb-3">Integrity</h3>
+              <p className="text-neutral-700">
+                We uphold the highest ethical standards across our integrated production and supply operations.
+              </p>
+            </motion.div>
+
+            <motion.div {...fadeInUp} className="bg-white p-6 rounded-lg shadow-sm">
+              <div className="w-12 h-12 bg-secondary-100 text-secondary-600 rounded-full flex items-center justify-center mb-4">
                 <Leaf size={24} />
               </div>
               <h3 className="text-xl font-serif font-semibold mb-3">Sustainability</h3>
               <p className="text-neutral-700">
-                We're committed to environmentally responsible farming practices that preserve our planet for future generations.
+                Environmental stewardship guides everything from sourcing to production protocols.
               </p>
             </motion.div>
-            
-            <motion.div 
-              className="bg-white p-6 rounded-lg shadow-sm"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              <div className="w-12 h-12 bg-secondary-100 text-secondary-600 rounded-full flex items-center justify-center mb-4">
-                <CheckCircle size={24} />
-              </div>
-              <h3 className="text-xl font-serif font-semibold mb-3">Quality</h3>
-              <p className="text-neutral-700">
-                We never compromise on the quality of our products, ensuring each batch meets our rigorous standards.
-              </p>
-            </motion.div>
-            
-            <motion.div 
-              className="bg-white p-6 rounded-lg shadow-sm"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
+
+            <motion.div {...fadeInUp} className="bg-white p-6 rounded-lg shadow-sm">
               <div className="w-12 h-12 bg-accent-100 text-accent-600 rounded-full flex items-center justify-center mb-4">
-                <Droplets size={24} />
+                <Shield size={24} />
               </div>
-              <h3 className="text-xl font-serif font-semibold mb-3">Purity</h3>
+              <h3 className="text-xl font-serif font-semibold mb-3">Transparency</h3>
               <p className="text-neutral-700">
-                We maintain the highest standards of purity, growing our spirulina in carefully controlled conditions away from contaminants.
+                We guarantee transparency at every level of our operations and product development.
               </p>
             </motion.div>
-            
-            <motion.div 
-              className="bg-white p-6 rounded-lg shadow-sm"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-            >
+
+            <motion.div {...fadeInUp} className="bg-white p-6 rounded-lg shadow-sm">
               <div className="w-12 h-12 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center mb-4">
+                <Award size={24} />
+              </div>
+              <h3 className="text-xl font-serif font-semibold mb-3">Innovation</h3>
+              <p className="text-neutral-700">
+                Our processes are continually refined using evidence-backed research and advanced methodologies.
+              </p>
+            </motion.div>
+
+            <motion.div {...fadeInUp} className="bg-white p-6 rounded-lg shadow-sm">
+              <div className="w-12 h-12 bg-secondary-100 text-secondary-600 rounded-full flex items-center justify-center mb-4">
                 <Users size={24} />
               </div>
-              <h3 className="text-xl font-serif font-semibold mb-3">Community</h3>
+              <h3 className="text-xl font-serif font-semibold mb-3">Respect & Inclusion</h3>
               <p className="text-neutral-700">
-                We support the communities where we farm, providing fair employment and investing in local initiatives.
+                We foster diversity, equality, and mutual respect across our certified networks.
               </p>
             </motion.div>
           </div>
         </div>
       </section>
-      
-      {/* Our Process */}
-      <section className="py-16 bg-white">
+
+      {/* Quality Assurance */}
+      <section id="quality" className="py-16 bg-white">
         <div className="container">
           <div className="text-center mb-12">
-            <span className="text-primary-600 font-medium">Our Process</span>
-            <h2 className="text-3xl font-serif font-semibold mt-2 mb-4">How We Grow Our Spirulina</h2>
+            <span className="text-primary-600 font-medium">Quality Assurance & Compliance</span>
+            <h2 className="text-3xl font-serif font-semibold mt-2 mb-4">Our Commitment to Excellence</h2>
             <p className="max-w-2xl mx-auto text-neutral-700">
-              From cultivation to packaging, every step of our process is designed to maintain the nutritional integrity of our spirulina.
+              Quality is not a checkpoint — it is the foundation of everything we do.
             </p>
           </div>
-          
-          <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 bg-primary-200 transform md:translate-x-px"></div>
-            
-            {/* Timeline items */}
-            <div className="relative z-10">
-              {/* Item 1 */}
-              <div className="flex flex-col md:flex-row items-center mb-12">
-                <motion.div 
-                  className="md:w-1/2 md:pr-12 text-right hidden md:block"
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <h3 className="text-xl font-serif font-semibold mb-2">Careful Cultivation</h3>
-                  <p className="text-neutral-700">
-                    We grow our spirulina in carefully controlled freshwater ponds, using pristine water and natural nutrients to create the optimal growing environment.
-                  </p>
-                </motion.div>
-                
-                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary-600 text-white border-4 border-white shadow-md z-10 my-4 md:my-0">
-                  1
-                </div>
-                
-                <motion.div 
-                  className="md:w-1/2 md:pl-12 md:hidden"
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <h3 className="text-xl font-serif font-semibold mb-2">Careful Cultivation</h3>
-                  <p className="text-neutral-700">
-                    We grow our spirulina in carefully controlled freshwater ponds, using pristine water and natural nutrients to create the optimal growing environment.
-                  </p>
-                </motion.div>
-              </div>
-              
-              {/* Item 2 */}
-              <div className="flex flex-col md:flex-row items-center mb-12">
-                <motion.div 
-                  className="md:w-1/2 md:pr-12 text-right md:hidden"
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <h3 className="text-xl font-serif font-semibold mb-2">Gentle Harvesting</h3>
-                  <p className="text-neutral-700">
-                    Our spirulina is harvested using low-pressure filtration methods that preserve its delicate cellular structure and nutrient profile.
-                  </p>
-                </motion.div>
-                
-                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary-600 text-white border-4 border-white shadow-md z-10 my-4 md:my-0">
-                  2
-                </div>
-                
-                <motion.div 
-                  className="md:w-1/2 md:pl-12 hidden md:block"
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <h3 className="text-xl font-serif font-semibold mb-2">Gentle Harvesting</h3>
-                  <p className="text-neutral-700">
-                    Our spirulina is harvested using low-pressure filtration methods that preserve its delicate cellular structure and nutrient profile.
-                  </p>
-                </motion.div>
-              </div>
-              
-              {/* Item 3 */}
-              <div className="flex flex-col md:flex-row items-center mb-12">
-                <motion.div 
-                  className="md:w-1/2 md:pr-12 text-right hidden md:block"
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <h3 className="text-xl font-serif font-semibold mb-2">Low-Temperature Drying</h3>
-                  <p className="text-neutral-700">
-                    We use low-temperature drying techniques to preserve heat-sensitive nutrients while achieving optimal moisture content.
-                  </p>
-                </motion.div>
-                
-                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary-600 text-white border-4 border-white shadow-md z-10 my-4 md:my-0">
-                  3
-                </div>
-                
-                <motion.div 
-                  className="md:w-1/2 md:pl-12 md:hidden"
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <h3 className="text-xl font-serif font-semibold mb-2">Low-Temperature Drying</h3>
-                  <p className="text-neutral-700">
-                    We use low-temperature drying techniques to preserve heat-sensitive nutrients while achieving optimal moisture content.
-                  </p>
-                </motion.div>
-              </div>
-              
-              {/* Item 4 */}
-              <div className="flex flex-col md:flex-row items-center">
-                <motion.div 
-                  className="md:w-1/2 md:pr-12 text-right md:hidden"
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <h3 className="text-xl font-serif font-semibold mb-2">Rigorous Testing</h3>
-                  <p className="text-neutral-700">
-                    Every batch is tested for purity, potency, and contaminants before being packaged in our eco-friendly, light-protective containers.
-                  </p>
-                </motion.div>
-                
-                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary-600 text-white border-4 border-white shadow-md z-10 my-4 md:my-0">
-                  4
-                </div>
-                
-                <motion.div 
-                  className="md:w-1/2 md:pl-12 hidden md:block"
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <h3 className="text-xl font-serif font-semibold mb-2">Rigorous Testing</h3>
-                  <p className="text-neutral-700">
-                    Every batch is tested for purity, potency, and contaminants before being packaged in our eco-friendly, light-protective containers.
-                  </p>
-                </motion.div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      {/* Team */}
-      <section className="py-16 bg-neutral-50">
-        <div className="container">
-          <div className="text-center mb-12">
-            <span className="text-primary-600 font-medium">Our Team</span>
-            <h2 className="text-3xl font-serif font-semibold mt-2 mb-4">The People Behind Seven Hills</h2>
-            <p className="max-w-2xl mx-auto text-neutral-700">
-              Our passionate team combines expertise in nutrition, sustainable agriculture, and quality assurance to bring you the best spirulina products.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <motion.div
-              className="bg-white rounded-lg overflow-hidden shadow-sm"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0 }}
-            >
-              <img 
-                src="https://images.pexels.com/photos/5792641/pexels-photo-5792641.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
-                alt="Sarah Miller" 
-                className="w-full h-60 object-cover object-center"
-              />
-              <div className="p-6">
-                <h3 className="text-xl font-serif font-semibold mb-1">Sarah Miller</h3>
-                <p className="text-primary-600 mb-4">Founder & CEO</p>
-                <p className="text-neutral-700">
-                  With a background in nutritional science and sustainable agriculture, Sarah founded Seven Hills with a mission to bring the highest quality spirulina to market.
-                </p>
-              </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <motion.div {...fadeInUp} className="bg-neutral-50 p-6 rounded-lg">
+              <h3 className="text-xl font-serif font-semibold mb-4">Testing & Validation</h3>
+              <ul className="space-y-3 text-neutral-700">
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-primary-600 mr-2 mt-1 flex-shrink-0" />
+                  <span>Purity & Potency Testing</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-primary-600 mr-2 mt-1 flex-shrink-0" />
+                  <span>Microbiological Analysis</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-primary-600 mr-2 mt-1 flex-shrink-0" />
+                  <span>Heavy Metal Screening</span>
+                </li>
+              </ul>
             </motion.div>
-            
-            <motion.div
-              className="bg-white rounded-lg overflow-hidden shadow-sm"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              <img 
-                src="https://images.pexels.com/photos/8439997/pexels-photo-8439997.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
-                alt="Dr. James Chen" 
-                className="w-full h-60 object-cover object-center"
-              />
-              <div className="p-6">
-                <h3 className="text-xl font-serif font-semibold mb-1">Dr. James Chen</h3>
-                <p className="text-primary-600 mb-4">Chief Scientific Officer</p>
-                <p className="text-neutral-700">
-                  With a Ph.D. in Algal Biotechnology, James oversees our cultivation methods and ensures optimal nutritional profiles in all our products.
-                </p>
-              </div>
+
+            <motion.div {...fadeInUp} className="bg-neutral-50 p-6 rounded-lg">
+              <h3 className="text-xl font-serif font-semibold mb-4">Manufacturing Standards</h3>
+              <ul className="space-y-3 text-neutral-700">
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-primary-600 mr-2 mt-1 flex-shrink-0" />
+                  <span>GMP Compliance</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-primary-600 mr-2 mt-1 flex-shrink-0" />
+                  <span>ISO 9001 & 22000</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-primary-600 mr-2 mt-1 flex-shrink-0" />
+                  <span>Global Regulatory Standards</span>
+                </li>
+              </ul>
             </motion.div>
-            
-            <motion.div
-              className="bg-white rounded-lg overflow-hidden shadow-sm"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <img 
-                src="https://images.pexels.com/photos/8106190/pexels-photo-8106190.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
-                alt="Maria Rodriguez" 
-                className="w-full h-60 object-cover object-center"
-              />
-              <div className="p-6">
-                <h3 className="text-xl font-serif font-semibold mb-1">Maria Rodriguez</h3>
-                <p className="text-primary-600 mb-4">Head of Sustainability</p>
-                <p className="text-neutral-700">
-                  Maria ensures our farming practices remain environmentally responsible and leads our initiatives to minimize our carbon footprint.
-                </p>
-              </div>
+
+            <motion.div {...fadeInUp} className="bg-neutral-50 p-6 rounded-lg">
+              <h3 className="text-xl font-serif font-semibold mb-4">Traceability</h3>
+              <ul className="space-y-3 text-neutral-700">
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-primary-600 mr-2 mt-1 flex-shrink-0" />
+                  <span>Batch-Level Control</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-primary-600 mr-2 mt-1 flex-shrink-0" />
+                  <span>Ingredient Origin Tracking</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-primary-600 mr-2 mt-1 flex-shrink-0" />
+                  <span>Continuous Improvement</span>
+                </li>
+              </ul>
             </motion.div>
           </div>
         </div>
       </section>
-      
-      {/* Newsletter */}
+
+      {/* Sustainability */}
+      <section id="sustainability" className="py-16 bg-neutral-50">
+        <div className="container">
+          <div className="text-center mb-12">
+            <span className="text-primary-600 font-medium">Sustainability Policy</span>
+            <h2 className="text-3xl font-serif font-semibold mt-2 mb-4">Our Environmental Commitment</h2>
+            <p className="max-w-2xl mx-auto text-neutral-700">
+              Sustainability is woven into the very fabric of our operations.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <motion.div {...fadeInUp} className="bg-white p-8 rounded-lg shadow-sm">
+              <div className="flex items-center mb-6">
+                <div className="w-12 h-12 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center mr-4">
+                  <Globe size={24} />
+                </div>
+                <h3 className="text-xl font-serif font-semibold">Environmental Impact Reduction</h3>
+              </div>
+              <ul className="space-y-3 text-neutral-700">
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-primary-600 mr-2 mt-1 flex-shrink-0" />
+                  <span>Energy Efficiency Upgrades</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-primary-600 mr-2 mt-1 flex-shrink-0" />
+                  <span>Water Stewardship</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-primary-600 mr-2 mt-1 flex-shrink-0" />
+                  <span>Carbon Footprint Reduction</span>
+                </li>
+              </ul>
+            </motion.div>
+
+            <motion.div {...fadeInUp} className="bg-white p-8 rounded-lg shadow-sm">
+              <div className="flex items-center mb-6">
+                <div className="w-12 h-12 bg-secondary-100 text-secondary-600 rounded-full flex items-center justify-center mr-4">
+                  <Leaf size={24} />
+                </div>
+                <h3 className="text-xl font-serif font-semibold">Sustainable Packaging</h3>
+              </div>
+              <ul className="space-y-3 text-neutral-700">
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-primary-600 mr-2 mt-1 flex-shrink-0" />
+                  <span>Eco-Friendly Materials</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-primary-600 mr-2 mt-1 flex-shrink-0" />
+                  <span>Zero-Waste Targets</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-primary-600 mr-2 mt-1 flex-shrink-0" />
+                  <span>Packaging Innovations</span>
+                </li>
+              </ul>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Data & Privacy */}
+      <section id="privacy" className="py-16 bg-white">
+        <div className="container">
+          <div className="text-center mb-12">
+            <span className="text-primary-600 font-medium">Data & Privacy Policy</span>
+            <h2 className="text-3xl font-serif font-semibold mt-2 mb-4">Your Trust Matters</h2>
+            <p className="max-w-2xl mx-auto text-neutral-700">
+              We safeguard the privacy and data security of our customers, partners, and stakeholders.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <motion.div {...fadeInUp} className="bg-neutral-50 p-6 rounded-lg">
+              <div className="flex items-center mb-4">
+                <Lock className="w-6 h-6 text-primary-600 mr-3" />
+                <h3 className="text-xl font-serif font-semibold">Data Protection</h3>
+              </div>
+              <p className="text-neutral-700">
+                Secure infrastructure with encrypted servers and multi-layer access controls.
+              </p>
+            </motion.div>
+
+            <motion.div {...fadeInUp} className="bg-neutral-50 p-6 rounded-lg">
+              <div className="flex items-center mb-4">
+                <Shield className="w-6 h-6 text-primary-600 mr-3" />
+                <h3 className="text-xl font-serif font-semibold">Privacy Rights</h3>
+              </div>
+              <p className="text-neutral-700">
+                Complete control over your data with access, correction, and deletion rights.
+              </p>
+            </motion.div>
+
+            <motion.div {...fadeInUp} className="bg-neutral-50 p-6 rounded-lg">
+              <div className="flex items-center mb-4">
+                <Globe className="w-6 h-6 text-primary-600 mr-3" />
+                <h3 className="text-xl font-serif font-semibold">Global Compliance</h3>
+              </div>
+              <p className="text-neutral-700">
+                Adherence to international data protection standards and regulations.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter Section */}
       <NewsletterSection />
     </div>
   );

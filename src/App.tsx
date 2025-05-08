@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage';
 import ProductsPage from './pages/ProductsPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
 import { CartProvider } from './context/CartContext';
 import NotFoundPage from './pages/NotFoundPage';
 
@@ -17,7 +18,8 @@ function App() {
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/products/:id" element={<ProductDetailPage />} />
           <Route path="/about" element={<AboutPage />} />
-          {/* <Route path="*" element={<NotFoundPage />} /> */}
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Layout>
     </CartProvider>

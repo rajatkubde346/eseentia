@@ -29,7 +29,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <img 
             src={product.images[0]} 
             alt={product.name}
-            className="w-full h-48 sm:h-56 md:h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+            // className="w-full h-48 sm:h-56 md:h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+            className='product-image object-cover transition-transform duration-300 group-hover:scale-105'
           />
           
           {/* Tags */}

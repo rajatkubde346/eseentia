@@ -121,35 +121,49 @@ const Footer: React.FC = () => {
           {/* Contact Information */}
           <div className="space-y-4 lg:col-span-2">
             <h4 className="text-lg font-serif font-bold text-neutral-900">Contact Us</h4>
-            <div className="space-y-4">
-              <div className="flex items-start space-x-3">
-                <Phone size={20} className="text-neutral-600 mt-1 flex-shrink-0" />
-                <a 
-                  href="tel:+919975105971" 
-                  className="text-neutral-600 hover:text-primary-600 transition-colors duration-200"
-                >
-                  +91 9975105971
-                </a>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <div className="flex items-start space-x-3">
+                  <Phone size={20} className="text-neutral-600 mt-1 flex-shrink-0" />
+                  <a 
+                    href="tel:+919975105971" 
+                    className="text-neutral-600 hover:text-primary-600 transition-colors duration-200"
+                  >
+                    +91 9975105971
+                  </a>
+                </div>
+                <div className="space-y-3">
+                  <div className="flex items-start space-x-3">
+                    <MapPin size={20} className="text-neutral-600 mt-1 flex-shrink-0" />
+                    <div className="text-neutral-600">
+                      <p className="font-medium">Business Registered Address:</p>
+                      <p>Raitown, Flat no- B3-303,</p>
+                      <p>IC Chowk Hingan Road,</p>
+                      <p>Nagpur - 440016</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <MapPin size={20} className="text-neutral-600 mt-1 flex-shrink-0" />
+                    <div className="text-neutral-600">
+                      <p className="font-medium">Office Address:</p>
+                      <p>Flat No. 03, Harihar Sahanlwas,</p>
+                      <p>Beside Dhandanla Infotech,</p>
+                      <p>Giripeth, Nagpur - 440010</p>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="space-y-3">
-                <div className="flex items-start space-x-3">
-                  <MapPin size={20} className="text-neutral-600 mt-1 flex-shrink-0" />
-                  <div className="text-neutral-600">
-                    <p className="font-medium">Business Registered Address:</p>
-                    <p>Raitown, Flat no- B3-303,</p>
-                    <p>IC Chowk Hingan Road,</p>
-                    <p>Nagpur - 440016</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <MapPin size={20} className="text-neutral-600 mt-1 flex-shrink-0" />
-                  <div className="text-neutral-600">
-                    <p className="font-medium">Office Address:</p>
-                    <p>Flat No. 03, Harihar Sahanlwas,</p>
-                    <p>Beside Dhandanla Infotech,</p>
-                    <p>Giripeth, Nagpur - 440010</p>
-                  </div>
-                </div>
+              <div className="h-48 rounded-lg overflow-hidden shadow-sm">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.9663095343008!2d-74.00425878428698!3d40.74076994379132!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259bf5c1654f3%3A0xc80f9cfce5383d5d!2sGoogle!5e0!3m2!1sen!2sus!4v1586000412513!5m2!1sen!2sus"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Eseentia Location"
+                ></iframe>
               </div>
             </div>
           </div>
