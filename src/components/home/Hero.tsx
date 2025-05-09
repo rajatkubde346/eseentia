@@ -19,15 +19,15 @@ const Hero: React.FC = () => {
       subtitle: "Discover our premium, organic spirulina products - sustainably harvested and packed with essential nutrients to support your health and wellness journey."
     },
     {
-      image: "https://images.pexels.com/photos/4068395/pexels-photo-4068395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      title: "Sustainably Harvested Spirulina",
-      subtitle: "Our commitment to sustainable farming practices ensures the highest quality spirulina while protecting our planet's resources."
-    },
-    {
       image: "https://images.pexels.com/photos/3735155/pexels-photo-3735155.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       title: "Premium Quality Guaranteed",
       subtitle: "Each batch of our spirulina is rigorously tested to ensure optimal nutrient content and purity."
-    }
+    },
+    {
+      image: "https://images.pexels.com/photos/1093946/pexels-photo-1093946.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      title: "Nature's Most Nutrient-Dense Superfood",
+      subtitle: "Discover our premium, organic spirulina products - sustainably harvested and packed with essential nutrients to support your health and wellness journey."
+    },
   ];
 
   return (
@@ -72,7 +72,7 @@ const Hero: React.FC = () => {
                   <motion.span 
                     className="inline-block mb-3 sm:mb-4 text-xs uppercase tracking-widest font-semibold bg-primary-600 text-white px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-sm"
                     initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                   >
                     Premium Spirulina Collection
@@ -81,7 +81,7 @@ const Hero: React.FC = () => {
                   <motion.h1 
                     className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-4 sm:mb-6 leading-tight"
                     initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.1 }}
                   >
                     {slide.title}
@@ -90,7 +90,7 @@ const Hero: React.FC = () => {
                   <motion.p 
                     className="text-base sm:text-lg md:text-xl opacity-90 mb-6 sm:mb-8 max-w-xl"
                     initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.2 }}
                   >
                     {slide.subtitle}
@@ -99,7 +99,7 @@ const Hero: React.FC = () => {
                   <motion.div 
                     className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4"
                     initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.3 }}
                   >
                     <Link to="/products" className="btn btn-primary text-sm sm:text-base px-6 py-2.5 sm:py-3">
@@ -135,11 +135,11 @@ const Hero: React.FC = () => {
       </Swiper>
 
       {/* Wave decoration at bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-16 z-10">
+      {/* <div className="absolute bottom-0 left-0 right-0 h-16 z-10">
         <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
           <path d="M0 60H240C480 60 720 0 960 0C1200 0 1320 60 1440 60V120H0V60Z" fill="white"/>
         </svg>
-      </div>
+      </div> */}
     </div>
   );
 };

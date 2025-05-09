@@ -17,7 +17,7 @@ const ProductVariants: React.FC = () => {
       link: "/products?category=powder"
     },
     {
-      title: "Easy-to-Take Tablets",
+      title: "Easy to Take Tablets",
       description: "Convenient tablets for your daily nutrition needs",
       image: "https://images.pexels.com/photos/3683098/pexels-photo-3683098.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       link: "/products?category=tablets"

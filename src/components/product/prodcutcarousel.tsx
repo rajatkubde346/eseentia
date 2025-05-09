@@ -162,15 +162,13 @@ const ProductCarousel = () => {
     <div className="relative w-full max-w-7xl mx-auto px-2 sm:px-4 py-4 sm:py-8 bg-white">
       <div 
         ref={carouselRef}
-        className="relative overflow-hidden"
+        className="relative md:overflow-hidden overflow-x-auto scroll-smooth"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
         <div
-          className="flex transition-transform duration-300 ease-in-out"
-          style={{ 
-            transform: `translateX(-${currentIndex * (100 / visibleCount)}%)`,
-          }}
+          className="flex flex-nowrap md:transition-transform md:duration-300 md:ease-in-out min-w-full"
+          style={window.innerWidth >= 768 ? { transform: `translateX(-${currentIndex * (100 / visibleCount)}%)` } : {}}
         >
           {products.map((product) => (
             <div
@@ -180,9 +178,11 @@ const ProductCarousel = () => {
             >
               <div 
                 className="group relative bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 cursor-pointer hover:shadow-xl"
-                onClick={() => handleProductClick(product.id)}
               >
-                <div className="relative aspect-square">
+                <div 
+                  className="relative aspect-square cursor-pointer touch-manipulation select-none"
+                  onClick={() => handleProductClick(product.id)}
+                >
                   <img
                     src={product.image}
                     alt={product.name}
@@ -190,12 +190,12 @@ const ProductCarousel = () => {
                     draggable="false"
                   />
                   {product.discount && (
-                    <div className="absolute top-1 right-1 sm:top-2 sm:right-2 bg-red-500 text-white px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full text-xs sm:text-sm">
+                    <div className="absolute top-1 right-1 sm:top-2 sm:right-2 bg-red-500 text-white px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full text-xs sm:text-sm pointer-events-none">
                       -{product.discount}%
                     </div>
                   )}
-                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300">
-                    <div className="flex space-x-3 scale-0 group-hover:scale-100 transition-transform duration-300">
+                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 pointer-events-none sm:pointer-events-auto">
+                    <div className="flex space-x-3 scale-0 group-hover:scale-100 transition-transform duration-300 pointer-events-auto">
                       <button className="bg-purple-500 hover:bg-purple-600 text-white w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 transform hover:scale-110">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 sm:w-5 sm:h-5">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -230,7 +230,7 @@ const ProductCarousel = () => {
           ))}
         </div>
         
-        {isHovering && (
+        {isHovering && window.innerWidth >= 768 && (
           <>
             <button
               onClick={prevSlide}
