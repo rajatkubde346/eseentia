@@ -1,11 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getProductById, getRelatedProducts } from '../data/products';
-import { ShoppingBag, ChevronRight, Truck, Shield, ArrowLeft, Star } from 'lucide-react';
+import { ShoppingBag, ChevronRight, Truck, Shield, ArrowLeft, Star, Check } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import ProductGrid from '../components/product/ProductGrid';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Product } from '../types/Product';
+
+const amazonUrls: Record<number, string> = {
+  1: 'https://www.amazon.com/your-actual-product-url',
+  2: 'https://www.amazon.com/another-product-url',
+  // Add more product URLs
+};
 
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -17,6 +23,14 @@ const ProductDetailPage: React.FC = () => {
   const [selectedSize, setSelectedSize] = useState<string | undefined>();
   const [quantity, setQuantity] = useState(1);
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
+  const [showMagnifier, setShowMagnifier] = useState(false);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+  const [zoomLevel, setZoomLevel] = useState(2);
+  const imageRef = useRef<HTMLImageElement>(null);
+  const magnifierRef = useRef<HTMLDivElement>(null);
+  const [showAddedToCart, setShowAddedToCart] = useState(false);
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
   
   // Update product when ID changes
   useEffect(() => {
@@ -57,8 +71,49 @@ const ProductDetailPage: React.FC = () => {
   const handleAddToCart = () => {
     addToCart({
       ...product,
-      price: currentPrice
+      price: currentPrice,
+      quantity: quantity
     });
+    setShowAddedToCart(true);
+    setTimeout(() => setShowAddedToCart(false), 2000);
+  };
+
+  const handleCheckout = () => {
+    setIsCheckingOut(true);
+    // Redirect to Amazon after a short delay
+    setTimeout(() => {
+      const amazonUrl = amazonUrls[Number(id)];
+      if (amazonUrl) {
+        window.open(amazonUrl, '_blank');
+      }
+    }, 500);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!imageRef.current) return;
+
+    const { left, top, width, height } = imageRef.current.getBoundingClientRect();
+    const x = ((e.clientX - left) / width) * 100;
+    const y = ((e.clientY - top) / height) * 100;
+
+    setPosition({ x, y });
+    setCursorPosition({ x: e.clientX - left, y: e.clientY - top });
+  };
+
+  const handleMouseEnter = () => {
+    setShowMagnifier(true);
+  };
+
+  const handleMouseLeave = () => {
+    setShowMagnifier(false);
+  };
+
+  const handleZoomIn = () => {
+    setZoomLevel(prev => Math.min(prev + 0.5, 4));
+  };
+
+  const handleZoomOut = () => {
+    setZoomLevel(prev => Math.max(prev - 0.5, 1));
   };
   
   return (
@@ -77,26 +132,94 @@ const ProductDetailPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
           {/* Product Images */}
           <div>
-            <div className="bg-white rounded-lg overflow-hidden mb-4 aspect-square">
+            <div 
+              className="bg-white rounded-lg overflow-hidden mb-4 aspect-square relative group cursor-zoom-in"
+              onMouseMove={handleMouseMove}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
               <motion.img 
+                ref={imageRef}
                 key={selectedImage}
                 src={product.images[selectedImage]} 
                 alt={product.name}
-                className="w-full h-full object-cover object-center"
+                className="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.3 }}
               />
+
+              {/* Magnifier */}
+              {showMagnifier && (
+                <>
+                  {/* Zoom Controls */}
+                  <div className="hidden md:flex absolute top-4 right-4 gap-2 z-20">
+                    <button
+                      onClick={handleZoomOut}
+                      className="w-7 h-7 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors"
+                      disabled={zoomLevel <= 1}
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-600" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z" clipRule="evenodd" />
+                      </svg>
+                    </button>
+                    <button
+                      onClick={handleZoomIn}
+                      className="w-7 h-7 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors"
+                      disabled={zoomLevel >= 3}
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-600" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clipRule="evenodd" />
+                      </svg>
+                    </button>
+                  </div>
+
+                  {/* Magnifier Glass */}
+                  <div
+                    ref={magnifierRef}
+                    className="hidden md:block absolute w-32 h-32 border-2 border-white rounded-full overflow-hidden pointer-events-none z-10 shadow-xl"
+                    style={{
+                      left: `${cursorPosition.x - 64}px`,
+                      top: `${cursorPosition.y - 64}px`,
+                    }}
+                  >
+                    <div
+                      className="w-full h-full"
+                      style={{
+                        backgroundImage: `url(${product.images[selectedImage]})`,
+                        backgroundPosition: `${position.x}% ${position.y}%`,
+                        backgroundSize: `${zoomLevel * 100}%`,
+                        backgroundRepeat: 'no-repeat',
+                      }}
+                    />
+                  </div>
+
+                  {/* Zoom Level Indicator */}
+                  <div className="hidden md:block absolute bottom-4 left-4 bg-white px-2 py-0.5 rounded-full text-xs font-medium text-gray-700 shadow-lg">
+                    {Math.round(zoomLevel * 100)}%
+                  </div>
+                </>
+              )}
+
+              {/* Mobile Zoom Hint */}
+              <div className="md:hidden absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-lg flex items-center justify-center">
+                <span className="text-white text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  Tap to Zoom
+                </span>
+              </div>
             </div>
             
+            {/* Thumbnail Images */}
             {product.images.length > 1 && (
               <div className="flex space-x-3">
                 {product.images.map((image, index) => (
                   <button
                     key={index}
                     onClick={() => setSelectedImage(index)}
-                    className={`w-20 h-20 rounded-md overflow-hidden border-2 ${
-                      selectedImage === index ? 'border-primary-600' : 'border-transparent'
+                    className={`w-20 h-20 rounded-md overflow-hidden border-2 transition-all duration-200 ${
+                      selectedImage === index 
+                        ? 'border-primary-600 scale-105' 
+                        : 'border-transparent hover:border-primary-300'
                     }`}
                     aria-label={`View image ${index + 1}`}
                   >
@@ -197,15 +320,70 @@ const ProductDetailPage: React.FC = () => {
               </div>
             </div>
             
-            {/* Add to Cart */}
-            <div className="mb-8">
+            {/* Add to Cart and Checkout */}
+            <div className="mb-8 space-y-4">
               <button
                 onClick={handleAddToCart}
-                className="w-full btn btn-primary flex items-center justify-center"
+                className="w-full btn btn-primary flex items-center justify-center relative overflow-hidden"
                 aria-label={`Add ${product.name} to cart`}
               >
-                <ShoppingBag size={18} className="mr-2" />
-                Add to Cart
+                <AnimatePresence>
+                  {showAddedToCart ? (
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      className="absolute inset-0 flex items-center justify-center bg-green-600"
+                    >
+                      <Check className="w-6 h-6 mr-2" />
+                      Added to Cart
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      className="flex items-center"
+                    >
+                      <ShoppingBag size={18} className="mr-2" />
+                      Add to Cart
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </button>
+
+              <button
+                onClick={handleCheckout}
+                disabled={isCheckingOut}
+                className={`w-full btn btn-secondary flex items-center justify-center ${
+                  isCheckingOut ? 'opacity-75 cursor-not-allowed' : ''
+                }`}
+              >
+                <AnimatePresence>
+                  {isCheckingOut ? (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      className="flex items-center"
+                    >
+                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Redirecting to Amazon...
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      className="flex items-center"
+                    >
+                      <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5L1 10.5v2h3v-2zM13 0.55h-2L10.5 2h3L13 0.55zM20.45 4.46l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zM17.24 18.16l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zM20 10.5v2h3v-2h-3zM12 5.5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zM11 22.45h2L12.5 24h-3l1.5-1.55zM3.55 18.54l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8z" />
+                      </svg>
+                      Checkout on Amazon
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </button>
             </div>
             

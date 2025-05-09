@@ -1,10 +1,111 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { products } from './prodcutcarousel';
+import { useState, useRef, useEffect } from 'react';
+
+// Add variant type definition
+type Variant = {
+  id: number;
+  name: string;
+  price: number;
+  stock: number;
+  color?: string;
+  size?: string;
+};
+
+// Add sample variants data
+const productVariants: Record<number, Variant[]> = {
+  1: [
+    { id: 1, name: 'Small', price: 29.99, stock: 10, size: 'S' },
+    { id: 2, name: 'Medium', price: 34.99, stock: 15, size: 'M' },
+    { id: 3, name: 'Large', price: 39.99, stock: 8, size: 'L' },
+  ],
+  2: [
+    { id: 1, name: 'Red', price: 24.99, stock: 12, color: '#FF0000' },
+    { id: 2, name: 'Blue', price: 24.99, stock: 8, color: '#0000FF' },
+    { id: 3, name: 'Green', price: 24.99, stock: 15, color: '#00FF00' },
+  ],
+};
+
+// Add Amazon URL type to product data
+type Variant = {
+  id: number;
+  name: string;
+  price: number;
+  stock: number;
+  color?: string;
+  size?: string;
+};
+
+// Add sample Amazon URLs for products
+const amazonUrls: Record<number, string> = {
+  1: 'https://www.amazon.com/dp/B08L5TNJHG', // Example Amazon product URL
+  2: 'https://www.amazon.com/dp/B08L5TNJHG', // Example Amazon product URL
+  // Add more product URLs as needed
+};
 
 const ProductDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const product = products.find(p => p.id === Number(id));
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [zoomLevel, setZoomLevel] = useState(1);
+  const [selectedVariant, setSelectedVariant] = useState<Variant | null>(null);
+  const [showVariants, setShowVariants] = useState(false);
+  
+  // Magnifier states
+  const [showMagnifier, setShowMagnifier] = useState(false);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+  const imageRef = useRef<HTMLImageElement>(null);
+  const magnifierRef = useRef<HTMLDivElement>(null);
+
+  const handleImageClick = () => {
+    setIsModalOpen(true);
+    setZoomLevel(1);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleZoomIn = () => {
+    setZoomLevel((prev) => Math.min(prev + 0.25, 3));
+  };
+
+  const handleZoomOut = () => {
+    setZoomLevel((prev) => Math.max(prev - 0.25, 1));
+  };
+
+  const handleVariantSelect = (variant: Variant) => {
+    setSelectedVariant(variant);
+    setShowVariants(false);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!imageRef.current) return;
+
+    const { left, top, width, height } = imageRef.current.getBoundingClientRect();
+    const x = ((e.clientX - left) / width) * 100;
+    const y = ((e.clientY - top) / height) * 100;
+
+    setPosition({ x, y });
+    setCursorPosition({ x: e.clientX - left, y: e.clientY - top });
+  };
+
+  const handleMouseEnter = () => {
+    setShowMagnifier(true);
+  };
+
+  const handleMouseLeave = () => {
+    setShowMagnifier(false);
+  };
+
+  const handleAmazonRedirect = () => {
+    const amazonUrl = amazonUrls[Number(id)];
+    if (amazonUrl) {
+      window.open(amazonUrl, '_blank');
+    }
+  };
 
   if (!product) {
     return (
@@ -22,8 +123,57 @@ const ProductDetails = () => {
     );
   }
 
+  const variants = productVariants[product.id] || [];
+
   return (
     <div className="min-h-screen bg-gray-50 py-12">
+      {/* Modal for image zoom */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 transition-all">
+          <div className="absolute inset-0" onClick={handleCloseModal} />
+          <div className="relative z-10 max-w-full max-h-full flex flex-col items-center justify-center p-4">
+            <button
+              onClick={handleCloseModal}
+              className="absolute top-4 right-4 text-white bg-black bg-opacity-50 rounded-full p-2 hover:bg-opacity-80 focus:outline-none"
+              aria-label="Close"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            <div className="flex items-center gap-4 mb-4">
+              <button
+                onClick={handleZoomOut}
+                className="bg-white text-gray-800 rounded-full p-2 shadow hover:bg-gray-100 focus:outline-none"
+                disabled={zoomLevel <= 1}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
+                </svg>
+              </button>
+              <span className="text-white font-semibold text-lg select-none">{Math.round(zoomLevel * 100)}%</span>
+              <button
+                onClick={handleZoomIn}
+                className="bg-white text-gray-800 rounded-full p-2 shadow hover:bg-gray-100 focus:outline-none"
+                disabled={zoomLevel >= 3}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                </svg>
+              </button>
+            </div>
+            <div className="overflow-auto max-w-[90vw] max-h-[80vh] flex items-center justify-center">
+              <img
+                src={product.image}
+                alt={product.name}
+                style={{ transform: `scale(${zoomLevel})` }}
+                className="transition-transform duration-200 rounded-lg shadow-lg max-w-full max-h-[70vh] object-contain"
+              />
+            </div>
+          </div>
+        </div>
+      )}
+      {/* End Modal */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <button
           onClick={() => navigate('/')}
@@ -37,17 +187,53 @@ const ProductDetails = () => {
 
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
-            <div className="relative aspect-square">
+            <div 
+              className="relative aspect-square group cursor-zoom-in"
+              onMouseMove={handleMouseMove}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+              onClick={handleImageClick}
+            >
               <img
+                ref={imageRef}
                 src={product.image}
                 alt={product.name}
-                className="w-full h-full object-cover rounded-lg"
+                className="w-full h-full object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
               />
               {product.discount && (
                 <div className="absolute top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-full text-lg font-bold">
                   -{product.discount}%
                 </div>
               )}
+              
+              {/* Magnifier */}
+              {showMagnifier && (
+                <div
+                  ref={magnifierRef}
+                  className="hidden md:block absolute w-40 h-40 border-2 border-gray-300 rounded-full overflow-hidden pointer-events-none z-10"
+                  style={{
+                    left: `${cursorPosition.x - 80}px`,
+                    top: `${cursorPosition.y - 80}px`,
+                  }}
+                >
+                  <div
+                    className="w-full h-full"
+                    style={{
+                      backgroundImage: `url(${product.image})`,
+                      backgroundPosition: `${position.x}% ${position.y}%`,
+                      backgroundSize: '200%',
+                      backgroundRepeat: 'no-repeat',
+                    }}
+                  />
+                </div>
+              )}
+
+              {/* Mobile Zoom Hint */}
+              <div className="md:hidden absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-lg flex items-center justify-center">
+                <span className="text-white text-lg font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  Tap to Zoom
+                </span>
+              </div>
             </div>
 
             <div className="flex flex-col justify-center">
@@ -55,12 +241,64 @@ const ProductDetails = () => {
               
               <div className="flex items-center gap-4 mb-6">
                 <span className="text-3xl font-bold text-blue-600">
-                  ${product.price.toFixed(2)}
+                  ${selectedVariant ? selectedVariant.price.toFixed(2) : product.price.toFixed(2)}
                 </span>
                 {product.discount && (
                   <span className="text-xl text-gray-500 line-through">
                     ${(product.price * (1 + product.discount / 100)).toFixed(2)}
                   </span>
+                )}
+              </div>
+
+              {/* Variant Selection */}
+              <div className="mb-8">
+                <button
+                  onClick={() => setShowVariants(!showVariants)}
+                  className="w-full text-left px-4 py-3 border border-gray-300 rounded-lg hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                >
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-700">
+                      {selectedVariant ? `Selected: ${selectedVariant.name}` : 'Select Variant'}
+                    </span>
+                    <svg
+                      className={`w-5 h-5 transform transition-transform ${showVariants ? 'rotate-180' : ''}`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                </button>
+
+                {showVariants && (
+                  <div className="mt-2 border border-gray-200 rounded-lg overflow-hidden">
+                    {variants.map((variant) => (
+                      <button
+                        key={variant.id}
+                        onClick={() => handleVariantSelect(variant)}
+                        className={`w-full px-4 py-3 text-left hover:bg-gray-50 transition-colors ${
+                          selectedVariant?.id === variant.id ? 'bg-blue-50' : ''
+                        }`}
+                      >
+                        <div className="flex justify-between items-center">
+                          <div className="flex items-center gap-3">
+                            {variant.color && (
+                              <div
+                                className="w-6 h-6 rounded-full border border-gray-300"
+                                style={{ backgroundColor: variant.color }}
+                              />
+                            )}
+                            <span className="text-gray-700">{variant.name}</span>
+                          </div>
+                          <div className="flex items-center gap-4">
+                            <span className="text-gray-600">${variant.price.toFixed(2)}</span>
+                            <span className="text-sm text-gray-500">Stock: {variant.stock}</span>
+                          </div>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
                 )}
               </div>
 
@@ -72,12 +310,35 @@ const ProductDetails = () => {
                 </p>
               </div>
 
-              <div className="flex gap-4">
-                <button className="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
-                  Add to Cart
-                </button>
-                <button className="flex-1 border-2 border-blue-600 text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
-                  Buy Now
+              <div className="flex flex-col gap-4">
+                <div className="flex gap-4">
+                  <button 
+                    className="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+                    disabled={!selectedVariant}
+                  >
+                    Add to Cart
+                  </button>
+                  <button 
+                    className="flex-1 border-2 border-blue-600 text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors disabled:border-gray-400 disabled:text-gray-400 disabled:cursor-not-allowed"
+                    disabled={!selectedVariant}
+                  >
+                    Buy Now
+                  </button>
+                </div>
+                
+                {/* Amazon Button */}
+                <button
+                  onClick={handleAmazonRedirect}
+                  className="w-full bg-[#FF9900] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#E88A00] transition-colors flex items-center justify-center gap-2"
+                >
+                  <svg 
+                    className="w-6 h-6" 
+                    viewBox="0 0 24 24" 
+                    fill="currentColor"
+                  >
+                    <path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5L1 10.5v2h3v-2zM13 0.55h-2L10.5 2h3L13 0.55zM20.45 4.46l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zM17.24 18.16l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zM20 10.5v2h3v-2h-3zM12 5.5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zM11 22.45h2L12.5 24h-3l1.5-1.55zM3.55 18.54l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8z" />
+                  </svg>
+                  Buy on Amazon
                 </button>
               </div>
             </div>

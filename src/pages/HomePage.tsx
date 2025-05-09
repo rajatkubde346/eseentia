@@ -8,6 +8,7 @@ import ProductCarousel from '../components/product/prodcutcarousel';
 import ProductVariants from '../components/home/ProductVariants';
 import Video from '../components/testimonials/VideoTestimonials'
 
+
 const HomePage: React.FC = () => {
   useEffect(() => {
     // Set page title
@@ -29,6 +30,7 @@ const HomePage: React.FC = () => {
       <Video/>
       <TestimonialSection />
       <NewsletterSection />
+      
     </div>
   );
 };

@@ -23,4 +23,5 @@ export interface Product {
   isNew?: boolean;
   isBestSeller?: boolean;
   isOrganic?: boolean;
+  quantity?: number;
 }

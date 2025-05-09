@@ -106,7 +106,7 @@ const Header: React.FC<{ onLoginClick: () => void }> = ({ onLoginClick }) => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group">
-            <div className="relative w-12 h-12 sm:w-16 sm:h-16 transition-all duration-300 group-hover:scale-105">
+            <div className="relative w-[60px] h-[60px] sm:w-[75px] sm:h-[75px] md:w-[85px] md:h-[85px] lg:w-[95px] lg:h-[95px] transition-all duration-300 group-hover:scale-105">
               <img 
                 src={logo}
                 alt="Eseentia Logo"
