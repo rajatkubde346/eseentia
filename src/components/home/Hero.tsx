@@ -7,6 +7,8 @@ import { Navigation, Autoplay, EffectFade } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
+import banner1 from  '../../images/banner/banner2.png'
+import banner2 from  '../../images/banner/banner1.png'
 
 const Hero: React.FC = () => {
   const navigationPrevRef = useRef<HTMLButtonElement>(null);
@@ -14,18 +16,18 @@ const Hero: React.FC = () => {
 
   const slides = [
     {
-      image: "https://images.pexels.com/photos/1093946/pexels-photo-1093946.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      title: "Nature's Most Nutrient-Dense Superfood",
-      subtitle: "Discover our premium, organic spirulina products - sustainably harvested and packed with essential nutrients to support your health and wellness journey."
+      image: banner1,
+      title: "Premium Spirulina Powder",
+      subtitle: "✔ 100% Organic  ✔ Rich in Protein & Antioxidants ✔ Immunity & Energy Booster"
     },
     {
-      image: "https://images.pexels.com/photos/3735155/pexels-photo-3735155.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      image: banner2,
       title: "Premium Quality Guaranteed",
       subtitle: "Each batch of our spirulina is rigorously tested to ensure optimal nutrient content and purity."
     },
     {
-      image: "https://images.pexels.com/photos/1093946/pexels-photo-1093946.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      title: "Nature's Most Nutrient-Dense Superfood",
+      image: banner1,
+      title: "Nature's Most Nutrient Dense Superfood",
       subtitle: "Discover our premium, organic spirulina products - sustainably harvested and packed with essential nutrients to support your health and wellness journey."
     },
   ];
@@ -67,7 +69,7 @@ const Hero: React.FC = () => {
               </div>
 
               {/* Content */}
-              <div className="relative z-10 container  h-full flex flex-col justify-center text-white px-4 sm:px-6 lg:px-8">
+              <div className="relative z-10 container h-full flex flex-col justify-center text-white px-4 sm:px-6 lg:px-8">
                 <div className="max-w-2xl">
                   <motion.span 
                     className="inline-block mb-3 sm:mb-4 text-xs uppercase tracking-widest font-semibold bg-primary-600 text-white px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-sm"

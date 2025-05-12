@@ -37,7 +37,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <motion.img 
             src={product.images[0]} 
             alt={product.name}
-            className="w-full object-cover product-image"
+            className="w-full object-cover"
             whileHover={{ 
               scale: 1.1,
               transition: { duration: 0.4 }

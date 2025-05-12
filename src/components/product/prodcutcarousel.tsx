@@ -159,7 +159,7 @@ const ProductCarousel = () => {
   };
 
   return (
-    <div className="relative w-full max-w-7xl mx-auto px-2 sm:px-4 py-4 sm:py-8 bg-white">
+    <div className="relative w-full mx-auto px-2 sm:px-4 py-4 sm:py-8 bg-white">
       <div 
         ref={carouselRef}
         className="relative md:overflow-hidden overflow-x-auto scroll-smooth"

@@ -10,7 +10,7 @@ const FeaturedProducts: React.FC = () => {
   
   return (
     <section className="py-16 bg-white">
-      <div className="container">
+      <div className="container-lg">
         <ProductGrid 
           products={featuredProducts} 
           title="Featured Products"
