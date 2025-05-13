@@ -18,12 +18,17 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, title, subtitle }) 
         </div>
       )}
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 px-4 sm:px-6">
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+      <div className="relative">
+        <div className="overflow-x-auto pb-4 hide-scrollbar">
+          <div className="flex space-x-4 px-4 sm:px-6 min-w-max">
+            {products.map((product) => (
+              <div key={product.id} className="w-[280px] sm:w-[300px] md:w-[320px] flex-shrink-0">
+                <ProductCard product={product} />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
-      
       
       {products.length === 0 && (
         <div className="text-center py-12 sm:py-16 px-4 sm:px-6">

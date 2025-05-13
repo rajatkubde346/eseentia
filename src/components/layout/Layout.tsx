@@ -13,8 +13,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div className="flex flex-col min-h-screen bg-neutral-50">
       <Header onLoginClick={() => setIsLoginOpen(true)} />
-      <main className="flex-grow pt-16 sm:pt-20 md:pt-24">
-        <div className="container-lg mx-auto px-4 sm:px-6 lg:px-8">
+      <main className="flex-grow">
+        <div className="container-lg mx-auto">
           {children}
         </div>
       </main>

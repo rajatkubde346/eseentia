@@ -48,15 +48,10 @@ const Header: React.FC<{ onLoginClick: () => void }> = ({ onLoginClick }) => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Add scroll event listener
+  // Remove scroll event listener since we don't need it anymore
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      setIsScrolled(scrollPosition > 20);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    // No need for scroll listener
+    return () => {};
   }, []);
 
   const menuItems = [
@@ -97,17 +92,13 @@ const Header: React.FC<{ onLoginClick: () => void }> = ({ onLoginClick }) => {
   return (
     <>
       <header 
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled 
-            ? 'bg-white/95 backdrop-blur-md shadow-lg py-2' 
-            : 'bg-white'
-        }`}
+        className="sticky top-0 left-0 right-0 z-50 bg-white shadow-md py-2 w-full"
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-          <div className="flex items-center justify-between">
+        <div className="container mx-auto px-3 sm:px-4 lg:px-6 max-w-7xl">
+          <div className="flex items-center justify-between h-14 sm:h-16 md:h-18 lg:h-20">
             {/* Logo */}
-            <Link to="/" className="flex items-center space-x-3 group">
-              <div className="relative w-[60px] h-[60px] sm:w-[75px] sm:h-[75px] md:w-[85px] md:h-[85px] lg:w-[95px] lg:h-[95px] transition-all duration-300 group-hover:scale-105">
+            <Link to="/" className="flex items-center space-x-2 group">
+              <div className="relative w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] md:w-[140px] md:h-[140px] lg:w-[160px] lg:h-[160px] xl:w-[180px] xl:h-[180px] transition-all duration-300 group-hover:scale-105">
                 <img 
                   src={logo}
                   alt="Eseentia Logo"
@@ -120,7 +111,7 @@ const Header: React.FC<{ onLoginClick: () => void }> = ({ onLoginClick }) => {
             <nav className="hidden lg:flex items-center space-x-8" ref={submenuRef}>
               <Link 
                 to="/" 
-                className="text-neutral-800 hover:text-primary-600 font-medium transition-all duration-300 relative group"
+                className="text-neutral-800 hover:text-primary-600 font-semibold text-xl sm:text-2xl transition-all duration-300 relative group"
               >
                 Home
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-600 transition-all duration-300 group-hover:w-full"></span>
@@ -130,24 +121,24 @@ const Header: React.FC<{ onLoginClick: () => void }> = ({ onLoginClick }) => {
                 <div key={item.name} className="relative group">
                   <button
                     onClick={() => toggleSubmenu(item.name)}
-                    className="flex items-center text-neutral-800 hover:text-primary-600 font-medium transition-all duration-300 relative group"
+                    className="flex items-center text-neutral-800 hover:text-primary-600 font-semibold text-xl sm:text-2xl transition-all duration-300 relative group"
                   >
                     {item.name}
-                    <ChevronDown size={16} className="ml-1 transition-transform duration-300 group-hover:rotate-180" />
+                    <ChevronDown size={24} className="ml-1.5 transition-transform duration-300 group-hover:rotate-180" />
                     <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-600 transition-all duration-300 group-hover:w-full"></span>
                   </button>
                   
                   {/* Desktop Submenu */}
-                  <div className={`absolute top-full left-0 w-56 bg-white shadow-xl rounded-xl py-3 transition-all duration-300 transform origin-top ${
+                  <div className={`absolute top-full left-0 w-80 bg-white shadow-xl rounded-lg py-3 transition-all duration-300 transform origin-top ${
                     activeSubmenu === item.name 
-                      ? 'opacity-100 scale-100 translate-y-2' 
+                      ? 'opacity-100 scale-100 translate-y-1' 
                       : 'opacity-0 scale-95 pointer-events-none'
                   }`}>
                     {item.submenu.map((subItem) => (
                       <Link
                         key={subItem.name}
                         to={subItem.path}
-                        className="block px-6 py-2.5 text-sm text-neutral-700 hover:text-primary-600 hover:bg-neutral-50 transition-all duration-200 hover:translate-x-1"
+                        className="block px-4 py-2 text-lg sm:text-xl text-neutral-700 hover:text-primary-600 hover:bg-neutral-50 transition-all duration-200 hover:translate-x-1"
                       >
                         {subItem.name}
                       </Link>
@@ -158,27 +149,27 @@ const Header: React.FC<{ onLoginClick: () => void }> = ({ onLoginClick }) => {
             </nav>
 
             {/* Desktop Utilities */}
-            <div className="hidden lg:flex items-center space-x-6">
+            <div className="hidden lg:flex items-center space-x-4">
               <button 
                 onClick={toggleSearch}
                 className="text-neutral-700 hover:text-primary-600 p-2 transition-all duration-300 hover:bg-neutral-100 rounded-full hover:scale-110"
                 aria-label="Search"
               >
-                <Search size={20} />
+                <Search size={26} />
               </button>
               <button
                 onClick={onLoginClick}
                 className="text-neutral-700 hover:text-primary-600 p-2 transition-all duration-300 hover:bg-neutral-100 rounded-full hover:scale-110"
                 aria-label="Account"
               >
-                <User size={20} />
+                <User size={26} />
               </button>
               <button 
                 onClick={toggleCart} 
                 className="relative text-neutral-700 hover:text-primary-600 p-2 transition-all duration-300 hover:bg-neutral-100 rounded-full hover:scale-110"
                 aria-label="Shopping cart"
               >
-                <ShoppingBag size={20} />
+                <ShoppingBag size={26} />
                 {totalItems > 0 && (
                   <span className="absolute -top-1 -right-1 bg-primary-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center transform scale-100 transition-transform duration-300 hover:scale-110">
                     {totalItems}
@@ -188,20 +179,20 @@ const Header: React.FC<{ onLoginClick: () => void }> = ({ onLoginClick }) => {
             </div>
 
             {/* Mobile Menu Button */}
-            <div className="flex items-center space-x-4 lg:hidden">
+            <div className="flex items-center space-x-3 lg:hidden">
               <button 
                 onClick={toggleSearch}
                 className="text-neutral-700 hover:text-primary-600 p-2 transition-all duration-300 hover:bg-neutral-100 rounded-full hover:scale-110"
                 aria-label="Search"
               >
-                <Search size={20} />
+                <Search size={24} />
               </button>
               <button 
                 onClick={toggleCart} 
                 className="relative text-neutral-700 hover:text-primary-600 p-2 transition-all duration-300 hover:bg-neutral-100 rounded-full hover:scale-110"
                 aria-label="Shopping cart"
               >
-                <ShoppingBag size={20} />
+                <ShoppingBag size={24} />
                 {totalItems > 0 && (
                   <span className="absolute -top-1 -right-1 bg-primary-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
                     {totalItems}
@@ -213,7 +204,7 @@ const Header: React.FC<{ onLoginClick: () => void }> = ({ onLoginClick }) => {
                 className="text-neutral-700 hover:text-primary-600 p-2 transition-all duration-300 hover:bg-neutral-100 rounded-full hover:scale-110"
                 aria-label={isMenuOpen ? "Close menu" : "Open menu"}
               >
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                {isMenuOpen ? <X size={26} /> : <Menu size={26} />}
               </button>
             </div>
           </div>
@@ -223,10 +214,10 @@ const Header: React.FC<{ onLoginClick: () => void }> = ({ onLoginClick }) => {
       {/* Mobile Navigation Menu */}
       {isMenuOpen && (
         <div className="lg:hidden absolute top-full left-0 right-0 bg-white shadow-xl transform transition-all duration-300 ease-in-out">
-          <nav className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <nav className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <Link 
               to="/" 
-              className="block py-3 text-neutral-800 hover:text-primary-600 font-medium border-b border-neutral-100 transition-all duration-300 hover:translate-x-2 text-sm"
+              className="block py-4 text-neutral-800 hover:text-primary-600 font-semibold border-b border-neutral-100 transition-all duration-300 hover:translate-x-2 text-lg"
             >
               Home
             </Link>
@@ -235,11 +226,11 @@ const Header: React.FC<{ onLoginClick: () => void }> = ({ onLoginClick }) => {
               <div key={item.name} className="border-b border-neutral-100">
                 <button
                   onClick={() => toggleSubmenu(item.name)}
-                  className="w-full flex items-center justify-between py-3 text-neutral-800 hover:text-primary-600 font-medium transition-all duration-300 text-sm"
+                  className="w-full flex items-center justify-between py-4 text-neutral-800 hover:text-primary-600 font-semibold transition-all duration-300 text-lg"
                 >
                   {item.name}
                   <ChevronDown 
-                    size={16} 
+                    size={24} 
                     className={`transition-transform duration-300 ${
                       activeSubmenu === item.name ? 'rotate-180' : ''
                     }`}
@@ -254,7 +245,7 @@ const Header: React.FC<{ onLoginClick: () => void }> = ({ onLoginClick }) => {
                     <Link
                       key={subItem.name}
                       to={subItem.path}
-                      className="block pl-6 py-3 text-sm text-neutral-700 hover:text-primary-600 hover:bg-neutral-50 transition-all duration-300 hover:translate-x-2"
+                      className="block pl-6 py-4 text-lg text-neutral-700 hover:text-primary-600 hover:bg-neutral-50 transition-all duration-300 hover:translate-x-2"
                     >
                       {subItem.name}
                     </Link>
@@ -265,7 +256,7 @@ const Header: React.FC<{ onLoginClick: () => void }> = ({ onLoginClick }) => {
             
             <Link 
               to="/account" 
-              className="block py-3 text-neutral-800 hover:text-primary-600 font-medium transition-all duration-300 hover:translate-x-2 text-sm"
+              className="block py-4 text-neutral-800 hover:text-primary-600 font-semibold transition-all duration-300 hover:translate-x-2 text-lg"
             >
               My Account
             </Link>
