@@ -9,27 +9,25 @@ interface ProductGridProps {
 
 const ProductGrid: React.FC<ProductGridProps> = ({ products, viewMode = 'grid' }) => {
   return (
-    <div>
-      <div className="relative">
+    <div className="w-full">
+      <div className="w-full">
         {viewMode === 'grid' ? (
-          <div className="overflow-x-auto pb-4 hide-scrollbar">
-            <div className="flex space-x-4 px-4 sm:px-6 min-w-max">
-              {products.map((product) => (
-                <div key={product.id} className="w-[280px] sm:w-[300px] md:w-[320px] flex-shrink-0">
-                  <ProductCard product={product} />
-                </div>
-              ))}
-            </div>
+          <div className="flex flex-wrap justify-center gap-4 md:gap-6 lg:gap-8 pb-4">
+            {products.map((product) => (
+              <div key={product.id} className="w-[300px]">
+                <ProductCard product={product} />
+              </div>
+            ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-6 px-4 sm:px-6">
+          <div className="grid grid-cols-1 gap-6 max-w-4xl mx-auto">
             {products.map((product) => (
-              <div key={product.id} className="flex bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300">
-                <div className="w-1/3 relative">
+              <div key={product.id} className="flex flex-col sm:flex-row bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300">
+                <div className="w-full sm:w-1/3 relative aspect-square">
                   <img
                     src={product.images[0]}
                     alt={product.name}
-                    className="w-full h-full object-cover rounded-l-lg"
+                    className="w-full h-full object-contain p-4 bg-white rounded-t-lg sm:rounded-l-lg sm:rounded-tr-none"
                   />
                   {product.isNew && (
                     <span className="absolute top-2 left-2 bg-secondary-600 text-white text-xs px-2 py-1 rounded-sm">
@@ -42,7 +40,8 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, viewMode = 'grid' }
                     </span>
                   )}
                 </div>
-                <div className="w-2/3 p-4">
+                
+                <div className="p-4 sm:p-6 flex-1">
                   <h3 className="text-lg font-medium text-gray-900 mb-2">{product.name}</h3>
                   <p className="text-sm text-gray-500 mb-4">{product.description}</p>
                   <div className="flex items-center justify-between">

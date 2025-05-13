@@ -35,12 +35,12 @@ const ProductPage = ({ products, onAddToCart }: ProductPageProps) => {
         Back to Products
       </button>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="relative aspect-square">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="relative w-full max-w-md mx-auto aspect-square">
           <img
             src={product.image}
             alt={product.name}
-            className="w-full h-full object-cover rounded-lg"
+            className="w-full h-full object-contain rounded-lg"
           />
           {product.discount && (
             <div className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm">

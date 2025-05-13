@@ -34,7 +34,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onCompare }) => {
   return (
     <>
       <motion.div 
-        className="product-card group bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300"
+        className="product-card group bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 h-full"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -45,14 +45,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onCompare }) => {
           transition: { duration: 0.3 }
         }}
       >
-        <Link to={`/products/${product.id}`} className="block">
-          <div className="relative overflow-hidden rounded-t-lg">
+        <Link to={`/products/${product.id}`} className="block h-full flex flex-col">
+          <div className="relative overflow-hidden rounded-t-lg aspect-square">
             <motion.img 
               src={product.images[0]} 
               alt={product.name}
-              className="w-full h-48 sm:h-56 md:h-64 object-cover"
+              className="w-full h-full object-contain p-2 sm:p-3 md:p-4 bg-white"
               whileHover={{ 
-                scale: 1.1,
+                scale: 1.05,
                 transition: { duration: 0.4 }
               }}
             />
@@ -141,28 +141,28 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onCompare }) => {
             </div>
           </div>
           
-          <div className="p-3 sm:p-4">
+          <div className="p-2 sm:p-3 md:p-4 flex-1 flex flex-col">
             {/* Title and Price with enhanced animations */}
-            <div className="flex justify-between items-start mb-1.5 sm:mb-2">
+            <div className="flex justify-between items-start mb-1 sm:mb-1.5">
               <motion.h3 
-                className="font-medium text-neutral-800 text-sm sm:text-base line-clamp-2"
+                className="font-medium text-neutral-800 text-xs sm:text-sm md:text-base line-clamp-2"
                 whileHover={{ color: "#4F46E5" }}
                 transition={{ duration: 0.2 }}
               >
                 {product.name}
               </motion.h3>
               <motion.div 
-                className="flex flex-col items-end ml-2"
+                className="flex flex-col items-end ml-2 flex-shrink-0"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.2 }}
               >
                 {product.compareAtPrice && (
-                  <span className="text-xs sm:text-sm text-neutral-400 line-through">
+                  <span className="text-xs text-neutral-400 line-through">
                     ${product.compareAtPrice.toFixed(2)}
                   </span>
                 )}
                 <motion.span 
-                  className="font-medium text-neutral-900 text-sm sm:text-base"
+                  className="font-medium text-neutral-900 text-xs sm:text-sm md:text-base"
                   whileHover={{ color: "#4F46E5" }}
                   animate={{ 
                     scale: isHovered ? [1, 1.05, 1] : 1
@@ -180,7 +180,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onCompare }) => {
             
             {/* Category with hover effect */}
             <motion.p 
-              className="text-xs sm:text-sm text-neutral-500 mb-1.5 sm:mb-2"
+              className="text-xs text-neutral-500 mb-1 sm:mb-1.5"
               whileHover={{ color: "#4F46E5" }}
               transition={{ duration: 0.2 }}
             >
@@ -188,12 +188,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onCompare }) => {
             </motion.p>
             
             {/* Rating with enhanced animation */}
-            <div className="flex items-center">
+            <div className="flex items-center mt-auto">
               <div className="flex text-accent-400">
                 {[...Array(5)].map((_, i) => (
                   <motion.svg 
                     key={i} 
-                    className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${i < Math.floor(product.rating) ? 'text-accent-500' : 'text-neutral-300'}`} 
+                    className={`w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 ${i < Math.floor(product.rating) ? 'text-accent-500' : 'text-neutral-300'}`} 
                     fill="currentColor" 
                     viewBox="0 0 20 20"
                     whileHover={{ 

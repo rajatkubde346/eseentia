@@ -21,7 +21,7 @@ const FeaturedProducts: React.FC = () => {
         <div className="mt-12 text-center">
           <Link 
             to="/products" 
-            className="inline-flex items-center font-medium text-primary-600 hover:text-primary-800"
+            className="inline-flex items-center font-medium text-primary-600 hover:text-primary-800 whitespace-nowrap"
           >
             View All Products
             <ArrowRight size={16} className="ml-2" />
