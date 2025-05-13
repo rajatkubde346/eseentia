@@ -94,18 +94,18 @@ const ProductsPage: React.FC = () => {
   }, []);
   
   return (
-    <div className="h-screen overflow-hidden">
-      <div className="container mx-auto px-4 h-full">
-        <div className="mb-4 text-center">
+    <div className="min-h-screen">
+      <div className="container mx-auto px-4">
+        <div className="mb-6">
           <h1 className="text-3xl md:text-4xl font-serif font-bold mb-2">Products</h1>
-          <p className="text-neutral-600 max-w-2xl mx-auto text-sm md:text-base">
+          <p className="text-neutral-600 max-w-2xl text-sm md:text-base">
             Explore our premium range of spirulina products, carefully harvested and processed to preserve nutritional integrity.
           </p>
         </div>
         
-        <div className="flex flex-col md:flex-row gap-4 h-[calc(100vh-12rem)]">
+        <div className="flex flex-col md:flex-row gap-6">
           {/* Filters */}
-          <div className="md:w-64 flex-shrink-0 overflow-y-auto">
+          <div className="md:w-64 flex-shrink-0">
             <div className="flex justify-between items-center mb-2 md:hidden">
               <button 
                 onClick={() => setIsFilterOpen(!isFilterOpen)}
@@ -130,7 +130,7 @@ const ProductsPage: React.FC = () => {
             </div>
             
             {isFilterOpen && (
-              <div className="bg-white p-3 rounded-lg border border-neutral-200 mb-4">
+              <div className="bg-white p-3 rounded-lg border border-neutral-200 mb-4 sticky top-4">
                 <div className="hidden md:flex justify-between items-center mb-4">
                   <h3 className="font-medium flex items-center">
                     <SlidersHorizontal size={16} className="mr-2" />
@@ -217,8 +217,8 @@ const ProductsPage: React.FC = () => {
           </div>
           
           {/* Products */}
-          <div className="flex-1 overflow-y-auto">
-            <div className="flex flex-col space-y-4 w-full px-4">
+          <div className="flex-1">
+            <div className="w-full">
               <ProductGrid products={filteredProducts} />
             </div>
           </div>
