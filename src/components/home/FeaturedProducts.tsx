@@ -11,11 +11,12 @@ const FeaturedProducts: React.FC = () => {
   return (
     <section className="py-16 bg-white">
       <div className="container-lg">
-        <ProductGrid 
-          products={featuredProducts} 
-          title="Featured Products"
-          subtitle="Our most popular and newest spirulina products carefully selected for quality and potency."
-        />
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold text-gray-900 mb-2">Featured Products</h2>
+          <p className="text-gray-600">Our most popular and newest spirulina products carefully selected for quality and potency.</p>
+        </div>
+        
+        <ProductGrid products={featuredProducts} />
         
         <div className="mt-12 text-center">
           <Link 
