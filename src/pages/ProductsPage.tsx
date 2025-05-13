@@ -218,7 +218,7 @@ const ProductsPage: React.FC = () => {
           
           {/* Products */}
           <div className="flex-1 overflow-y-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 auto-rows-fr">
+            <div className="flex flex-col space-y-4 w-full px-4">
               <ProductGrid products={filteredProducts} />
             </div>
           </div>
