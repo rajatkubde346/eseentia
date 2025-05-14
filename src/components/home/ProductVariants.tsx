@@ -9,6 +9,10 @@ import 'swiper/css/navigation';
 import 'swiper/css/effect-fade';
 import banner1 from  '../../images/banner/banner2.png'
 import banner2 from  '../../images/banner/banner1.png'
+import banner3 from  '../../images/banner/banner3.png'
+import banner4 from  '../../images/banner/banner4.png'
+import banner5 from  '../../images/banner/banner5.png'
+
 
 const ProductVariants: React.FC = () => {
   const variants = [
@@ -21,13 +25,19 @@ const ProductVariants: React.FC = () => {
     {
       title: "Easy to Take Tablets",
       description: "Convenient tablets for your daily nutrition needs",
-      image: banner2,
+      image: banner4,
       link: "/products?category=tablets"
     },
     {
       title: "Vegetarian Capsules",
       description: "Pure spirulina in easy-to-swallow vegetarian capsules",
-      image: banner1,
+      image: banner3,
+      link: "/products?category=capsules"
+    },
+    {
+      title: "Alfalfa Leaves Powder With Barleys Grass Powder",
+      description: "Pure spirulina in easy-to-swallow vegetarian capsules",
+      image: banner5,
       link: "/products?category=capsules"
     }
   ];

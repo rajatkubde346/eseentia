@@ -7,8 +7,11 @@ import { Navigation, Autoplay, EffectFade } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
-import banner1 from  '../../images/banner/banner2.png'
-import banner2 from  '../../images/banner/banner1.png'
+import banner1 from  '../../images/banner/banner1.png'
+import banner2 from  '../../images/banner/banner2.png'
+import banner3 from  '../../images/banner/banner3.png'
+import banner4 from  '../../images/banner/banner4.png'
+import banner5 from  '../../images/banner/banner5.png'
 
 const Hero: React.FC = () => {
   const navigationPrevRef = useRef<HTMLButtonElement>(null);
@@ -16,18 +19,23 @@ const Hero: React.FC = () => {
 
   const slides = [
     {
-      image: banner1,
+      image: banner2,
       title: "Premium Spirulina Powder",
       subtitle: "✔ 100% Organic  ✔ Rich in Protein & Antioxidants ✔ Immunity & Energy Booster"
     },
     {
-      image: banner2,
-      title: "Premium Quality Guaranteed",
+      image: banner4,
+      title: "Premium Spirulina Tablets",
       subtitle: "Each batch of our spirulina is rigorously tested to ensure optimal nutrient content and purity."
     },
     {
-      image: banner1,
-      title: "Nature's Most Nutrient Dense Superfood",
+      image: banner3,
+      title: "Spirulina Capsules With Moringa Capsules",
+      subtitle: "Discover our premium, organic spirulina products - sustainably harvested and packed with essential nutrients to support your health and wellness journey."
+    },
+    {
+      image: banner5,
+      title: "Alfalfa Leaves Powder With Barleys Grass Powder",
       subtitle: "Discover our premium, organic spirulina products - sustainably harvested and packed with essential nutrients to support your health and wellness journey."
     },
   ];
