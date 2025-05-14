@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { products } from './prodcutcarousel';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 
 // Add variant type definition
 type Variant = {
@@ -27,7 +27,7 @@ const productVariants: Record<number, Variant[]> = {
 };
 
 // Add Amazon URL type to product data
-type Variant = {
+type ProductVariant = {
   id: number;
   name: string;
   price: number;
@@ -58,6 +58,11 @@ const ProductDetails = () => {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const imageRef = useRef<HTMLImageElement>(null);
   const magnifierRef = useRef<HTMLDivElement>(null);
+
+  // Calculate discount percentage if compareAtPrice exists
+  const discountPercentage = product?.compareAtPrice 
+    ? Math.round(((product.compareAtPrice - product.price) / product.compareAtPrice) * 100)
+    : 0;
 
   const handleImageClick = () => {
     setIsModalOpen(true);
@@ -124,6 +129,7 @@ const ProductDetails = () => {
   }
 
   const variants = productVariants[product.id] || [];
+  const mainImage = product.images[0];
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">
@@ -164,7 +170,7 @@ const ProductDetails = () => {
             </div>
             <div className="overflow-auto max-w-[90vw] max-h-[80vh] flex items-center justify-center">
               <img
-                src={product.image}
+                src={mainImage}
                 alt={product.name}
                 style={{ transform: `scale(${zoomLevel})` }}
                 className="transition-transform duration-200 rounded-lg shadow-lg max-w-full max-h-[70vh] object-contain"
@@ -196,13 +202,13 @@ const ProductDetails = () => {
             >
               <img
                 ref={imageRef}
-                src={product.image}
+                src={mainImage}
                 alt={product.name}
                 className="w-full h-full object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
               />
-              {product.discount && (
+              {discountPercentage > 0 && (
                 <div className="absolute top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-full text-lg font-bold">
-                  -{product.discount}%
+                  -{discountPercentage}%
                 </div>
               )}
               
@@ -219,7 +225,7 @@ const ProductDetails = () => {
                   <div
                     className="w-full h-full"
                     style={{
-                      backgroundImage: `url(${product.image})`,
+                      backgroundImage: `url(${mainImage})`,
                       backgroundPosition: `${position.x}% ${position.y}%`,
                       backgroundSize: '200%',
                       backgroundRepeat: 'no-repeat',
@@ -243,9 +249,9 @@ const ProductDetails = () => {
                 <span className="text-3xl font-bold text-blue-600">
                   ${selectedVariant ? selectedVariant.price.toFixed(2) : product.price.toFixed(2)}
                 </span>
-                {product.discount && (
+                {product.compareAtPrice && (
                   <span className="text-xl text-gray-500 line-through">
-                    ${(product.price * (1 + product.discount / 100)).toFixed(2)}
+                    ${product.compareAtPrice.toFixed(2)}
                   </span>
                 )}
               </div>

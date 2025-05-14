@@ -7,25 +7,27 @@ import { Navigation, Autoplay, EffectFade } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/effect-fade';
+import banner1 from  '../../images/banner/banner2.png'
+import banner2 from  '../../images/banner/banner1.png'
 
 const ProductVariants: React.FC = () => {
   const variants = [
     {
       title: "Premium Powder",
       description: "Our finest spirulina powder, perfect for smoothies and drinks",
-      image: "https://images.pexels.com/photos/9709817/pexels-photo-9709817.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      image: banner1,
       link: "/products?category=powder"
     },
     {
       title: "Easy to Take Tablets",
       description: "Convenient tablets for your daily nutrition needs",
-      image: "https://images.pexels.com/photos/3683098/pexels-photo-3683098.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      image: banner2,
       link: "/products?category=tablets"
     },
     {
       title: "Vegetarian Capsules",
       description: "Pure spirulina in easy-to-swallow vegetarian capsules",
-      image: "https://images.pexels.com/photos/3850647/pexels-photo-3850647.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      image: banner1,
       link: "/products?category=capsules"
     }
   ];
