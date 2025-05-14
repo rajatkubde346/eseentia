@@ -1,5 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ShoppingBag, Eye, BarChart2 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useCart } from '../../context/CartContext';
+import { Product } from '../../types/Product';
 import product1 from '../../images/product/powder.png';
 import product2 from '../../images/product/tablets.png';
 import product3 from '../../images/product/alfalfa powder.png';
@@ -9,99 +13,141 @@ import product6 from  '../../images/product/Moringa.png';
 import product7 from  '../../images/product/MoringaC.png';
 import product8 from  '../../images/product/MoringaT.png';
 
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-  discount?: number;
-}
-
 export const products: Product[] = [
   {
     id: 1,
     name: "Spirulina Powder",
+    description: "Premium quality spirulina powder for optimal nutrition",
     price: 99.99,
-    image: product1,
-    discount: 20
+    compareAtPrice: 124.99,
+    images: [product1],
+    rating: 4.5,
+    reviewCount: 128,
+    category: "powder",
+    tags: ["organic", "superfood"],
+    features: ["100% Natural", "Rich in Protein", "High in Nutrients"],
+    stock: 100,
+    sku: "SP001",
+    isNew: true,
+    isBestSeller: true,
+    isOrganic: true
   },
   {
     id: 2,
     name: "Spirulina Capsules",
+    description: "Easy-to-swallow spirulina capsules for daily nutrition",
     price: 199.99,
-    image: product4,
-    discount: 15
+    compareAtPrice: 234.99,
+    images: [product4],
+    rating: 4.8,
+    reviewCount: 95,
+    category: "capsules",
+    tags: ["organic", "convenient"],
+    features: ["Easy to Take", "No Taste", "Portable"],
+    stock: 150,
+    sku: "SC001",
+    isBestSeller: true,
+    isOrganic: true
   },
   {
     id: 3,
     name: "Spirulina Tablets",
+    description: "Compressed spirulina tablets for convenient consumption",
     price: 1299.99,
-    image: product2,
-    discount: 10
+    compareAtPrice: 1444.99,
+    images: [product2],
+    rating: 4.6,
+    reviewCount: 82,
+    category: "tablets",
+    tags: ["organic", "tablets"],
+    features: ["Compressed Form", "Easy to Store", "Long Shelf Life"],
+    stock: 200,
+    sku: "ST001",
+    isNew: true,
+    isOrganic: true
   },
   {
     id: 4,
     name: "Moringa Powder",
+    description: "Pure moringa powder for natural nutrition",
     price: 49.99,
-    image: product6,
-    discount: 25
+    compareAtPrice: 74.99,
+    images: [product6],
+    rating: 4.7,
+    reviewCount: 156,
+    category: "powder",
+    tags: ["organic", "superfood"],
+    features: ["100% Natural", "Rich in Vitamins", "Antioxidant"],
+    stock: 120,
+    sku: "MP001",
+    isNew: true,
+    isOrganic: true
   },
   {
     id: 5,
     name: "Moringa Capsules",
+    description: "Convenient moringa capsules for daily use",
     price: 129.99,
-    image: product7,
-    discount: 5
+    compareAtPrice: 144.99,
+    images: [product7],
+    rating: 4.4,
+    reviewCount: 73,
+    category: "capsules",
+    tags: ["organic", "convenient"],
+    features: ["Easy to Take", "No Taste", "Portable"],
+    stock: 180,
+    sku: "MC001",
+    isOrganic: true
   },
   {
     id: 6,
     name: "Moringa Tablets",
+    description: "Compressed moringa tablets for easy consumption",
     price: 399.99,
-    image: product8,
-    discount: 12
+    compareAtPrice: 459.99,
+    images: [product8],
+    rating: 4.5,
+    reviewCount: 91,
+    category: "tablets",
+    tags: ["organic", "tablets"],
+    features: ["Compressed Form", "Easy to Store", "Long Shelf Life"],
+    stock: 160,
+    sku: "MT001",
+    isOrganic: true
   },
   {
     id: 7,
     name: "Barleys Grass Powder",
+    description: "Pure barley grass powder for natural nutrition",
     price: 99.99,
-    image: product5,
-    discount: 20
+    compareAtPrice: 124.99,
+    images: [product5],
+    rating: 4.6,
+    reviewCount: 112,
+    category: "powder",
+    tags: ["organic", "superfood"],
+    features: ["100% Natural", "Rich in Chlorophyll", "Alkaline"],
+    stock: 140,
+    sku: "BGP001",
+    isBestSeller: true,
+    isOrganic: true
   },
   {
     id: 8,
     name: "Alfalfa Leaves Powder",
+    description: "Pure alfalfa leaves powder for natural nutrition",
     price: 199.99,
-    image: product3,
-    discount: 15
-  },
-  {
-    id: 9,
-    name: "Spirulina Tablets",
-    price: 1299.99,
-    image: product2,
-    discount: 10
-  },
-  {
-    id: 10,
-    name: "Moringa Powder",
-    price: 49.99,
-    image: product6,
-    discount: 25
-  },
-  {
-    id: 11,
-    name: "Moringa Capsules",
-    price: 129.99,
-    image: product7,
-    discount: 5
-  },
-  {
-    id: 12,
-    name: "Moringa Tablets",
-    price: 399.99,
-    image: product8,
-    discount: 12
-  },
+    compareAtPrice: 234.99,
+    images: [product3],
+    rating: 4.7,
+    reviewCount: 88,
+    category: "powder",
+    tags: ["organic", "superfood"],
+    features: ["100% Natural", "Rich in Minerals", "Digestive Support"],
+    stock: 130,
+    sku: "ALP001",
+    isOrganic: true
+  }
 ];
 
 // Responsive breakpoints for number of visible items
@@ -141,13 +187,13 @@ const QuickViewModal = ({ product, isOpen, onClose }: { product: Product | null;
               <div className="mt-3 text-center sm:mt-0 sm:text-left w-full sm:w-1/2">
                 <div className="relative aspect-square">
                   <img
-                    src={product.image}
+                    src={product.images[0]}
                     alt={product.name}
                     className="w-full h-full object-contain p-4"
                   />
-                  {product.discount && (
+                  {product.compareAtPrice && (
                     <div className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-full text-sm">
-                      -{product.discount}%
+                      -{Math.round((1 - product.price / product.compareAtPrice) * 100)}%
                     </div>
                   )}
                 </div>
@@ -165,9 +211,9 @@ const QuickViewModal = ({ product, isOpen, onClose }: { product: Product | null;
                     <span className="text-2xl font-bold text-gray-900">
                       ${product.price.toFixed(2)}
                     </span>
-                    {product.discount && (
+                    {product.compareAtPrice && (
                       <span className="text-lg text-gray-500 line-through">
-                        ${(product.price * (1 + product.discount / 100)).toFixed(2)}
+                        ${(product.compareAtPrice).toFixed(2)}
                       </span>
                     )}
                   </div>
@@ -223,6 +269,7 @@ const QuickViewModal = ({ product, isOpen, onClose }: { product: Product | null;
 };
 
 const ProductCarousel = () => {
+  const { addToCart } = useCart();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState(getVisibleCount());
   const [isDragging, setIsDragging] = useState(false);
@@ -270,7 +317,9 @@ const ProductCarousel = () => {
     navigate(`/products/${productId}`);
   };
 
-  const handleQuickView = (productId: number) => {
+  const handleQuickView = (e: React.MouseEvent, productId: number) => {
+    e.preventDefault();
+    e.stopPropagation();
     setShowQuickView(productId);
   };
 
@@ -278,14 +327,22 @@ const ProductCarousel = () => {
     setShowQuickView(null);
   };
 
-  const handleAddToCart = (productId: number) => {
-    setCartItems(prev => [...prev, productId]);
-    // Here you can implement your cart logic
+  const handleAddToCart = (e: React.MouseEvent, productId: number) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const product = products.find(p => p.id === productId);
+    if (product) {
+      addToCart(product);
+    }
   };
 
-  const handleCompare = (productId: number) => {
-    setCompareItems(prev => [...prev, productId]);
-    // Here you can implement your compare logic
+  const handleCompare = (e: React.MouseEvent, productId: number) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const product = products.find(p => p.id === productId);
+    if (product) {
+      setCompareItems(prev => [...prev, productId]);
+    }
   };
 
   return (
@@ -306,81 +363,75 @@ const ProductCarousel = () => {
               className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/6 flex-shrink-0 px-1 sm:px-2 select-none"
               style={{ flex: `0 0 ${100 / visibleCount}%` }}
             >
-              <div 
+              <motion.div 
                 className="group relative bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 cursor-pointer hover:shadow-xl"
                 onMouseEnter={() => setActiveProduct(product.id)}
                 onMouseLeave={() => setActiveProduct(null)}
+                whileHover={{ 
+                  scale: 1.02,
+                  transition: { duration: 0.3 }
+                }}
               >
-                {/* Action Icons Container - Right Side */}
-                <div className="absolute right-0 top-1/2 -translate-y-1/2 transform translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-in-out z-10">
-                  <div className="flex flex-col space-y-2 bg-white shadow-lg rounded-l-lg p-2">
-                    <button 
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleQuickView(product.id);
-                      }}
-                      className="relative flex items-center justify-center p-2 hover:bg-purple-50 rounded-lg transition-all duration-200 group/btn"
-                      title="Quick View"
-                    >
-                      <div className="absolute inset-0 bg-purple-100 rounded-lg scale-0 group-hover/btn:scale-100 transition-transform duration-200"></div>
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-gray-600 group-hover/btn:text-purple-600 transition-colors duration-200 relative z-10">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                      </svg>
-                      <span className="absolute -right-20 top-1/2 -translate-y-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover/btn:opacity-100 transition-opacity duration-200 whitespace-nowrap">
-                        Quick View
-                      </span>
-                    </button>
-                    <button 
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleAddToCart(product.id);
-                      }}
-                      className="relative flex items-center justify-center p-2 hover:bg-green-50 rounded-lg transition-all duration-200 group/btn"
-                      title="Add to Cart"
-                    >
-                      <div className="absolute inset-0 bg-green-100 rounded-lg scale-0 group-hover/btn:scale-100 transition-transform duration-200"></div>
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-gray-600 group-hover/btn:text-green-600 transition-colors duration-200 relative z-10">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                      </svg>
-                      <span className="absolute -right-20 top-1/2 -translate-y-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover/btn:opacity-100 transition-opacity duration-200 whitespace-nowrap">
-                        Add to Cart
-                      </span>
-                    </button>
-                    <button 
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleCompare(product.id);
-                      }}
-                      className="relative flex items-center justify-center p-2 hover:bg-blue-50 rounded-lg transition-all duration-200 group/btn"
-                      title="Compare"
-                    >
-                      <div className="absolute inset-0 bg-blue-100 rounded-lg scale-0 group-hover/btn:scale-100 transition-transform duration-200"></div>
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-gray-600 group-hover/btn:text-blue-600 transition-colors duration-200 relative z-10">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                      </svg>
-                      <span className="absolute -right-20 top-1/2 -translate-y-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover/btn:opacity-100 transition-opacity duration-200 whitespace-nowrap">
-                        Compare
-                      </span>
-                    </button>
-                  </div>
-                </div>
-
                 <div 
                   className="relative aspect-square cursor-pointer touch-manipulation select-none"
                   onClick={() => handleProductClick(product.id)}
                 >
-                  <img
-                    src={product.image}
+                  <motion.img
+                    src={product.images[0]}
                     alt={product.name}
-                    className="w-full h-full object-contain p-2 sm:p-4 transition-all duration-300 group-hover:scale-105"
+                    className="w-full h-full object-contain p-2 sm:p-4 transition-all duration-300"
+                    whileHover={{ 
+                      scale: 1.05,
+                      transition: { duration: 0.4 }
+                    }}
                     draggable="false"
                   />
-                  {product.discount && (
+                  {product.compareAtPrice && (
                     <div className="absolute top-1 right-1 sm:top-2 sm:right-2 bg-red-500 text-white px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full text-xs sm:text-sm pointer-events-none">
-                      -{product.discount}%
+                      -{Math.round((1 - product.price / product.compareAtPrice) * 100)}%
                     </div>
                   )}
+
+                  {/* Action Icons Overlay - Bottom */}
+                  <motion.div 
+                    className="absolute bottom-0 left-0 right-0 flex justify-center gap-3 p-3 bg-gradient-to-t from-black/60 to-transparent"
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ 
+                      y: activeProduct === product.id ? 0 : 20,
+                      opacity: activeProduct === product.id ? 1 : 0
+                    }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <motion.button
+                      onClick={(e) => handleQuickView(e, product.id)}
+                      className="bg-white/90 backdrop-blur-sm text-primary-800 p-2 sm:p-2.5 rounded-full shadow-md hover:bg-primary-600 hover:text-white transition-colors"
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                      aria-label="Quick View"
+                    >
+                      <Eye size={18} className="sm:w-5 sm:h-5" />
+                    </motion.button>
+
+                    <motion.button
+                      onClick={(e) => handleAddToCart(e, product.id)}
+                      className="bg-white/90 backdrop-blur-sm text-primary-800 p-2 sm:p-2.5 rounded-full shadow-md hover:bg-primary-600 hover:text-white transition-colors"
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                      aria-label="Add to Cart"
+                    >
+                      <ShoppingBag size={18} className="sm:w-5 sm:h-5" />
+                    </motion.button>
+
+                    <motion.button
+                      onClick={(e) => handleCompare(e, product.id)}
+                      className="bg-white/90 backdrop-blur-sm text-primary-800 p-2 sm:p-2.5 rounded-full shadow-md hover:bg-primary-600 hover:text-white transition-colors"
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                      aria-label="Compare Product"
+                    >
+                      <BarChart2 size={18} className="sm:w-5 sm:h-5" />
+                    </motion.button>
+                  </motion.div>
                 </div>
                 <div className="p-2 sm:p-4">
                   <h3 className="text-xs sm:text-sm font-medium mb-1 truncate text-gray-800 group-hover:text-blue-600 transition-colors duration-300">
@@ -390,14 +441,14 @@ const ProductCarousel = () => {
                     <span className="text-sm sm:text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
                       ${product.price.toFixed(2)}
                     </span>
-                    {product.discount && (
+                    {product.compareAtPrice && (
                       <span className="text-xs sm:text-sm text-gray-500 line-through">
-                        ${(product.price * (1 + product.discount / 100)).toFixed(2)}
+                        ${(product.compareAtPrice).toFixed(2)}
                       </span>
                     )}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           ))}
         </div>
