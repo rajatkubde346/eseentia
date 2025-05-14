@@ -55,7 +55,7 @@ const Footer: React.FC = () => {
               <MapPin size={20} className="text-neutral-600 mt-1 flex-shrink-0" />
               <div className="text-neutral-600 text-sm">
                 <p className="font-medium">Business Address:</p>
-                <p>Raitown, Flat no- B3-303, IC Chowk Hingan Road, Nagpur - 440016</p>
+                <p>Raitown, Flat no- B3-303, IC Chowk Hingna Road, Nagpur - 440016</p>
                 <p className="font-medium mt-2">Office Address:</p>
                 <p>Flat No. 03, Harihar Sahanlwas, Beside Dhandanla Infotech, Giripeth, Nagpur - 440010</p>
               </div>
