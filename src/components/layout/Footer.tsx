@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Instagram, Facebook, Twitter, Mail, Phone, MapPin, Linkedin } from 'lucide-react';
+import { Instagram, Facebook, Twitter, Mail, Phone, MapPin, Linkedin, Youtube } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -20,6 +20,7 @@ const Footer: React.FC = () => {
               <a href="https://www.facebook.com/profile.php?id=61576108148964" className="text-neutral-600 hover:text-primary-600 transition-colors duration-200 hover:scale-110 transform" aria-label="Facebook"><Facebook size={20} /></a>
               <a href="https://x.com/eseentia" className="text-neutral-600 hover:text-primary-600 transition-colors duration-200 hover:scale-110 transform" aria-label="Twitter"><Twitter size={20} /></a>
               <a href="https://www.linkedin.com/in/eseentia-health-6bb192366" className="text-neutral-600 hover:text-primary-600 transition-colors duration-200 hover:scale-110 transform" aria-label="LinkedIn"><Linkedin size={20} /></a>
+              <a href="https://www.youtube.com/@Eseentia" className="text-neutral-600 hover:text-primary-600 transition-colors duration-200 hover:scale-110 transform" aria-label="Youtube"><Youtube size={20} /></a>
             </div>
           </div>
           
