@@ -94,7 +94,7 @@ const Header: React.FC<{ onLoginClick: () => void }> = ({ onLoginClick }) => {
       <header 
         className="sticky top-0 left-0 right-0 z-50 bg-white shadow-md py-2 w-full"
       >
-        <div className="container mx-auto px-3 sm:px-4 lg:px-6 max-w-7xl">
+        <div className="container-lg mx-auto px-3 sm:px-4 lg:px-6">
           <div className="flex items-center justify-between h-14 sm:h-16 md:h-18 lg:h-20">
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-2 group">
