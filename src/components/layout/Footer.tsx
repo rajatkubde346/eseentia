@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
               Providing premium quality, sustainable wholefood products since 2010.
             </p>
             <div className="flex space-x-4">
-              <a href="https://www.instagram.com/eseentia.official/" className="text-neutral-600 hover:text-primary-600 transition-colors duration-200 hover:scale-110 transform" aria-label="Instagram"><Instagram size={20} /></a>
+              <a href="https://www.instagram.com/eseentia.official/" className="text-neutral-600 bg-pink hover:text-primary-600 transition-colors duration-200 hover:scale-110 transform" aria-label="Instagram"><Instagram size={20} /></a>
               <a href="https://www.facebook.com/profile.php?id=61576108148964" className="text-neutral-600 hover:text-primary-600 transition-colors duration-200 hover:scale-110 transform" aria-label="Facebook"><Facebook size={20} /></a>
               <a href="https://x.com/eseentia" className="text-neutral-600 hover:text-primary-600 transition-colors duration-200 hover:scale-110 transform" aria-label="Twitter"><Twitter size={20} /></a>
               <a href="https://www.linkedin.com/in/eseentia-health-6bb192366" className="text-neutral-600 hover:text-primary-600 transition-colors duration-200 hover:scale-110 transform" aria-label="LinkedIn"><Linkedin size={20} /></a>
