@@ -76,12 +76,21 @@ const CartSidebar: React.FC = () => {
                         <div className="ml-4 flex flex-1 flex-col">
                           <div>
                             <div className="flex justify-between text-base font-medium text-neutral-800">
-                              <h3>
-                                <Link to={`/products/₹{item.product.id}`} onClick={toggleCart}>
-                                  {item.product.name}
-                                </Link>
-                              </h3>
-                              <p className="ml-4">₹{(item.product.price * item.quantity).toFixed(2)}</p>
+                              <div className="flex justify-between items-start">
+                                <div>
+                                  <h3>
+                                    <Link to={`/products/${item.product.id}`} onClick={toggleCart}>
+                                      {item.product.name}
+                                    </Link>
+                                  </h3>
+                                  {item.selectedSize && (
+                                    <p className="mt-1 text-sm text-neutral-500">
+                                      Size: {item.selectedSize}
+                                    </p>
+                                  )}
+                                </div>
+                                <p className="ml-4">₹{(item.price * item.quantity).toFixed(2)}</p>
+                              </div>
                             </div>
                             <p className="mt-1 text-sm text-neutral-500">
                               {item.product.category.charAt(0).toUpperCase() + item.product.category.slice(1)}
@@ -112,7 +121,8 @@ const CartSidebar: React.FC = () => {
                             <button
                               type="button"
                               onClick={() => removeFromCart(item.product.id)}
-                              className="font-medium text-primary-600 hover:text-primary-800 flex items-center"
+                              className="flex items-center px-2 py-1 rounded-md text-red-600 hover:bg-red-100 hover:text-red-800 transition-colors"
+                              aria-label="Remove item from cart"
                             >
                               <Trash2 size={14} className="mr-1" />
                               Remove

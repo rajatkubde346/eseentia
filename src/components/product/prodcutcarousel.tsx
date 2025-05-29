@@ -334,7 +334,9 @@ const ProductCarousel = () => {
     e.stopPropagation();
     const product = products.find(p => p.id === productId);
     if (product) {
-      addToCart(product, 1);  // Add default quantity of 1
+      // Use the first size if available, otherwise use base price
+      const selectedSize = product.sizes?.[0]?.size;
+      addToCart(product, 1, selectedSize);
     }
   };
 

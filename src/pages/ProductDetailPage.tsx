@@ -74,7 +74,7 @@ const ProductDetailPage: React.FC = () => {
       return;
     }
 
-    addToCart(product, quantity);
+    addToCart(product, quantity, selectedSize);
     setShowAddedToCart(true);
     setTimeout(() => setShowAddedToCart(false), 2000);
   };
@@ -267,7 +267,15 @@ const ProductDetailPage: React.FC = () => {
               {product.compareAtPrice && (
                 <span className="text-neutral-500 line-through mr-2">₹{product.compareAtPrice.toFixed(2)}</span>
               )}
-              <span className="text-2xl font-semibold text-neutral-900">₹{product.price.toFixed(2)}</span>
+              {selectedSize && product.sizes?.find(s => s.size === selectedSize)?.sellingPrice ? (
+                <span className="text-2xl font-semibold text-neutral-900">
+                  ₹{product.sizes.find(s => s.size === selectedSize)?.sellingPrice?.toFixed(2)}
+                </span>
+              ) : (
+                <span className="text-2xl font-semibold text-neutral-900">
+                  ₹{product.sizes?.find(s => s.size === selectedSize)?.price?.toFixed(2)}
+                </span>
+              )}
             </div>
             
             {/* Description */}

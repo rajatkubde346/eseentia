@@ -80,7 +80,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onCompare }) => {
               <motion.button
                 onClick={(e) => {
                   e.preventDefault();
-                  addToCart(product, 1);
+                  // Use the first size if available, otherwise use base price
+                  const selectedSize = product.sizes?.[0]?.size;
+                  addToCart(product, 1, selectedSize);
                 }}
                 className="bg-white/90 backdrop-blur-sm text-primary-800 p-2 sm:p-2.5 rounded-full shadow-md hover:bg-primary-600 hover:text-white transition-colors"
                 whileHover={{ scale: 1.1, y: -2 }}

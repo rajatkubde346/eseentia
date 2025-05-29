@@ -4,11 +4,13 @@ import { Product } from '../types/Product';
 interface CartItem {
   product: Product;
   quantity: number;
+  selectedSize?: string;
+  price: number;
 }
 
 interface CartContextValue {
   items: CartItem[];
-  addToCart: (product: Product, quantity: number) => void;
+  addToCart: (product: Product, quantity: number, selectedSize?: string) => void;
   removeFromCart: (productId: number) => void;
   updateQuantity: (productId: number, quantity: number) => void;
   clearCart: () => void;
@@ -36,11 +38,11 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setIsCartOpen(!isCartOpen);
   };
 
-  const addToCart = (product: Product, quantity: number = 1) => {
+  const addToCart = (product: Product, quantity: number = 1, selectedSize?: string) => {
     setItems(currentItems => {
-      // Check if product already exists in cart
+      // Check if product already exists in cart with the same size
       const existingItemIndex = currentItems.findIndex(
-        item => item.product.id === product.id
+        item => item.product.id === product.id && item.selectedSize === selectedSize
       );
 
       if (existingItemIndex > -1) {
@@ -49,8 +51,18 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         updatedItems[existingItemIndex].quantity += quantity;
         return updatedItems;
       } else {
-        // Add new item to cart
-        return [...currentItems, { product, quantity }];
+        // Get the price for the selected size
+        const selectedSizeObj = product.sizes?.find(s => s.size === selectedSize);
+        const price = selectedSizeObj?.sellingPrice || selectedSizeObj?.price || product.price;
+
+        // Add new item with price
+        const newItem: CartItem = {
+          product,
+          quantity,
+          selectedSize,
+          price
+        };
+        return [...currentItems, newItem];
       }
     });
   };
@@ -83,7 +95,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const totalItems = items.reduce((total, item) => total + item.quantity, 0);
   
   const totalPrice = items.reduce(
-    (total, item) => total + item.product.price * item.quantity,
+    (total, item) => total + item.price * item.quantity,
     0
   );
 
