@@ -8,7 +8,7 @@ interface CartItem {
 
 interface CartContextValue {
   items: CartItem[];
-  addToCart: (product: Product) => void;
+  addToCart: (product: Product, quantity: number) => void;
   removeFromCart: (productId: number) => void;
   updateQuantity: (productId: number, quantity: number) => void;
   clearCart: () => void;
@@ -36,7 +36,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setIsCartOpen(!isCartOpen);
   };
 
-  const addToCart = (product: Product) => {
+  const addToCart = (product: Product, quantity: number = 1) => {
     setItems(currentItems => {
       // Check if product already exists in cart
       const existingItemIndex = currentItems.findIndex(
@@ -46,11 +46,11 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (existingItemIndex > -1) {
         // Update quantity of existing item
         const updatedItems = [...currentItems];
-        updatedItems[existingItemIndex].quantity += 1;
+        updatedItems[existingItemIndex].quantity += quantity;
         return updatedItems;
       } else {
         // Add new item to cart
-        return [...currentItems, { product, quantity: 1 }];
+        return [...currentItems, { product, quantity }];
       }
     });
   };

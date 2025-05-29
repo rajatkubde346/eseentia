@@ -5,6 +5,7 @@ import { Product } from '../../types/Product';
 import { useCart } from '../../context/CartContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import QuickViewModal from './QuickViewModal';
+import ReactDOM from 'react-dom';
 
 interface ProductCardProps {
   product: Product;
@@ -15,14 +16,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onCompare }) => {
   const { addToCart } = useCart();
   const [isHovered, setIsHovered] = useState(false);
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
-  
-  const handleAddToCart = (e: React.MouseEvent) => {
-    e.preventDefault();
-    addToCart(product);
-  };
+  const [quickViewPosition, setQuickViewPosition] = useState<{ top: number; left: number } | null>(null);
 
   const handleQuickView = (e: React.MouseEvent) => {
     e.preventDefault();
+    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+    setQuickViewPosition({
+      top: rect.top + window.scrollY + rect.height + 10,
+      left: rect.left + window.scrollX
+    });
     setIsQuickViewOpen(true);
   };
 
@@ -30,20 +32,24 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onCompare }) => {
     e.preventDefault();
     onCompare?.(product);
   };
-  
+
+  const formatCurrency = (amount: number) =>
+    new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: 'INR',
+      maximumFractionDigits: 2,
+    }).format(amount);
+
   return (
     <>
       <motion.div 
-        className="product-card group bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 h-full"
+        className="product-card group bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 h-full relative"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        whileHover={{ 
-          scale: 1.02,
-          transition: { duration: 0.3 }
-        }}
+        whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
       >
         <Link to={`/products/${product.id}`} className="block h-full flex flex-col">
           <div className="relative overflow-hidden rounded-t-lg aspect-square">
@@ -51,20 +57,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onCompare }) => {
               src={product.images[0]} 
               alt={product.name}
               className="w-full h-full object-contain p-2 sm:p-3 md:p-4 bg-white"
-              whileHover={{ 
-                scale: 1.05,
-                transition: { duration: 0.4 }
-              }}
+              whileHover={{ scale: 1.05, transition: { duration: 0.4 } }}
             />
-            
-            {/* Action Icons Overlay - Bottom */}
+
+            {/* Action Icons */}
             <motion.div 
               className="absolute bottom-0 left-0 right-0 flex justify-center gap-3 p-3 bg-gradient-to-t from-black/60 to-transparent"
               initial={{ y: 20, opacity: 0 }}
-              animate={{ 
-                y: isHovered ? 0 : 20,
-                opacity: isHovered ? 1 : 0
-              }}
+              animate={{ y: isHovered ? 0 : 20, opacity: isHovered ? 1 : 0 }}
               transition={{ duration: 0.3 }}
             >
               <motion.button
@@ -78,7 +78,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onCompare }) => {
               </motion.button>
 
               <motion.button
-                onClick={handleAddToCart}
+                onClick={(e) => {
+                  e.preventDefault();
+                  addToCart(product, 1);
+                }}
                 className="bg-white/90 backdrop-blur-sm text-primary-800 p-2 sm:p-2.5 rounded-full shadow-md hover:bg-primary-600 hover:text-white transition-colors"
                 whileHover={{ scale: 1.1, y: -2 }}
                 whileTap={{ scale: 0.95 }}
@@ -97,8 +100,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onCompare }) => {
                 <BarChart2 size={18} className="sm:w-5 sm:h-5" />
               </motion.button>
             </motion.div>
-            
-            {/* Tags with floating animation */}
+
+            {/* Tags */}
             <div className="absolute top-2 sm:top-3 left-2 sm:left-3 flex flex-col gap-1.5 sm:gap-2">
               <AnimatePresence>
                 {product.isNew && (
@@ -140,9 +143,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onCompare }) => {
               </AnimatePresence>
             </div>
           </div>
-          
+
           <div className="p-2 sm:p-3 md:p-4 flex-1 flex flex-col">
-            {/* Title and Price with enhanced animations */}
             <div className="flex justify-between items-start mb-1 sm:mb-1.5">
               <motion.h3 
                 className="font-medium text-neutral-800 text-xs sm:text-sm md:text-base line-clamp-2"
@@ -158,14 +160,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onCompare }) => {
               >
                 {product.compareAtPrice && (
                   <span className="text-xs text-neutral-400 line-through">
-                    ${product.compareAtPrice.toFixed(2)}
+                    {formatCurrency(product.compareAtPrice)}
                   </span>
                 )}
                 <motion.span 
                   className="font-medium text-neutral-900 text-xs sm:text-sm md:text-base"
                   whileHover={{ color: "#4F46E5" }}
                   animate={{ 
-                    scale: isHovered ? [1, 1.05, 1] : 1
+                    scale: isHovered ? [1, 1.05, 1] : 1 
                   }}
                   transition={{ 
                     duration: 0.5,
@@ -173,12 +175,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onCompare }) => {
                     repeatType: "reverse"
                   }}
                 >
-                  ${product.price.toFixed(2)}
+                  {formatCurrency(product.price)}
                 </motion.span>
               </motion.div>
             </div>
-            
-            {/* Category with hover effect */}
+
             <motion.p 
               className="text-xs text-neutral-500 mb-1 sm:mb-1.5"
               whileHover={{ color: "#4F46E5" }}
@@ -186,8 +187,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onCompare }) => {
             >
               {product.category.charAt(0).toUpperCase() + product.category.slice(1)}
             </motion.p>
-            
-            {/* Rating with enhanced animation */}
+
             <div className="flex items-center mt-auto">
               <div className="flex text-accent-400">
                 {[...Array(5)].map((_, i) => (
@@ -196,10 +196,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onCompare }) => {
                     className={`w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 ${i < Math.floor(product.rating) ? 'text-accent-500' : 'text-neutral-300'}`} 
                     fill="currentColor" 
                     viewBox="0 0 20 20"
-                    whileHover={{ 
-                      scale: 1.2,
-                      color: i < Math.floor(product.rating) ? "#F59E0B" : "#D1D5DB"
-                    }}
+                    whileHover={{ scale: 1.2 }}
                     transition={{ duration: 0.2 }}
                   >
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -218,12 +215,25 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onCompare }) => {
         </Link>
       </motion.div>
 
-      {/* Quick View Modal */}
-      <QuickViewModal
-        product={product}
-        isOpen={isQuickViewOpen}
-        onClose={() => setIsQuickViewOpen(false)}
-      />
+      {isQuickViewOpen && quickViewPosition &&
+        ReactDOM.createPortal(
+          <div
+            className="absolute z-50 bg-white border rounded-lg shadow-lg w-[300px]"
+            style={{
+              top: quickViewPosition.top,
+              left: quickViewPosition.left,
+              position: 'absolute'
+            }}
+          >
+            <QuickViewModal
+              product={product}
+              isOpen={isQuickViewOpen}
+              onClose={() => setIsQuickViewOpen(false)}
+              onAddToCart={addToCart}
+            />
+          </div>,
+          document.body
+        )}
     </>
   );
 };

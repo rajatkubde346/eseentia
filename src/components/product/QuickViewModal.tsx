@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { X } from 'lucide-react';
 import { Product } from '../../types/Product';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -7,9 +7,12 @@ interface QuickViewModalProps {
   product: Product | null;
   isOpen: boolean;
   onClose: () => void;
+  onAddToCart: (product: Product, quantity: number) => void;
 }
 
-const QuickViewModal: React.FC<QuickViewModalProps> = ({ product, isOpen, onClose }) => {
+const QuickViewModal: React.FC<QuickViewModalProps> = ({ product, isOpen, onClose, onAddToCart }) => {
+  const [quantity, setQuantity] = useState(1);
+
   if (!product) return null;
 
   return (
@@ -96,8 +99,29 @@ const QuickViewModal: React.FC<QuickViewModalProps> = ({ product, isOpen, onClos
                   </p>
 
                   <div className="space-y-4">
-                    <button className="w-full bg-primary-600 text-white py-2 px-4 rounded-md hover:bg-primary-700 transition-colors">
-                      Add to Cart
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                        className="px-3 py-1 border rounded-md hover:bg-gray-50"
+                      >
+                        -
+                      </button>
+                      <span className="text-gray-700">{quantity}</span>
+                      <button
+                        onClick={() => setQuantity(quantity + 1)}
+                        className="px-3 py-1 border rounded-md hover:bg-gray-50"
+                      >
+                        +
+                      </button>
+                    </div>
+                    <button
+                      onClick={() => {
+                        onAddToCart(product, quantity);
+                        onClose();
+                      }}
+                      className="w-full bg-primary-600 text-white py-2 px-4 rounded-md hover:bg-primary-700 transition-colors"
+                    >
+                      Add to Cart ({quantity} item{quantity > 1 ? 's' : ''})
                     </button>
                     <button className="w-full border border-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-50 transition-colors">
                       Add to Wishlist

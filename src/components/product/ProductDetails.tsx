@@ -133,225 +133,195 @@ const ProductDetails = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">
-      {/* Modal for image zoom */}
-      {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 transition-all">
-          <div className="absolute inset-0" onClick={handleCloseModal} />
-          <div className="relative z-10 max-w-full max-h-full flex flex-col items-center justify-center p-4">
-            <button
-              onClick={handleCloseModal}
-              className="absolute top-4 right-4 text-white bg-black bg-opacity-50 rounded-full p-2 hover:bg-opacity-80 focus:outline-none"
-              aria-label="Close"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-            <div className="flex items-center gap-4 mb-4">
-              <button
-                onClick={handleZoomOut}
-                className="bg-white text-gray-800 rounded-full p-2 shadow hover:bg-gray-100 focus:outline-none"
-                disabled={zoomLevel <= 1}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
-                </svg>
-              </button>
-              <span className="text-white font-semibold text-lg select-none">{Math.round(zoomLevel * 100)}%</span>
-              <button
-                onClick={handleZoomIn}
-                className="bg-white text-gray-800 rounded-full p-2 shadow hover:bg-gray-100 focus:outline-none"
-                disabled={zoomLevel >= 3}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                </svg>
-              </button>
-            </div>
-            <div className="overflow-auto max-w-[90vw] max-h-[80vh] flex items-center justify-center">
-              <img
-                src={mainImage}
-                alt={product.name}
-                style={{ transform: `scale(${zoomLevel})` }}
-                className="transition-transform duration-200 rounded-lg shadow-lg max-w-full max-h-[70vh] object-contain"
-              />
-            </div>
-          </div>
-        </div>
-      )}
-      {/* End Modal */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  {/* Modal for image zoom */}
+  {isModalOpen && (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 transition-all">
+      <div className="absolute inset-0" onClick={handleCloseModal} />
+      <div className="relative z-10 max-w-full max-h-full flex flex-col items-center justify-center p-4">
         <button
-          onClick={() => navigate('/')}
-          className="mb-8 flex items-center text-blue-600 hover:text-blue-800 transition-colors"
+          onClick={handleCloseModal}
+          className="absolute top-4 right-4 text-white bg-black bg-opacity-50 rounded-full p-2 hover:bg-opacity-80 focus:outline-none"
+          aria-label="Close"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clipRule="evenodd" />
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           </svg>
-          Back to Products
         </button>
-
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
-            <div 
-              className="relative aspect-square group cursor-zoom-in"
-              onMouseMove={handleMouseMove}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-              onClick={handleImageClick}
-            >
-              <img
-                ref={imageRef}
-                src={mainImage}
-                alt={product.name}
-                className="w-full h-full object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
-              />
-              {discountPercentage > 0 && (
-                <div className="absolute top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-full text-lg font-bold">
-                  -{discountPercentage}%
-                </div>
-              )}
-              
-              {/* Magnifier */}
-              {showMagnifier && (
-                <div
-                  ref={magnifierRef}
-                  className="hidden md:block absolute w-40 h-40 border-2 border-gray-300 rounded-full overflow-hidden pointer-events-none z-10"
-                  style={{
-                    left: `${cursorPosition.x - 80}px`,
-                    top: `${cursorPosition.y - 80}px`,
-                  }}
-                >
-                  <div
-                    className="w-full h-full"
-                    style={{
-                      backgroundImage: `url(${mainImage})`,
-                      backgroundPosition: `${position.x}% ${position.y}%`,
-                      backgroundSize: '200%',
-                      backgroundRepeat: 'no-repeat',
-                    }}
-                  />
-                </div>
-              )}
-
-              {/* Mobile Zoom Hint */}
-              <div className="md:hidden absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-lg flex items-center justify-center">
-                <span className="text-white text-lg font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  Tap to Zoom
-                </span>
-              </div>
-            </div>
-
-            <div className="flex flex-col justify-center">
-              <h1 className="text-3xl font-bold text-gray-900 mb-4">{product.name}</h1>
-              
-              <div className="flex items-center gap-4 mb-6">
-                <span className="text-3xl font-bold text-blue-600">
-                  ${selectedVariant ? selectedVariant.price.toFixed(2) : product.price.toFixed(2)}
-                </span>
-                {product.compareAtPrice && (
-                  <span className="text-xl text-gray-500 line-through">
-                    ${product.compareAtPrice.toFixed(2)}
-                  </span>
-                )}
-              </div>
-
-              {/* Variant Selection */}
-              <div className="mb-8">
-                <button
-                  onClick={() => setShowVariants(!showVariants)}
-                  className="w-full text-left px-4 py-3 border border-gray-300 rounded-lg hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
-                >
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-700">
-                      {selectedVariant ? `Selected: ${selectedVariant.name}` : 'Select Variant'}
-                    </span>
-                    <svg
-                      className={`w-5 h-5 transform transition-transform ${showVariants ? 'rotate-180' : ''}`}
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </div>
-                </button>
-
-                {showVariants && (
-                  <div className="mt-2 border border-gray-200 rounded-lg overflow-hidden">
-                    {variants.map((variant) => (
-                      <button
-                        key={variant.id}
-                        onClick={() => handleVariantSelect(variant)}
-                        className={`w-full px-4 py-3 text-left hover:bg-gray-50 transition-colors ${
-                          selectedVariant?.id === variant.id ? 'bg-blue-50' : ''
-                        }`}
-                      >
-                        <div className="flex justify-between items-center">
-                          <div className="flex items-center gap-3">
-                            {variant.color && (
-                              <div
-                                className="w-6 h-6 rounded-full border border-gray-300"
-                                style={{ backgroundColor: variant.color }}
-                              />
-                            )}
-                            <span className="text-gray-700">{variant.name}</span>
-                          </div>
-                          <div className="flex items-center gap-4">
-                            <span className="text-gray-600">${variant.price.toFixed(2)}</span>
-                            <span className="text-sm text-gray-500">Stock: {variant.stock}</span>
-                          </div>
-                        </div>
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              <div className="space-y-4 mb-8">
-                <h2 className="text-xl font-semibold text-gray-900">Product Description</h2>
-                <p className="text-gray-600">
-                  Experience the natural benefits of our premium quality {product.name.toLowerCase()}. 
-                  Made with the finest ingredients and processed with care to maintain maximum nutritional value.
-                </p>
-              </div>
-
-              <div className="flex flex-col gap-4">
-                <div className="flex gap-4">
-                  <button 
-                    className="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
-                    disabled={!selectedVariant}
-                  >
-                    Add to Cart
-                  </button>
-                  <button 
-                    className="flex-1 border-2 border-blue-600 text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors disabled:border-gray-400 disabled:text-gray-400 disabled:cursor-not-allowed"
-                    disabled={!selectedVariant}
-                  >
-                    Buy Now
-                  </button>
-                </div>
-                
-                {/* Amazon Button */}
-                <button
-                  onClick={handleAmazonRedirect}
-                  className="w-full bg-[#FF9900] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#E88A00] transition-colors flex items-center justify-center gap-2"
-                >
-                  <svg 
-                    className="w-6 h-6" 
-                    viewBox="0 0 24 24" 
-                    fill="currentColor"
-                  >
-                    <path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5L1 10.5v2h3v-2zM13 0.55h-2L10.5 2h3L13 0.55zM20.45 4.46l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zM17.24 18.16l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zM20 10.5v2h3v-2h-3zM12 5.5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zM11 22.45h2L12.5 24h-3l1.5-1.55zM3.55 18.54l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8z" />
-                  </svg>
-                  Buy on Amazon
-                </button>
-              </div>
-            </div>
-          </div>
+        <div className="flex items-center gap-4 mb-4">
+          <button
+            onClick={handleZoomOut}
+            className="bg-white text-gray-800 rounded-full p-2 shadow hover:bg-gray-100 focus:outline-none"
+            disabled={zoomLevel <= 1}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
+            </svg>
+          </button>
+          <span className="text-white font-semibold text-lg select-none">{Math.round(zoomLevel * 100)}%</span>
+          <button
+            onClick={handleZoomIn}
+            className="bg-white text-gray-800 rounded-full p-2 shadow hover:bg-gray-100 focus:outline-none"
+            disabled={zoomLevel >= 3}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+            </svg>
+          </button>
+        </div>
+        <div className="overflow-auto max-w-[90vw] max-h-[80vh] flex items-center justify-center">
+          <img
+            src={mainImage}
+            alt={product.name}
+            style={{ transform: `scale(${zoomLevel})` }}
+            className="transition-transform duration-200 rounded-lg shadow-lg max-w-full max-h-[70vh] object-contain"
+          />
         </div>
       </div>
     </div>
+  )}
+
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <button
+      onClick={() => navigate('/')}
+      className="mb-8 flex items-center text-blue-600 hover:text-blue-800 transition-colors"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+        <path fillRule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clipRule="evenodd" />
+      </svg>
+      Back to Products
+    </button>
+
+    <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
+        {/* Product Image Section */}
+        <div 
+          className="relative aspect-square group cursor-zoom-in"
+          onMouseMove={handleMouseMove}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          onClick={handleImageClick}
+        >
+          <img
+            ref={imageRef}
+            src={mainImage}
+            alt={product.name}
+            className="w-full h-full object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
+          />
+          {discountPercentage > 0 && (
+            <div className="absolute top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-full text-lg font-bold">
+              -{discountPercentage}%
+            </div>
+          )}
+          {/* Magnifier */}
+          {showMagnifier && (
+            <div
+              ref={magnifierRef}
+              className="hidden md:block absolute w-40 h-40 border-2 border-gray-300 rounded-full overflow-hidden pointer-events-none z-10"
+              style={{
+                left: `${cursorPosition.x - 80}px`,
+                top: `${cursorPosition.y - 80}px`,
+              }}
+            >
+              <div
+                className="w-full h-full"
+                style={{
+                  backgroundImage: `url(${mainImage})`,
+                  backgroundPosition: `${position.x}% ${position.y}%`,
+                  backgroundSize: '200%',
+                  backgroundRepeat: 'no-repeat',
+                }}
+              />
+            </div>
+          )}
+        </div>
+
+        {/* Product Info */}
+        <div className="flex flex-col justify-center">
+          <h1 className="text-3xl font-bold text-gray-900 mb-4">{product.name}</h1>
+          <div className="flex items-center gap-4 mb-6">
+            <span className="text-3xl font-bold text-blue-600">
+              ₹{selectedVariant ? selectedVariant.price.toFixed(2) : product.price.toFixed(2)}
+            </span>
+            {product.compareAtPrice && (
+              <span className="text-xl text-gray-500 line-through">
+                ₹{product.compareAtPrice.toFixed(2)}
+              </span>
+            )}
+          </div>
+
+          {/* Variant Selection */}
+          <div className="mb-8">
+            <button
+              onClick={() => setShowVariants(!showVariants)}
+              className="w-full text-left px-4 py-3 border border-gray-300 rounded-lg hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+            >
+              <div className="flex justify-between items-center">
+                <span className="text-gray-700">
+                  {selectedVariant ? `Selected: ${selectedVariant.name}` : 'Select Variant'}
+                </span>
+                <svg
+                  className={`w-5 h-5 transform transition-transform ${showVariants ? 'rotate-180' : ''}`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </button>
+
+            {showVariants && (
+              <div className="mt-2 border border-gray-200 rounded-lg overflow-hidden">
+                {variants.map((variant) => (
+                  <button
+                    key={variant.id}
+                    onClick={() => handleVariantSelect(variant)}
+                    className={`w-full px-4 py-3 text-left hover:bg-gray-50 transition-colors ${
+                      selectedVariant?.id === variant.id ? 'bg-blue-50' : ''
+                    }`}
+                  >
+                    <div className="flex justify-between items-center">
+                      <div className="flex items-center gap-3">
+                        {variant.color && (
+                          <div
+                            className="w-6 h-6 rounded-full border border-gray-300"
+                            style={{ backgroundColor: variant.color }}
+                          />
+                        )}
+                        <span className="text-gray-700">{variant.name}</span>
+                      </div>
+                      <div className="flex items-center gap-4">
+                        <span className="text-gray-600">₹{variant.price.toFixed(2)}</span>
+                        <span className="text-sm text-gray-500">Stock: {variant.stock}</span>
+                      </div>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Description */}
+          <div className="space-y-4 mb-8">
+            <h2 className="text-xl font-semibold text-gray-900">Product Description</h2>
+            <p className="text-gray-600">
+              Experience the natural benefits of our premium product — crafted with care to deliver quality and value. Perfect for everyday use.
+            </p>
+          </div>
+
+          {/* Amazon Redirect */}
+          <button
+            onClick={handleAmazonRedirect}
+            className="mt-auto inline-flex justify-center items-center px-6 py-3 bg-orange-500 text-white text-lg font-semibold rounded-lg hover:bg-orange-600 transition-colors"
+          >
+            Buy on Amazon
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
   );
 };
 

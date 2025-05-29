@@ -13,7 +13,7 @@ export const products: Product[] = [
   {
     id: 1,
     name: "Spirulina Powder",
-    description: "Our premium organic spirulina powder is harvested from pristine waters and carefully processed to preserve its nutritional integrity. This superfood is packed with protein, vitamins, minerals, and antioxidants to support your overall health and wellbeing.",
+    description: "Experience the purest form of plant-based nutrition with Eseentia Organic Spirulina Powder cultivated under controlled conditions using fresh mineral-rich water and sunlight, ensuring maximum potency and safety. Our spirulina is 100% natural, vegan, and free from additives,pesticides, or heavy metals.",
     price: 29.99,
     compareAtPrice: 34.99,
     rating: 4.8,
@@ -25,16 +25,16 @@ export const products: Product[] = [
     category: "powder",
     tags: ["organic", "superfood", "vegan", "gluten-free"],
     sizes: [
-      { size: "100g", price: 29.99 },
-      { size: "250g", price: 59.99 },
-      { size: "500g", price: 99.99 }
+      { size: "100g", price: 599, sellingPrice: 499 },
+      { size: "250g", price: 899, sellingPrice: 799 },
+      { size: "500g", price: 1799, sellingPrice: 1599 }
     ],
     features: [
-      "65% protein by weight",
-      "Rich in B vitamins, iron, and essential amino acids",
-      "Supports immune function and energy levels",
-      "Sustainably harvested and processed",
-      "100% organic with no fillers or additives"
+      "Boosts energy & reduces fatigue",
+      "Strengthens immunity & ghts oxidative stress",
+      "Detoxi es liver and supports gut health",
+      "Enhances muscle recovery and stamina",
+      "Supports healthy skin, hair, and metabolism"
     ],
     ingredients: ["100% Organic Spirulina (Arthrospira platensis)"],
     nutritionalInfo: {
@@ -51,7 +51,7 @@ export const products: Product[] = [
   {
     id: 2,
     name: "Spirulina Tablets",
-    description: "Our easy-to-take spirulina tablets offer a convenient way to include this nutrient-dense superfood in your daily routine. Each tablet contains pure, compressed spirulina with no binders or fillers.",
+    description: "Simplify your superfood routine with Eseentia Organic Spirulina Tablets a clean, compact,and potent source of plant-based nutrition. Made from 100% pure spirulina, cold-compressed into tablets without any binders, additives, or preservatives. Just one product — one purpose: total body nourishment",
     price: 24.99,
     rating: 4.6,
     reviewCount: 86,
@@ -61,16 +61,16 @@ export const products: Product[] = [
     category: "tablets",
     tags: ["tablets", "superfood", "vegan", "gluten-free"],
     sizes: [
-      { size: "100 tablets", price: 24.99 },
-      { size: "250 tablets", price: 49.99 },
-      { size: "500 tablets", price: 89.99 }
+      { size: "60 tablets", price: 548, sellingPrice: 448 },
+      { size: "120 tablets", price: 849, sellingPrice: 749 },
+      { size: "240 tablets", price: 1799, sellingPrice: 1599 }
     ],
     features: [
-      "500mg of pure spirulina per tablet",
-      "Convenient for travel and busy lifestyles",
-      "No artificial binders or fillers",
-      "Easy to incorporate into daily routine",
-      "60-day supply (at recommended dosage)"
+      "Builds immunity & natural defense",
+      "Increases energy, stamina & performance",
+      "Promotes detoxi cation & gut cleansing",
+      "Supports glowing skin & healthy hair",
+      "Enhances focus & ghts fatigue"
     ],
     ingredients: ["100% Spirulina (Arthrospira platensis)"],
     nutritionalInfo: {
@@ -85,7 +85,7 @@ export const products: Product[] = [
   {
     id: 3,
     name: "Premium Spirulina Capsules",
-    description: "Our premium spirulina capsules deliver the powerful benefits of spirulina in an easy-to-swallow vegetarian capsule. Perfect for those who want the benefits without the taste.",
+    description: "Get your daily dose of complete nutrition in the most convenient form with Eseentia Organic Spirulina Capsules made from 100% pure, sun-dried spirulina powder, packed into easy-to swallow vegetarian capsules. No binders, llers, or additives — just clean, green, and powerful nutrition.",
     price: 34.99,
     compareAtPrice: 39.99,
     rating: 4.9,
@@ -96,16 +96,16 @@ export const products: Product[] = [
     category: "capsules",
     tags: ["capsules", "superfood", "vegan", "gluten-free"],
     sizes: [
-      { size: "60 capsules", price: 34.99 },
-      { size: "120 capsules", price: 59.99 },
-      { size: "240 capsules", price: 99.99 }
+      { size: "60 capsules", price: 34.99, sellingPrice: 29.99 },
+      { size: "120 capsules", price: 59.99, sellingPrice: 54.99 },
+      { size: "240 capsules", price: 99.99, sellingPrice: 89.99 }
     ],
     features: [
-      "750mg of spirulina per capsule",
-      "Vegetarian capsules",
-      "No taste, perfect for sensitive palates",
-      "Higher concentration than standard tablets",
-      "Third-party tested for purity"
+      "Enhances immunity and cellular health",
+      "Increases energy, focus, and stamina",
+      "Supports detox, gut health & metabolism",
+      "Ideal for tness, wellness, and vegan lifestyles",
+      "Helps maintain healthy skin, hair & nails"
     ],
     ingredients: ["Spirulina (Arthrospira platensis)", "Vegetable Cellulose (capsule)"],
     nutritionalInfo: {
@@ -121,8 +121,9 @@ export const products: Product[] = [
   {
     id: 4,
     name: "Alfalfa Leaves Powder",
-    description: "Our specially formulated smoothie blend combines pure spirulina with organic fruits and superfoods for a delicious, nutritious boost to your favorite smoothies.",
-    price: 39.99,
+    description: "Revitalize your health with Eseentia Organic Alfalfa Powder, one of nature’s most mineral dense greens. Carefully harvested from young, tender alfalfa leaves, our powder is shade-dried and nely ground to preserve its raw vitality and bioactive nutrients.",
+    price: 499,
+    sellingPrice: 399,
     rating: 4.7,
     reviewCount: 42,
     images: [
@@ -131,15 +132,16 @@ export const products: Product[] = [
     category: "blends",
     tags: ["blend", "smoothie", "organic", "vegan", "gluten-free"],
     sizes: [
-      { size: "200g", price: 39.99 },
-      { size: "400g", price: 69.99 }
+      { size: "100g", price: 499, sellingPrice: 399 },
+      { size: "250g", price: 599, sellingPrice: 499 },
+      { size: "500g", price: 1199, sellingPrice: 999 }
     ],
     features: [
-      "30% spirulina combined with organic superfoods",
-      "Contains acai, blueberry, and maca root",
-      "Lightly sweetened with monk fruit",
-      "Mixes easily in smoothies, juices, or water",
-      "Fruity flavor makes spirulina more palatable"
+      "Deep detoxi cation & internal cleansing",
+      "Supports liver health & digestion",
+      "Boosts immunity & oxygenates blood",
+      "Alkalizes the body & balances pH levels",
+      "Aids in hormonal balance and bone strength"
     ],
     ingredients: [
       "Organic Spirulina (Arthrospira platensis)",
@@ -163,7 +165,7 @@ export const products: Product[] = [
   {
     id: 5,
     name: "Spirulina Tablets",
-    description: "This specialized spirulina formula is designed to support skin, hair, and nail health from the inside out, combining spirulina with beauty-enhancing nutrients.",
+  description: "Simplify your superfood routine with Eseentia Organic Spirulina Tablets a clean, compact,and potent source of plant-based nutrition. Made from 100% pure spirulina, cold-compressed into tablets without any binders, additives, or preservatives. Just one product — one purpose total body nourishment",
     price: 42.99,
     rating: 4.5,
     reviewCount: 36,
@@ -173,15 +175,15 @@ export const products: Product[] = [
     category: "specialty",
     tags: ["beauty", "superfood", "vegan", "gluten-free"],
     sizes: [
-      { size: "60 capsules", price: 42.99 },
-      { size: "120 capsules", price: 79.99 }
+      { size: "60 capsules", price: 42.99, sellingPrice: 37.99 },
+      { size: "120 capsules", price: 79.99, sellingPrice: 69.99 }
     ],
     features: [
-      "Combines spirulina with biotin and collagen support",
-      "Contains antioxidant-rich ingredients",
-      "Formulated to promote skin elasticity",
-      "Supports healthy hair growth and strength",
-      "Helps strengthen nails"
+      "Builds immunity & natural defense",
+      "Bioavailable Iron, Vitamin B12, and Chlorophyll",
+      "Promotes detoxi cation & gut cleansing",
+      "Supports glowing skin & healthy hair",
+      "Enhances focus & ghts fatigue"
     ],
     ingredients: [
       "Spirulina (Arthrospira platensis)",
@@ -203,7 +205,7 @@ export const products: Product[] = [
   {
     id: 6,
     name: "Barleys Grass Powder",
-    description: "Our premium Hawaiian spirulina is sourced from the pristine waters of Kona, Hawaii, known for producing some of the world's purest and most nutrient-dense spirulina.",
+    description: "Fuel your body with the natural power of **Eseentia Organic Barley Grass Powder harvested at the peak of freshness from organic barley elds and carefully processed to retain its vibrant nutrients and potent antioxidants. Known as a nutrient-dense supergreen, barley grass supports your overall wellness with a rich pro le of vitamins, minerals, and chlorophyll.",
     price: 49.99,
     compareAtPrice: 59.99,
     rating: 4.9,
@@ -219,11 +221,11 @@ export const products: Product[] = [
       { size: "250g", price: 99.99 }
     ],
     features: [
-      "Grown in mineral-rich Hawaiian deep ocean water",
-      "Higher phycocyanin content than standard spirulina",
-      "Exceptionally high nutrient density",
-      "Rigorously tested for purity and potency",
-      "Distinctive mild flavor"
+      "Supports natural detoxi cation & liver health",
+      "Enhances immunity & combats oxidative stress",
+      "Boosts energy, endurance & mental clarity",
+      "Helps maintain healthy digestion & alkalinity",
+      "Promotes healthy skin, hair & cellular repair"
     ],
     ingredients: ["100% Organic Hawaiian Spirulina (Arthrospira platensis)"],
     nutritionalInfo: {
@@ -241,7 +243,7 @@ export const products: Product[] = [
   {
     id: 7,
     name: "Moringa Powder",
-    description: "Pure organic moringa powder, packed with essential nutrients and antioxidants. Perfect for smoothies, juices, and cooking.",
+    description: "Tap into the ancient wisdom of Ayurveda with Eseentia Organic Moringa Powder known as the “Miracle Tree” for a reason. Our moringa is organically grown, shade-dried, and nely milled to preserve its maximum nutrient potency and vibrant green color.",
     price: 34.99,
     compareAtPrice: 39.99,
     rating: 4.7,
@@ -257,11 +259,11 @@ export const products: Product[] = [
       { size: "500g", price: 129.99 }
     ],
     features: [
-      "Rich in vitamins A, C, and E",
-      "High in calcium and iron",
-      "Contains all essential amino acids",
-      "Supports immune system",
-      "Natural energy booster"
+      "Strengthens immunity & ghts in ammation",
+      "Boosts energy levels naturally (without ca eine)",
+      "Balances blood sugar & supports metabolism",
+      "Improves digestion & detoxi es the liver",
+      "Promotes radiant skin & hormonal balance"
     ],
     ingredients: ["100% Organic Moringa Oleifera Leaf Powder"],
     nutritionalInfo: {
@@ -277,7 +279,7 @@ export const products: Product[] = [
   {
     id: 8,
     name: "Moringa Capsules",
-    description: "Convenient moringa capsules for easy daily supplementation. Each capsule contains pure moringa leaf powder for maximum nutrient absorption.",
+    description: "Discover clean, powerful nutrition in its purest form with Eseentia Organic Moringa Capsules.Made from 100% organically grown moringa leaves — carefully shade-dried and nely powdered— these capsules deliver a complete spectrum of essential nutrients in a convenient, tasteless form.",
     price: 29.99,
     rating: 4.6,
     reviewCount: 67,
@@ -292,11 +294,11 @@ export const products: Product[] = [
       { size: "240 capsules", price: 99.99 }
     ],
     features: [
-      "500mg moringa per capsule",
-      "Easy to swallow",
-      "No fillers or binders",
-      "Convenient daily dosage",
-      "Sustainably sourced"
+      "Boosts immunity and ghts fatigue",
+      "Supports hormonal balance and digestion",
+      "Enhances skin glow and cellular repair",
+      "Balances blood sugar & reduces in ammation",
+      "Ideal for daily detox and nutrient replenishment"
     ],
     ingredients: ["Organic Moringa Oleifera Leaf Powder", "Vegetable Cellulose (capsule)"],
     nutritionalInfo: {

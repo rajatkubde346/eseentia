@@ -34,7 +34,7 @@ const Cart = ({ items, onRemoveItem }: CartProps) => {
               />
               <div className="flex-1">
                 <h3 className="font-medium text-gray-800">{item.name}</h3>
-                <p className="text-gray-600">${item.price.toFixed(2)}</p>
+                <p className="text-gray-600">₹{item.price.toFixed(2)}</p>
               </div>
               <button
                 onClick={() => onRemoveItem(item.id)}
@@ -51,7 +51,7 @@ const Cart = ({ items, onRemoveItem }: CartProps) => {
         <div className="absolute bottom-0 left-0 right-0 p-6 bg-white border-t">
           <div className="flex justify-between items-center mb-4">
             <span className="text-lg font-medium">Total:</span>
-            <span className="text-xl font-bold">${total.toFixed(2)}</span>
+            <span className="text-xl font-bold">₹{total.toFixed(2)}</span>
           </div>
           <button className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors">
             Checkout

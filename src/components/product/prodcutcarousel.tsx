@@ -207,16 +207,18 @@ const QuickViewModal = ({ product, isOpen, onClose }: { product: Product | null;
                 
                 <div className="mt-4 space-y-4">
                   {/* Price */}
-                  <div className="flex items-center gap-2">
-                    <span className="text-2xl font-bold text-gray-900">
-                      ${product.price.toFixed(2)}
-                    </span>
-                    {product.compareAtPrice && (
-                      <span className="text-lg text-gray-500 line-through">
-                        ${(product.compareAtPrice).toFixed(2)}
-                      </span>
-                    )}
-                  </div>
+                  {/* Price */}
+<div className="flex items-center gap-2">
+  <span className="text-2xl font-bold text-gray-900">
+    ₹{product.price.toFixed(2)}
+  </span>
+  {product.compareAtPrice && (
+    <span className="text-lg text-gray-500 line-through">
+      ₹{product.compareAtPrice.toFixed(2)}
+    </span>
+  )}
+</div>
+
 
                   {/* Description */}
                   <div className="text-gray-600">
@@ -439,11 +441,11 @@ const ProductCarousel = () => {
                   </h3>
                   <div className="flex items-center gap-1 sm:gap-2">
                     <span className="text-sm sm:text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
-                      ${product.price.toFixed(2)}
+                      ₹{product.price.toFixed(2)}
                     </span>
                     {product.compareAtPrice && (
                       <span className="text-xs sm:text-sm text-gray-500 line-through">
-                        ${(product.compareAtPrice).toFixed(2)}
+                        ₹{(product.compareAtPrice).toFixed(2)}
                       </span>
                     )}
                   </div>

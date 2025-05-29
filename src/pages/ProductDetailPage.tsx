@@ -69,11 +69,12 @@ const ProductDetailPage: React.FC = () => {
     : product.price;
   
   const handleAddToCart = () => {
-    addToCart({
-      ...product,
-      price: currentPrice,
-      quantity: quantity
-    });
+    if (quantity > 10) {
+      alert('Maximum quantity per product is 10 items.');
+      return;
+    }
+
+    addToCart(product, quantity);
     setShowAddedToCart(true);
     setTimeout(() => setShowAddedToCart(false), 2000);
   };
@@ -264,9 +265,9 @@ const ProductDetailPage: React.FC = () => {
             {/* Price */}
             <div className="mb-6">
               {product.compareAtPrice && (
-                <span className="text-neutral-500 line-through mr-2">${product.compareAtPrice.toFixed(2)}</span>
+                <span className="text-neutral-500 line-through mr-2">₹{product.compareAtPrice.toFixed(2)}</span>
               )}
-              <span className="text-2xl font-semibold text-neutral-900">${currentPrice.toFixed(2)}</span>
+              <span className="text-2xl font-semibold text-neutral-900">₹{currentPrice.toFixed(2)}</span>
             </div>
             
             {/* Description */}
@@ -289,7 +290,17 @@ const ProductDetailPage: React.FC = () => {
                           : 'bg-white text-neutral-800 border-neutral-300 hover:border-primary-600'
                       }`}
                     >
-                      {size.size} - ${size.price.toFixed(2)}
+                      {size.size}
+                      <span className="block text-sm">
+                        {size.sellingPrice ? (
+                          <>
+                            <span className="line-through text-neutral-500">₹{size.price.toFixed(2)}</span>
+                            <span className="ml-1">₹{size.sellingPrice.toFixed(2)}</span>
+                          </>
+                        ) : (
+                          <span>₹{size.price.toFixed(2)}</span>
+                        )}
+                      </span>
                     </button>
                   ))}
                 </div>
@@ -336,7 +347,7 @@ const ProductDetailPage: React.FC = () => {
                       className="absolute inset-0 flex items-center justify-center bg-green-600"
                     >
                       <Check className="w-6 h-6 mr-2" />
-                      Added to Cart
+                      Added {quantity} item{quantity > 1 ? 's' : ''} to Cart
                     </motion.div>
                   ) : (
                     <motion.div
@@ -393,7 +404,7 @@ const ProductDetailPage: React.FC = () => {
                 <Truck size={20} className="text-primary-600 mr-3 flex-shrink-0" />
                 <div>
                   <h3 className="font-medium text-neutral-900 mb-1">Free Shipping</h3>
-                  <p className="text-sm text-neutral-600">Orders over $50 qualify for free shipping.</p>
+                  <p className="text-sm text-neutral-600">Orders over ₹50 qualify for free shipping.</p>
                 </div>
               </div>
               <div className="flex">

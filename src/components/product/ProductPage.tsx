@@ -54,11 +54,11 @@ const ProductPage = ({ products, onAddToCart }: ProductPageProps) => {
           
           <div className="flex items-center gap-4 mb-6">
             <span className="text-2xl font-bold text-gray-900">
-              ${product.price.toFixed(2)}
+              ₹{product.price.toFixed(2)}
             </span>
             {product.discount && (
               <span className="text-lg text-gray-500 line-through">
-                ${(product.price * (1 + product.discount / 100)).toFixed(2)}
+                ₹{(product.price * (1 + product.discount / 100)).toFixed(2)}
               </span>
             )}
           </div>

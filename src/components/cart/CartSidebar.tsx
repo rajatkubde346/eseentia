@@ -77,11 +77,11 @@ const CartSidebar: React.FC = () => {
                           <div>
                             <div className="flex justify-between text-base font-medium text-neutral-800">
                               <h3>
-                                <Link to={`/products/${item.product.id}`} onClick={toggleCart}>
+                                <Link to={`/products/₹{item.product.id}`} onClick={toggleCart}>
                                   {item.product.name}
                                 </Link>
                               </h3>
-                              <p className="ml-4">${(item.product.price * item.quantity).toFixed(2)}</p>
+                              <p className="ml-4">₹{(item.product.price * item.quantity).toFixed(2)}</p>
                             </div>
                             <p className="mt-1 text-sm text-neutral-500">
                               {item.product.category.charAt(0).toUpperCase() + item.product.category.slice(1)}
@@ -126,7 +126,7 @@ const CartSidebar: React.FC = () => {
                   <div className="border-t border-neutral-200 pt-6 mt-6">
                     <div className="flex justify-between text-base font-medium text-neutral-800 mb-1">
                       <p>Subtotal</p>
-                      <p>${totalPrice.toFixed(2)}</p>
+                      <p>₹{totalPrice.toFixed(2)}</p>
                     </div>
                     <p className="text-sm text-neutral-500 mb-6">Shipping and taxes calculated at checkout</p>
                     
