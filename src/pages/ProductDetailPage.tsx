@@ -267,7 +267,7 @@ const ProductDetailPage: React.FC = () => {
               {product.compareAtPrice && (
                 <span className="text-neutral-500 line-through mr-2">₹{product.compareAtPrice.toFixed(2)}</span>
               )}
-              <span className="text-2xl font-semibold text-neutral-900">₹{currentPrice.toFixed(2)}</span>
+              <span className="text-2xl font-semibold text-neutral-900">₹{product.price.toFixed(2)}</span>
             </div>
             
             {/* Description */}

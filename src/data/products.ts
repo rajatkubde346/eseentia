@@ -14,8 +14,8 @@ export const products: Product[] = [
     id: 1,
     name: "Spirulina Powder",
     description: "Experience the purest form of plant-based nutrition with Eseentia Organic Spirulina Powder cultivated under controlled conditions using fresh mineral-rich water and sunlight, ensuring maximum potency and safety. Our spirulina is 100% natural, vegan, and free from additives,pesticides, or heavy metals.",
-    price: 29.99,
-    compareAtPrice: 34.99,
+    price: 449,
+    compareAtPrice: 599,
     rating: 4.8,
     reviewCount: 124,
     images: [
@@ -25,9 +25,9 @@ export const products: Product[] = [
     category: "powder",
     tags: ["organic", "superfood", "vegan", "gluten-free"],
     sizes: [
-      { size: "100g", price: 599, sellingPrice: 499 },
-      { size: "250g", price: 899, sellingPrice: 799 },
-      { size: "500g", price: 1799, sellingPrice: 1599 }
+      { size: "100g", price: 599, sellingPrice: 449 },
+      { size: "250g", price: 899, sellingPrice: 749 },
+      { size: "500g", price: 1799, sellingPrice: 1699 }
     ],
     features: [
       "Boosts energy & reduces fatigue",
@@ -52,7 +52,8 @@ export const products: Product[] = [
     id: 2,
     name: "Spirulina Tablets",
     description: "Simplify your superfood routine with Eseentia Organic Spirulina Tablets a clean, compact,and potent source of plant-based nutrition. Made from 100% pure spirulina, cold-compressed into tablets without any binders, additives, or preservatives. Just one product — one purpose: total body nourishment",
-    price: 24.99,
+    price: 449,
+    compareAtPrice: 599,
     rating: 4.6,
     reviewCount: 86,
     images: [
@@ -61,7 +62,7 @@ export const products: Product[] = [
     category: "tablets",
     tags: ["tablets", "superfood", "vegan", "gluten-free"],
     sizes: [
-      { size: "60 tablets", price: 548, sellingPrice: 448 },
+      { size: "60 tablets", price: 59, sellingPrice: 449 },
       { size: "120 tablets", price: 849, sellingPrice: 749 },
       { size: "240 tablets", price: 1799, sellingPrice: 1599 }
     ],
@@ -86,19 +87,19 @@ export const products: Product[] = [
     id: 3,
     name: "Premium Spirulina Capsules",
     description: "Get your daily dose of complete nutrition in the most convenient form with Eseentia Organic Spirulina Capsules made from 100% pure, sun-dried spirulina powder, packed into easy-to swallow vegetarian capsules. No binders, llers, or additives — just clean, green, and powerful nutrition.",
-    price: 34.99,
-    compareAtPrice: 39.99,
-    rating: 4.9,
-    reviewCount: 58,
+    price: 449,
+    compareAtPrice: 599,
+    rating: 4.8,
+    reviewCount: 124,
     images: [
       product4,
     ],
     category: "capsules",
     tags: ["capsules", "superfood", "vegan", "gluten-free"],
     sizes: [
-      { size: "60 capsules", price: 34.99, sellingPrice: 29.99 },
-      { size: "120 capsules", price: 59.99, sellingPrice: 54.99 },
-      { size: "240 capsules", price: 99.99, sellingPrice: 89.99 }
+      { size: "60 capsules", price: 549, sellingPrice: 449 },
+      { size: "120 capsules", price: 849, sellingPrice: 749 },
+      { size: "240 capsules", price: 1799, sellingPrice: 1599 }
     ],
     features: [
       "Enhances immunity and cellular health",
@@ -122,19 +123,19 @@ export const products: Product[] = [
     id: 4,
     name: "Alfalfa Leaves Powder",
     description: "Revitalize your health with Eseentia Organic Alfalfa Powder, one of nature’s most mineral dense greens. Carefully harvested from young, tender alfalfa leaves, our powder is shade-dried and nely ground to preserve its raw vitality and bioactive nutrients.",
-    price: 499,
-    sellingPrice: 399,
-    rating: 4.7,
-    reviewCount: 42,
+    price: 349,
+    compareAtPrice: 499,
+    rating: 4.8,
+    reviewCount: 124,
     images: [
         product2,
     ],
     category: "blends",
     tags: ["blend", "smoothie", "organic", "vegan", "gluten-free"],
     sizes: [
-      { size: "100g", price: 499, sellingPrice: 399 },
-      { size: "250g", price: 599, sellingPrice: 499 },
-      { size: "500g", price: 1199, sellingPrice: 999 }
+      { size: "100g", price: 499, sellingPrice: 349 },
+      { size: "250g", price: 599, sellingPrice: 449 },
+      { size: "500g", price: 1199, sellingPrice: 1049 }
     ],
     features: [
       "Deep detoxi cation & internal cleansing",
@@ -165,18 +166,19 @@ export const products: Product[] = [
   {
     id: 5,
     name: "Spirulina Tablets",
-  description: "Simplify your superfood routine with Eseentia Organic Spirulina Tablets a clean, compact,and potent source of plant-based nutrition. Made from 100% pure spirulina, cold-compressed into tablets without any binders, additives, or preservatives. Just one product — one purpose total body nourishment",
-    price: 42.99,
-    rating: 4.5,
-    reviewCount: 36,
+    description: "Simplify your superfood routine with Eseentia Organic Spirulina Tablets a clean, compact,and potent source of plant-based nutrition. Made from 100% pure spirulina, cold-compressed into tablets without any binders, additives, or preservatives. Just one product — one purpose total body nourishment",
+    price: 449,
+    compareAtPrice: 599,
+    rating: 4.8,
+    reviewCount: 124,
     images: [
       product3,
     ],
     category: "specialty",
     tags: ["beauty", "superfood", "vegan", "gluten-free"],
     sizes: [
-      { size: "60 capsules", price: 42.99, sellingPrice: 37.99 },
-      { size: "120 capsules", price: 79.99, sellingPrice: 69.99 }
+      { size: "60 capsules", price: 599, sellingPrice: 449 },
+      { size: "120 capsules", price: 899, sellingPrice: 749 }
     ],
     features: [
       "Builds immunity & natural defense",
@@ -206,19 +208,19 @@ export const products: Product[] = [
     id: 6,
     name: "Barleys Grass Powder",
     description: "Fuel your body with the natural power of **Eseentia Organic Barley Grass Powder harvested at the peak of freshness from organic barley elds and carefully processed to retain its vibrant nutrients and potent antioxidants. Known as a nutrient-dense supergreen, barley grass supports your overall wellness with a rich pro le of vitamins, minerals, and chlorophyll.",
-    price: 49.99,
-    compareAtPrice: 59.99,
-    rating: 4.9,
-    reviewCount: 108,
+    price: 349,
+    compareAtPrice: 499,
+    rating: 4.8,
+    reviewCount: 124,
     images: [
       product5,
-      
     ],
     category: "powder",
     tags: ["premium", "hawaiian", "organic", "vegan", "gluten-free"],
     sizes: [
-      { size: "100g", price: 49.99 },
-      { size: "250g", price: 99.99 }
+      { size: "100g", price: 499, sellingPrice: 349 },
+      { size: "250g", price: 799, sellingPrice: 649 },
+      { size: "500g", price: 1299, sellingPrice: 1149 }
     ],
     features: [
       "Supports natural detoxi cation & liver health",
@@ -244,19 +246,19 @@ export const products: Product[] = [
     id: 7,
     name: "Moringa Powder",
     description: "Tap into the ancient wisdom of Ayurveda with Eseentia Organic Moringa Powder known as the “Miracle Tree” for a reason. Our moringa is organically grown, shade-dried, and nely milled to preserve its maximum nutrient potency and vibrant green color.",
-    price: 34.99,
-    compareAtPrice: 39.99,
-    rating: 4.7,
-    reviewCount: 89,
+    price: 449,
+    compareAtPrice: 599,
+    rating: 4.8,
+    reviewCount: 124,
     images: [
       product6,
     ],
     category: "powder",
     tags: ["organic", "vegan", "gluten-free", "premium"],
     sizes: [
-      { size: "100g", price: 34.99 },
-      { size: "250g", price: 69.99 },
-      { size: "500g", price: 129.99 }
+      { size: "100g", price: 599, sellingPrice: 449 },
+      { size: "250g", price: 899, sellingPrice: 749 },
+      { size: "500g", price: 1799, sellingPrice: 1599 }
     ],
     features: [
       "Strengthens immunity & ghts in ammation",
@@ -280,7 +282,8 @@ export const products: Product[] = [
     id: 8,
     name: "Moringa Capsules",
     description: "Discover clean, powerful nutrition in its purest form with Eseentia Organic Moringa Capsules.Made from 100% organically grown moringa leaves — carefully shade-dried and nely powdered— these capsules deliver a complete spectrum of essential nutrients in a convenient, tasteless form.",
-    price: 29.99,
+    price: 699,
+    compareAtPrice:899,
     rating: 4.6,
     reviewCount: 67,
     images: [
@@ -289,9 +292,9 @@ export const products: Product[] = [
     category: "capsules",
     tags: ["organic", "vegan", "gluten-free"],
     sizes: [
-      { size: "60 capsules", price: 29.99 },
-      { size: "120 capsules", price: 54.99 },
-      { size: "240 capsules", price: 99.99 }
+      { size: "60 capsules", price: 599, sellingPrice: 449 },
+      { size: "120 capsules", price: 899, sellingPrice: 749 },
+      { size: "240 capsules", price: 1799, sellingPrice: 1599 }
     ],
     features: [
       "Boosts immunity and ghts fatigue",
@@ -315,7 +318,8 @@ export const products: Product[] = [
     id: 9,
     name: "Moringa Tablets",
     description: "Compressed moringa tablets for those who prefer a tablet form. Each tablet contains pure moringa leaf powder for optimal nutrition.",
-    price: 27.99,
+    price: 749,
+    compareAtPrice: 899,
     rating: 4.5,
     reviewCount: 52,
     images: [
@@ -324,9 +328,9 @@ export const products: Product[] = [
     category: "tablets",
     tags: ["organic", "vegan", "gluten-free"],
     sizes: [
-      { size: "100 tablets", price: 27.99 },
-      { size: "200 tablets", price: 49.99 },
-      { size: "400 tablets", price: 89.99 }
+      { size: "100 tablets", price: 899, sellingPrice: 749 },
+      { size: "200 tablets", price: 1799, sellingPrice: 1599 },
+      { size: "400 tablets", price: 2799, sellingPrice: 2599 }
     ],
     features: [
       "400mg moringa per tablet",

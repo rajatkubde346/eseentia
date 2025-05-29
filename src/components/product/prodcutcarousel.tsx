@@ -18,8 +18,8 @@ export const products: Product[] = [
     id: 1,
     name: "Spirulina Powder",
     description: "Premium quality spirulina powder for optimal nutrition",
-    price: 99.99,
-    compareAtPrice: 124.99,
+    price: 449,
+    compareAtPrice: 599,
     images: [product1],
     rating: 4.5,
     reviewCount: 128,
@@ -36,8 +36,8 @@ export const products: Product[] = [
     id: 2,
     name: "Spirulina Capsules",
     description: "Easy-to-swallow spirulina capsules for daily nutrition",
-    price: 199.99,
-    compareAtPrice: 234.99,
+    price: 449,
+    compareAtPrice: 599,
     images: [product4],
     rating: 4.8,
     reviewCount: 95,
@@ -70,8 +70,8 @@ export const products: Product[] = [
     id: 4,
     name: "Moringa Powder",
     description: "Pure moringa powder for natural nutrition",
-    price: 49.99,
-    compareAtPrice: 74.99,
+    price: 599,
+    compareAtPrice: 799,
     images: [product6],
     rating: 4.7,
     reviewCount: 156,
@@ -87,8 +87,8 @@ export const products: Product[] = [
     id: 5,
     name: "Moringa Capsules",
     description: "Convenient moringa capsules for daily use",
-    price: 129.99,
-    compareAtPrice: 144.99,
+    price: 349,
+    compareAtPrice: 499,
     images: [product7],
     rating: 4.4,
     reviewCount: 73,
@@ -119,8 +119,8 @@ export const products: Product[] = [
     id: 7,
     name: "Barleys Grass Powder",
     description: "Pure barley grass powder for natural nutrition",
-    price: 99.99,
-    compareAtPrice: 124.99,
+    price: 349,
+    compareAtPrice: 499,
     images: [product5],
     rating: 4.6,
     reviewCount: 112,
@@ -136,8 +136,8 @@ export const products: Product[] = [
     id: 8,
     name: "Alfalfa Leaves Powder",
     description: "Pure alfalfa leaves powder for natural nutrition",
-    price: 199.99,
-    compareAtPrice: 234.99,
+    price: 349,
+    compareAtPrice: 499,
     images: [product3],
     rating: 4.7,
     reviewCount: 88,
@@ -334,7 +334,7 @@ const ProductCarousel = () => {
     e.stopPropagation();
     const product = products.find(p => p.id === productId);
     if (product) {
-      addToCart(product);
+      addToCart(product, 1);  // Add default quantity of 1
     }
   };
 

@@ -58,7 +58,12 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, viewMode = 'grid', 
                   <h3 className="text-lg font-medium text-gray-900 mb-2">{product.name}</h3>
                   <p className="text-sm text-gray-500 mb-4">{product.description}</p>
                   <div className="flex items-center justify-between">
-                    <span className="text-xl font-bold text-gray-900">₹{product.price.toFixed(2)}</span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xl font-bold text-gray-900">₹{product.price.toFixed(2)}</span>
+                      {product.compareAtPrice && (
+                        <span className="text-sm text-gray-500 line-through">₹{product.compareAtPrice.toFixed(2)}</span>
+                      )}
+                    </div>
                     <button className="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors">
                       Add to Cart
                     </button>

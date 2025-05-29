@@ -238,15 +238,17 @@ const ProductDetails = () => {
         {/* Product Info */}
         <div className="flex flex-col justify-center">
           <h1 className="text-3xl font-bold text-gray-900 mb-4">{product.name}</h1>
-          <div className="flex items-center gap-4 mb-6">
-            <span className="text-3xl font-bold text-blue-600">
-              ₹{selectedVariant ? selectedVariant.price.toFixed(2) : product.price.toFixed(2)}
-            </span>
-            {product.compareAtPrice && (
-              <span className="text-xl text-gray-500 line-through">
-                ₹{product.compareAtPrice.toFixed(2)}
+          <div className="mb-6">
+            <div className="flex items-center gap-4">
+              <span className="text-3xl font-bold text-blue-600">
+                ₹{product.price.toFixed(2)}
               </span>
-            )}
+              {product.compareAtPrice && (
+                <span className="text-xl text-gray-500 line-through">
+                  ₹{product.compareAtPrice.toFixed(2)}
+                </span>
+              )}
+            </div>
           </div>
 
           {/* Variant Selection */}
