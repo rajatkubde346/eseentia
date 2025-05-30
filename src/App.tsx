@@ -7,6 +7,7 @@ import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import { CartProvider } from './context/CartContext';
 import NotFoundPage from './pages/NotFoundPage';
+import FAQPage from './pages/FAQPage';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/products/:id" element={<ProductDetailPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/faq" element={<FAQPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Layout>
