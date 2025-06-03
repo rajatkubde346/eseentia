@@ -15,6 +15,12 @@ const ProductsPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string | undefined>(
     queryParams.get('search') || undefined
   );
+
+  // Update search term when URL changes
+  useEffect(() => {
+    const searchParam = queryParams.get('search');
+    setSearchTerm(searchParam || undefined);
+  }, [location.search]);
   const [tagFilters, setTagFilters] = useState<string[]>([]);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   

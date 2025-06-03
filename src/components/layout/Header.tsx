@@ -150,13 +150,9 @@ const Header: React.FC<{ onLoginClick: () => void }> = ({ onLoginClick }) => {
 
             {/* Desktop Utilities */}
             <div className="hidden lg:flex items-center space-x-4">
-              <button 
-                onClick={toggleSearch}
-                className="text-neutral-700 hover:text-primary-600 p-2 transition-all duration-300 hover:bg-neutral-100 rounded-full hover:scale-110"
-                aria-label="Search"
-              >
-                <Search size={26} />
-              </button>
+              <div className="relative">
+                <SearchBar onClose={() => setIsSearchOpen(false)} />
+              </div>
               <button
                 onClick={onLoginClick}
                 className="text-neutral-700 hover:text-primary-600 p-2 transition-all duration-300 hover:bg-neutral-100 rounded-full hover:scale-110"
@@ -213,67 +209,98 @@ const Header: React.FC<{ onLoginClick: () => void }> = ({ onLoginClick }) => {
 
       {/* Mobile Navigation Menu */}
       {isMenuOpen && (
-        <div className="lg:hidden absolute top-full left-0 right-0 bg-white shadow-xl transform transition-all duration-300 ease-in-out">
-          <nav className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <Link 
-              to="/" 
-              className="block py-4 text-neutral-800 hover:text-primary-600 font-semibold border-b border-neutral-100 transition-all duration-300 hover:translate-x-2 text-lg"
-            >
-              Home
-            </Link>
-            
-            {menuItems.map((item) => (
-              <div key={item.name} className="border-b border-neutral-100">
-                <button
-                  onClick={() => toggleSubmenu(item.name)}
-                  className="w-full flex items-center justify-between py-4 text-neutral-800 hover:text-primary-600 font-semibold transition-all duration-300 text-lg"
-                >
-                  {item.name}
-                  <ChevronDown 
-                    size={24} 
-                    className={`transition-transform duration-300 ${
-                      activeSubmenu === item.name ? 'rotate-180' : ''
-                    }`}
-                  />
-                </button>
-                
-                {/* Mobile Submenu */}
-                <div className={`overflow-hidden transition-all duration-300 ${
-                  activeSubmenu === item.name ? 'max-h-96' : 'max-h-0'
-                }`}>
-                  {item.submenu.map((subItem) => (
-                    <Link
-                      key={subItem.name}
-                      to={subItem.path}
-                      className="block pl-6 py-4 text-lg text-neutral-700 hover:text-primary-600 hover:bg-neutral-50 transition-all duration-300 hover:translate-x-2"
-                    >
-                      {subItem.name}
-                    </Link>
-                  ))}
+        <div className="lg:hidden fixed inset-0 bg-white z-50">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-semibold">Menu</h2>
+              <button
+                onClick={toggleMenu}
+                className="text-neutral-400 hover:text-neutral-600"
+              >
+                <X size={24} />
+              </button>
+            </div>
+            <nav className="space-y-4">
+              <Link 
+                to="/" 
+                className="block py-4 text-neutral-800 hover:text-primary-600 font-semibold border-b border-neutral-100 transition-all duration-300 hover:translate-x-2 text-lg"
+                onClick={toggleMenu}
+              >
+                Home
+              </Link>
+              
+              {menuItems.map((item) => (
+                <div key={item.name} className="border-b border-neutral-100">
+                  <button
+                    onClick={() => {
+                      // Toggle submenu without closing menu
+                      toggleSubmenu(item.name);
+                    }}
+                    className="w-full flex items-center justify-between py-4 text-neutral-800 hover:text-primary-600 font-semibold transition-all duration-300 text-lg"
+                  >
+                    {item.name}
+                    <ChevronDown 
+                      size={24} 
+                      className={`transition-transform duration-300 ${
+                        activeSubmenu === item.name ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </button>
+                  
+                  {/* Mobile Submenu */}
+                  <div className={`overflow-hidden transition-all duration-300 ${
+                    activeSubmenu === item.name ? 'max-h-96' : 'max-h-0'
+                  }`}>
+                    {item.submenu.map((subItem) => (
+                      <Link
+                        key={subItem.name}
+                        to={subItem.path}
+                        className="block pl-6 py-4 text-lg text-neutral-700 hover:text-primary-600 hover:bg-neutral-50 transition-all duration-300 hover:translate-x-2"
+                        onClick={() => {
+                          // Close menu when clicking submenu item
+                          toggleMenu();
+                        }}
+                      >
+                        {subItem.name}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
-            
-            <Link 
-              to="/account" 
-              className="block py-4 text-neutral-800 hover:text-primary-600 font-semibold transition-all duration-300 hover:translate-x-2 text-lg"
-            >
-              My Account
-            </Link>
-          </nav>
+              ))}
+              
+              <Link 
+                to="/account" 
+                className="block py-4 text-neutral-800 hover:text-primary-600 font-semibold transition-all duration-300 hover:translate-x-2 text-lg"
+                onClick={toggleMenu}
+              >
+                My Account
+              </Link>
+            </nav>
+          </div>
         </div>
       )}
 
-      {/* Cart Sidebar - Moved outside header */}
+      {/* Cart Sidebar */}
       <div className="fixed top-0 right-0 h-full z-[60]">
         <CartSidebar />
       </div>
 
       {/* Search Overlay */}
       {isSearchOpen && (
-        <div className="absolute top-full left-0 right-0 bg-white shadow-xl transform transition-all duration-300 ease-in-out">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <SearchBar onClose={toggleSearch} />
+        <div className="lg:hidden fixed top-0 left-0 right-0 bg-white z-50">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-semibold">Search</h2>
+              <button
+                onClick={toggleSearch}
+                className="text-neutral-400 hover:text-neutral-600"
+              >
+                <X size={24} />
+              </button>
+            </div>
+            <div className="max-w-2xl mx-auto">
+              <SearchBar onClose={toggleSearch} />
+            </div>
           </div>
         </div>
       )}
